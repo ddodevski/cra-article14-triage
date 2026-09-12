@@ -46,7 +46,7 @@ import httpx
 
 from .cache import Cache
 from .errors import Art14Error
-from .lines import count_line
+from .lines import count_line, note_line
 from .models import Vulnerability
 from .provenance import KEV_MAX_AGE
 
@@ -201,10 +201,24 @@ class Review:
         """Distinct CVEs actually put to the catalogue."""
         return len(self.exposures)
 
+    @property
+    def listed_pairs(self) -> int:
+        """The listed CVEs counted in component-CVE pairs.
+
+        The buckets below are in pairs and this line is in CVE ids, so the
+        two numbers differ whenever one CVE reaches more than one component.
+        Both are printed rather than leaving the reader to reconcile them.
+        """
+        return sum(len(exposure.component_refs) for exposure in self.listed)
+
     def as_json(self) -> dict[str, object]:
         return {
             "checked": self.checked,
             "listed": len(self.listed),
+            # Distinct CVE ids in `listed`, counted again in the unit the
+            # triage buckets use. A consumer comparing `kev.listed` with
+            # `triage.counts.assess` is comparing two different things.
+            "listedPairs": self.listed_pairs,
             "absent": len(self.absent),
             # Counted and listed, never folded into `absent`.
             "uncheckable": len(self.uncheckable),
@@ -589,15 +603,34 @@ def summary_lines(review: Review) -> list[str]:
             "CVEs checked",
             review.checked,
             "(distinct CVE ids put to the EUVD KEV catalogue)",
-        ),
-        count_line("known exploited", len(review.listed), "(listed in the catalogue)"),
+        )
     ]
+    if review.listed:
+        # The unit changes here and the buckets below change it back, which
+        # is exactly where a reader does the arithmetic and finds it does not
+        # work. Five ids over seven pairs, said on screen.
+        out.append(
+            count_line(
+                "known exploited",
+                len(review.listed),
+                "(distinct CVE ids listed in the catalogue,",
+            )
+        )
+        pairs = review.listed_pairs
+        noun = "pair" if pairs == 1 else "pairs"
+        out.append(note_line(f"across {pairs} component-CVE {noun})"))
+    else:
+        out.append(
+            count_line(
+                "known exploited", 0, "(distinct CVE ids listed in the catalogue)"
+            )
+        )
     if review.uncheckable:
         out.append(
             count_line(
                 "not checkable",
                 len(review.uncheckable),
-                "(no CVE id; the catalogue could not be asked)",
+                "(records with no CVE id; no key to look up)",
             )
         )
     return out

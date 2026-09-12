@@ -776,6 +776,7 @@ def test_an_unavailable_catalogue_fails_closed(capsys, kev_state):
         "available": False,
         "checked": 0,
         "listed": 0,
+        "listedPairs": 0,
         "absent": 0,
         "uncheckable": 0,
         "exposures": [],
@@ -1098,13 +1099,80 @@ def test_brief_prints_the_full_decision_brief(capsys, osv_responses):
     assert "-> REPORT" in out and "-> NO" in out
 
 
+def test_the_funnel_says_which_unit_each_number_is_in(capsys, kev_state):
+    """The arithmetic a reader does between two adjacent lines has to work.
+
+    `known exploited` is distinct CVE ids and the buckets directly under it
+    are component-CVE pairs, so the two differ whenever one CVE reaches more
+    than one component -- which is the normal case, not the corner one. Each
+    gloss names its own unit, and the listed line names both.
+    """
+    main([str(FIXTURE)])
+    out = _flat(capsys.readouterr().out)
+
+    assert "vulnerabilities 6 (records carried by the SBOM, not matched here)" in out
+    assert "component-CVE pairs 5 (one record can affect several components)" in out
+    assert "CVEs checked 6 (distinct CVE ids put to the EUVD KEV catalogue)" in out
+    assert "distinct CVE ids listed in the catalogue," in out
+    assert "REPORT 0 (component-CVE pairs; the 24h clock is running)" in out
+    assert "pairs in the KEV catalogue; needs a decision now" in out
+    assert "pairs not in the KEV catalogue" in out
+
+    # The identity the reader is entitled to: the pairs quoted beside the
+    # listed CVE ids are the pairs sitting in the buckets that the catalogue
+    # put there. Asserted rather than hardcoded, so it keeps holding when the
+    # fixture changes.
+    listed_pairs = int(re.search(r"across (\d+) component-CVE pair", out).group(1))
+    report = int(re.search(r"REPORT (\d+)", out).group(1))
+    assess = int(re.search(r"ASSESS (\d+)", out).group(1))
+    assert listed_pairs == report + assess
+
+
+def test_the_funnel_owns_up_when_two_records_are_one_pair(
+    capsys, document, tmp_path, kev_state
+):
+    """The line above the buckets is findings; the buckets are pairs.
+
+    Two records aliasing one CVE on one component is the ordinary case -- a
+    scanner's own feed and OSV both carry Log4shell -- and it makes the two
+    differ by one. The reader is told on the line rather than left to add the
+    buckets up and find a number that is not above them.
+    """
+    duplicate = dict(document["vulnerabilities"][0], **{"bom-ref": "vuln-1-again"})
+    document["vulnerabilities"].append(duplicate)
+    main([_write(tmp_path, document)])
+    out = _flat(capsys.readouterr().out)
+
+    findings = int(re.search(r"component-CVE pairs (\d+)", out).group(1))
+    distinct = int(re.search(r"one CVE: (\d+) distinct pairs", out).group(1))
+    assert distinct == findings - 1
+    # `unchecked` prints only when something was unassessable, so it is
+    # summed where it appears rather than required.
+    found = [
+        re.search(rf"{label} (\d+)", out)
+        for label in ("REPORT", "ASSESS", "NO", "unchecked")
+    ]
+    buckets = sum(int(m.group(1)) for m in found if m)
+    assert buckets == distinct
+
+
+def test_a_funnel_that_collapses_nothing_says_nothing(capsys, kev_state):
+    """The second line is a reconciliation, so it is there only when there is
+    something to reconcile. On a run where every finding is its own pair it
+    would be a clause a reader has to read and discard."""
+    main([str(FIXTURE)])
+    out = _flat(capsys.readouterr().out)
+    assert "component-CVE pairs 5 (one record can affect several components)" in out
+    assert "distinct pairs" not in out
+
+
 def test_no_is_counted_and_never_listed_row_by_row(capsys, kev_state):
     """One summary line. Listing it buries the two buckets that decide
     anything, and it is most of the output on any real product."""
     kev_state["dump"] = list(IRRELEVANT_KEV_DUMP)
     main(["--brief", str(FIXTURE)])
     out = capsys.readouterr().out
-    assert "NO 5 (not in the KEV catalogue)" in _flat(out)
+    assert "NO 5 (pairs not in the KEV catalogue)" in _flat(out)
     assert "[NO]" not in out
 
 

@@ -26,6 +26,7 @@ from art14.kev import (
     banner_line,
     parse_dump,
     review,
+    summary_lines,
     uncheckable_warning,
 )
 from art14.models import Vulnerability
@@ -312,6 +313,59 @@ def test_a_cve_the_catalogue_does_not_list_is_absent():
 def test_a_cve_in_the_id_field_is_used_directly():
     result = review([Vulnerability(id=LOG4SHELL_CVE)], _catalogue())
     assert result.listed[0].osv_ids == (LOG4SHELL_CVE,)
+
+
+# --- which unit the number is in ------------------------------------------
+#
+# The block changes unit on its way down: records, then component-CVE pairs,
+# then distinct CVE ids here, then pairs again in the buckets. Every
+# transition is correct and none is visible, so a reader does the arithmetic
+# between two adjacent lines and it does not work.
+
+
+def test_the_listed_line_names_both_units():
+    """One CVE over two components is one id and two pairs. The buckets
+    under this line count the pairs, so this line says both numbers."""
+    records = [
+        Vulnerability(
+            id=LOG4SHELL_GHSA,
+            aliases=(LOG4SHELL_CVE,),
+            affects=("pkg:maven/a@1", "pkg:maven/b@1"),
+        )
+    ]
+    result = review(records, _catalogue())
+    assert len(result.listed) == 1
+    assert result.listed_pairs == 2
+
+    lines = summary_lines(result)
+    assert "distinct CVE ids listed in the catalogue," in lines[1]
+    assert lines[2].strip() == "across 2 component-CVE pairs)"
+    # Aligned under the note column of the line it belongs to, not indented
+    # arbitrarily: the two lines are one sentence.
+    assert lines[2].index("across") == lines[1].index("(distinct")
+
+
+def test_a_zero_needs_no_second_unit():
+    """Nothing listed is nothing to reconcile, and "across 0 pairs" is a
+    clause that makes a reader stop."""
+    lines = summary_lines(review([Vulnerability(id="CVE-2026-9999")], _catalogue()))
+    assert lines[1].endswith("(distinct CVE ids listed in the catalogue)")
+    assert len(lines) == 2
+
+
+def test_the_pair_count_reaches_the_json():
+    """A consumer comparing kev.listed with triage.counts.assess is comparing
+    CVE ids with pairs. Both are in the payload."""
+    records = [
+        Vulnerability(
+            id=LOG4SHELL_GHSA,
+            aliases=(LOG4SHELL_CVE,),
+            affects=("pkg:maven/a@1", "pkg:maven/b@1"),
+        )
+    ]
+    payload = review(records, _catalogue()).as_json()
+    assert payload["listed"] == 1
+    assert payload["listedPairs"] == 2
 
 
 def test_the_json_shape_counts_all_three_categories():

@@ -44,18 +44,20 @@ Treat it as unassessed for exploitation, exactly as you would an unmatched
 component -- not as clear.
 
   components            36   (read from the SBOM)
-  vulnerabilities      138   (matched against OSV.dev)
-  component-CVE pairs  140   (one per affected component)
+  vulnerabilities      138   (records matched against OSV.dev)
+  component-CVE pairs  140   (one record can affect several components;
+                             several can name one CVE: 139 distinct pairs)
   components queried    36   (36 answered from cache)
   records fetched        0   (vulnerability records downloaded this run)
   CVEs checked         136   (distinct CVE ids put to the EUVD KEV catalogue)
-  known exploited        5   (listed in the catalogue)
-  not checkable          1   (no CVE id; the catalogue could not be asked)
+  known exploited        5   (distinct CVE ids listed in the catalogue,
+                             across 7 component-CVE pairs)
+  not checkable          1   (records with no CVE id; no key to look up)
 
-  REPORT                 0   (confirmed present; the 24h clock is running)
-  ASSESS                 7   (in the KEV catalogue; needs a human decision now)
-  NO                   131   (not in the KEV catalogue)
-  unchecked              1   (no CVE id; the catalogue could not be asked)
+  REPORT                 0   (component-CVE pairs; the 24h clock is running)
+  ASSESS                 7   (pairs in the KEV catalogue; needs a decision now)
+  NO                   131   (pairs not in the KEV catalogue)
+  unchecked              1   (pairs whose record carries no CVE id)
 CVE            | component                     | D/T | bucket | listed by
 ---------------+-------------------------------+-----+--------+----------
 CVE-2022-22965 | spring-boot-starter-web@2.5.6 | D   | ASSESS |      CISA
@@ -92,7 +94,12 @@ talking rather than a bug.
 
 ## Run it
 
-Clone the repository, then from its root:
+```
+git clone https://github.com/ddodevski/cra-article14-triage
+cd cra-article14-triage
+```
+
+Then, from the root:
 
 ```
 ./art14.sh examples/log4j-app.cdx.json      # Linux, macOS
@@ -149,11 +156,11 @@ Decided 2026-09-11 by the platform security team.
 ```
 result: 1 to report - 1 to assess - 136 not to report
 
-  REPORT                 1   (confirmed present; the 24h clock is running)
-  ASSESS                 1   (in the KEV catalogue; needs a human decision now)
-  NO                   136   (not to report)
+  REPORT                 1   (component-CVE pairs; the 24h clock is running)
+  ASSESS                 1   (pairs in the KEV catalogue; needs a decision now)
+  NO                   136   (pairs not to report)
   of which               5   ruled out in configuration; the reasons are below
-  unchecked              1   (no CVE id; the catalogue could not be asked)
+  unchecked              1   (pairs whose record carries no CVE id)
 CVE            | component                | D/T | bucket | listed by
 ---------------+--------------------------+-----+--------+----------
 CVE-2021-44228 | log4j-core@2.14.1        | D   | REPORT |      CISA
@@ -218,14 +225,14 @@ have identified those components either, and nothing in the file says
 whether it did. Treat them as unverified rather than clean.
 
   components            15   (of 76 in the SBOM; 61 are not packages)
-  vulnerabilities      125   (carried by the SBOM; matching was skipped)
-  component-CVE pairs  125   (one per affected component)
+  vulnerabilities      125   (records carried by the SBOM, not matched here)
+  component-CVE pairs  125   (one record can affect several components)
   CVEs checked          65   (distinct CVE ids put to the EUVD KEV catalogue)
-  known exploited        0   (listed in the catalogue)
+  known exploited        0   (distinct CVE ids listed in the catalogue)
 
-  REPORT                 0   (confirmed present; the 24h clock is running)
-  ASSESS                 0   (in the KEV catalogue; needs a human decision now)
-  NO                   125   (not in the KEV catalogue)
+  REPORT                 0   (component-CVE pairs; the 24h clock is running)
+  ASSESS                 0   (pairs in the KEV catalogue; needs a decision now)
+  NO                   125   (pairs not in the KEV catalogue)
 ```
 
 Grype carried 125 vulnerabilities over 65 distinct CVEs. Every one of them is
@@ -268,18 +275,18 @@ carries its own vulnerability list will answer where OSV did not: `grype
 <image> -o cyclonedx-json | art14 -`.
 
   components            15   (of 76 in the SBOM; 61 are not packages)
-  vulnerabilities        0   (matched against OSV.dev)
-  component-CVE pairs    0   (one per affected component)
+  vulnerabilities        0   (records matched against OSV.dev)
+  component-CVE pairs    0   (one record can affect several components)
   components queried    14   (14 answered from cache)
   osv coverage           0   (of 14 queried came back with records)
                              pkg:apk/alpine   14 queried, 0 answered
   records fetched        0   (vulnerability records downloaded this run)
   CVEs checked           0   (distinct CVE ids put to the EUVD KEV catalogue)
-  known exploited        0   (listed in the catalogue)
+  known exploited        0   (distinct CVE ids listed in the catalogue)
 
-  REPORT                 0   (confirmed present; the 24h clock is running)
-  ASSESS                 0   (in the KEV catalogue; needs a human decision now)
-  NO                     0   (not in the KEV catalogue)
+  REPORT                 0   (component-CVE pairs; the 24h clock is running)
+  ASSESS                 0   (pairs in the KEV catalogue; needs a decision now)
+  NO                     0   (pairs not in the KEV catalogue)
 ```
 
 Same image, same 15 packages, and an empty result -- but not a clean one.

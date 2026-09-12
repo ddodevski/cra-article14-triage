@@ -272,6 +272,20 @@ class Triage:
     unused: tuple[ConfirmationUse, ...] = ()
 
     @property
+    def pairs(self) -> int:
+        """Distinct (CVE, component) pairs -- the unit the buckets count.
+
+        One below the finding count whenever two vulnerability records alias
+        the same CVE on the same component, which is ordinary: OSV and a
+        scanner's own feed both carry Log4Shell. Bucketing keys on the pair
+        and keeps the first, so the funnel line above the buckets would
+        otherwise quote a total nothing below it adds up to.
+        """
+        return (
+            len(self.report) + len(self.assess) + len(self.no) + len(self.unassessed)
+        )
+
+    @property
     def actionable(self) -> tuple[Item, ...]:
         """Everything a human has to look at. REPORT first, by precedence."""
         return self.report + self.assess
@@ -516,16 +530,21 @@ def counts(result: Triage | None) -> list[str]:
     """The default terminal summary. NO is one line, never row by row."""
     if result is None:
         return []
+    # Every bucket is counted in component-CVE pairs, and the catalogue line
+    # above them is counted in distinct CVE ids. The first row says the unit
+    # and the rest inherit it, rather than each repeating the word.
     out = [
         count_line(
-            REPORT, len(result.report), "(confirmed present; the 24h clock is running)"
+            REPORT,
+            len(result.report),
+            "(component-CVE pairs; the 24h clock is running)",
         ),
         count_line(
             ASSESS,
             len(result.assess),
-            "(in the KEV catalogue; needs a human decision now)",
+            "(pairs in the KEV catalogue; needs a decision now)",
         ),
-        count_line(NO, len(result.no), f"({no_label(result)})"),
+        count_line(NO, len(result.no), f"(pairs {no_label(result)})"),
     ]
     if result.ruled_out:
         out.append(
@@ -548,7 +567,7 @@ def counts(result: Triage | None) -> list[str]:
             count_line(
                 "unchecked",
                 len(result.unassessed),
-                "(no CVE id; the catalogue could not be asked)",
+                "(pairs whose record carries no CVE id)",
             )
         )
     return out

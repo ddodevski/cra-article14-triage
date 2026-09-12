@@ -221,6 +221,20 @@ def test_the_same_pair_twice_is_one_item():
     assert len(result.assess) == 1
 
 
+def test_the_pair_count_is_what_the_buckets_add_up_to():
+    """Two records, one pair. The funnel prints the finding count above the
+    buckets, so it also has to be able to print the number the buckets total
+    -- otherwise a reader adds the bucket lines and lands one short."""
+    sbom = _sbom([_vuln("GHSA-a"), _vuln("GHSA-b")])
+    result = _run(sbom.vulnerabilities, sbom=sbom)
+    assert len(sbom.findings) == 2
+    assert result.pairs == 1
+    assert result.pairs == (
+        len(result.report) + len(result.assess) + len(result.no)
+        + len(result.unassessed)
+    )
+
+
 # --- the ASSESS to REPORT transition --------------------------------------
 
 

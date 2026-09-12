@@ -36,7 +36,7 @@ from . import (
 from .cyclonedx import SUPPORTED_SPEC_VERSIONS, parse_source, version_caveat
 from .errors import Art14Error
 from .kev import CatalogueLoad, CatalogueUnavailable, KevClient, Review
-from .lines import LABEL_WIDTH, VALUE_WIDTH, count_line
+from .lines import count_line, note_line
 from .models import Sbom
 from .osv import MatchResult, OsvClient
 from .provenance import Provenance, SourceStamp
@@ -503,8 +503,10 @@ def _coverage_lines(quality: InputQuality) -> list[str]:
         # No gloss on a zero: the line above says what zero means, and the
         # block has to hold together at 80 columns like every other row here.
         out.append(
-            f"{' ' * (LABEL_WIDTH + VALUE_WIDTH + 5)}{ecosystem.label}"
-            f"   {ecosystem.queried} queried, {ecosystem.answered} answered"
+            note_line(
+                f"{ecosystem.label}   {ecosystem.queried} queried,"
+                f" {ecosystem.answered} answered"
+            )
         )
     return out
 
@@ -635,11 +637,26 @@ def _print_inventory(
             f"({_match_source(result)})",
         )
     )
+    # Two records aliasing one CVE on one component are one pair to bucket
+    # and two findings here, so the head of the funnel can sit one above the
+    # total of the buckets. Said on the line rather than left as arithmetic
+    # that does not work.
+    collapses = result_triage is not None and result_triage.pairs != len(sbom.findings)
     print(
         count_line(
-            "component-CVE pairs", len(sbom.findings), "(one per affected component)"
+            "component-CVE pairs",
+            len(sbom.findings),
+            "(one record can affect several components;"
+            if collapses
+            else "(one record can affect several components)",
         )
     )
+    if collapses:
+        print(
+            note_line(
+                f"several can name one CVE: {result_triage.pairs} distinct pairs)"
+            )
+        )
     if result is not None:
         # Two different units, so two rows. On one row "(2 from cache, 7
         # fetched)" reads as "2 cached and 7 not", when in fact all 2 were
@@ -744,11 +761,15 @@ def _print_inventory(
 
 
 def _match_source(result: MatchResult | None) -> str:
+    """Where the vulnerabilities came from, in the unit they are counted in.
+
+    Records, not pairs: the row under this one is pairs and the two numbers
+    differ. Both notes are sized to leave the row inside 80 columns, which is
+    the width the README block and a pasted terminal are read at.
+    """
     if result is None:
-        # Two characters short of 80 with the row in front of it, which is the
-        # width the README block and a pasted terminal are read at.
-        return "carried by the SBOM; matching was skipped"
-    return "matched against OSV.dev"
+        return "records carried by the SBOM, not matched here"
+    return "records matched against OSV.dev"
 
 
 def run() -> None:

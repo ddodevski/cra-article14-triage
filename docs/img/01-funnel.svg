@@ -1,202 +1,210 @@
-<svg class="rich-terminal" viewBox="0 0 994 1050.4" xmlns="http://www.w3.org/2000/svg">
+<svg class="rich-terminal" viewBox="0 0 994 1099.2" xmlns="http://www.w3.org/2000/svg">
     <!-- Generated with Rich https://www.textualize.io -->
     <style>
-    .terminal-2575763287-matrix {
+    .terminal-4343201-matrix {
         font-family: "Cascadia Mono", "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
         font-size: 20px;
         line-height: 24.4px;
     }
 
-    .terminal-2575763287-title {
+    .terminal-4343201-title {
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
     }
 
-    .terminal-2575763287-r1 { fill: #98a84b;font-weight: bold }
-.terminal-2575763287-r2 { fill: #c5c8c6 }
-.terminal-2575763287-r3 { fill: #c5c8c6;font-weight: bold }
-.terminal-2575763287-r4 { fill: #d0b344 }
-.terminal-2575763287-r5 { fill: #868887 }
+    .terminal-4343201-r1 { fill: #98a84b;font-weight: bold }
+.terminal-4343201-r2 { fill: #c5c8c6 }
+.terminal-4343201-r3 { fill: #c5c8c6;font-weight: bold }
+.terminal-4343201-r4 { fill: #d0b344 }
+.terminal-4343201-r5 { fill: #868887 }
     </style>
 
     <defs>
-    <clipPath id="terminal-2575763287-clip-terminal">
-      <rect x="0" y="0" width="975.0" height="999.4" />
+    <clipPath id="terminal-4343201-clip-terminal">
+      <rect x="0" y="0" width="975.0" height="1048.2" />
     </clipPath>
-    <clipPath id="terminal-2575763287-line-0">
+    <clipPath id="terminal-4343201-line-0">
     <rect x="0" y="1.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-1">
+<clipPath id="terminal-4343201-line-1">
     <rect x="0" y="25.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-2">
+<clipPath id="terminal-4343201-line-2">
     <rect x="0" y="50.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-3">
+<clipPath id="terminal-4343201-line-3">
     <rect x="0" y="74.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-4">
+<clipPath id="terminal-4343201-line-4">
     <rect x="0" y="99.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-5">
+<clipPath id="terminal-4343201-line-5">
     <rect x="0" y="123.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-6">
+<clipPath id="terminal-4343201-line-6">
     <rect x="0" y="147.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-7">
+<clipPath id="terminal-4343201-line-7">
     <rect x="0" y="172.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-8">
+<clipPath id="terminal-4343201-line-8">
     <rect x="0" y="196.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-9">
+<clipPath id="terminal-4343201-line-9">
     <rect x="0" y="221.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-10">
+<clipPath id="terminal-4343201-line-10">
     <rect x="0" y="245.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-11">
+<clipPath id="terminal-4343201-line-11">
     <rect x="0" y="269.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-12">
+<clipPath id="terminal-4343201-line-12">
     <rect x="0" y="294.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-13">
+<clipPath id="terminal-4343201-line-13">
     <rect x="0" y="318.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-14">
+<clipPath id="terminal-4343201-line-14">
     <rect x="0" y="343.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-15">
+<clipPath id="terminal-4343201-line-15">
     <rect x="0" y="367.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-16">
+<clipPath id="terminal-4343201-line-16">
     <rect x="0" y="391.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-17">
+<clipPath id="terminal-4343201-line-17">
     <rect x="0" y="416.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-18">
+<clipPath id="terminal-4343201-line-18">
     <rect x="0" y="440.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-19">
+<clipPath id="terminal-4343201-line-19">
     <rect x="0" y="465.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-20">
+<clipPath id="terminal-4343201-line-20">
     <rect x="0" y="489.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-21">
+<clipPath id="terminal-4343201-line-21">
     <rect x="0" y="513.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-22">
+<clipPath id="terminal-4343201-line-22">
     <rect x="0" y="538.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-23">
+<clipPath id="terminal-4343201-line-23">
     <rect x="0" y="562.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-24">
+<clipPath id="terminal-4343201-line-24">
     <rect x="0" y="587.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-25">
+<clipPath id="terminal-4343201-line-25">
     <rect x="0" y="611.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-26">
+<clipPath id="terminal-4343201-line-26">
     <rect x="0" y="635.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-27">
+<clipPath id="terminal-4343201-line-27">
     <rect x="0" y="660.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-28">
+<clipPath id="terminal-4343201-line-28">
     <rect x="0" y="684.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-29">
+<clipPath id="terminal-4343201-line-29">
     <rect x="0" y="709.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-30">
+<clipPath id="terminal-4343201-line-30">
     <rect x="0" y="733.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-31">
+<clipPath id="terminal-4343201-line-31">
     <rect x="0" y="757.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-32">
+<clipPath id="terminal-4343201-line-32">
     <rect x="0" y="782.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-33">
+<clipPath id="terminal-4343201-line-33">
     <rect x="0" y="806.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-34">
+<clipPath id="terminal-4343201-line-34">
     <rect x="0" y="831.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-35">
+<clipPath id="terminal-4343201-line-35">
     <rect x="0" y="855.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-36">
+<clipPath id="terminal-4343201-line-36">
     <rect x="0" y="879.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-37">
+<clipPath id="terminal-4343201-line-37">
     <rect x="0" y="904.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-38">
+<clipPath id="terminal-4343201-line-38">
     <rect x="0" y="928.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2575763287-line-39">
+<clipPath id="terminal-4343201-line-39">
     <rect x="0" y="953.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-4343201-line-40">
+    <rect x="0" y="977.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-4343201-line-41">
+    <rect x="0" y="1001.9" width="976" height="24.65"/>
             </clipPath>
     </defs>
 
-    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="992" height="1048.4" rx="8"/><text class="terminal-2575763287-title" fill="#c5c8c6" text-anchor="middle" x="496" y="27">art14</text>
+    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="992" height="1097.2" rx="8"/><text class="terminal-4343201-title" fill="#c5c8c6" text-anchor="middle" x="496" y="27">art14</text>
             <g transform="translate(26,22)">
             <circle cx="0" cy="0" r="7" fill="#ff5f57"/>
             <circle cx="22" cy="0" r="7" fill="#febc2e"/>
             <circle cx="44" cy="0" r="7" fill="#28c840"/>
             </g>
         
-    <g transform="translate(9, 41)" clip-path="url(#terminal-2575763287-clip-terminal)">
+    <g transform="translate(9, 41)" clip-path="url(#terminal-4343201-clip-terminal)">
     
-    <g class="terminal-2575763287-matrix">
-    <text class="terminal-2575763287-r1" x="0" y="20" textLength="427" clip-path="url(#terminal-2575763287-line-0)">$&#160;art14&#160;examples/log4j-app.cdx.json</text><text class="terminal-2575763287-r2" x="976" y="20" textLength="12.2" clip-path="url(#terminal-2575763287-line-0)">
-</text><text class="terminal-2575763287-r2" x="0" y="44.4" textLength="585.6" clip-path="url(#terminal-2575763287-line-1)">art14&#160;0.1.0.dev0&#160;-&#160;CycloneDX&#160;1.6&#160;-&#160;gateway@3.2.0</text><text class="terminal-2575763287-r2" x="976" y="44.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-1)">
-</text><text class="terminal-2575763287-r2" x="976" y="68.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-2)">
-</text><text class="terminal-2575763287-r2" x="0" y="93.2" textLength="756.4" clip-path="url(#terminal-2575763287-line-3)">input:&#160;36&#160;components&#160;-&#160;0&#160;without&#160;PURL&#160;(0%)&#160;-&#160;0&#160;without&#160;version</text><text class="terminal-2575763287-r2" x="976" y="93.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-3)">
-</text><text class="terminal-2575763287-r2" x="0" y="117.6" textLength="488" clip-path="url(#terminal-2575763287-line-4)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;matching&#160;quality:&#160;ok&#160;-&#160;see&#160;README</text><text class="terminal-2575763287-r2" x="976" y="117.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-4)">
-</text><text class="terminal-2575763287-r2" x="0" y="142" textLength="963.8" clip-path="url(#terminal-2575763287-line-5)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;vulnerability&#160;with&#160;no&#160;CVE&#160;id&#160;-&#160;not&#160;checkable&#160;against&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-2575763287-r2" x="976" y="142" textLength="12.2" clip-path="url(#terminal-2575763287-line-5)">
-</text><text class="terminal-2575763287-r2" x="0" y="166.4" textLength="780.8" clip-path="url(#terminal-2575763287-line-6)">result:&#160;0&#160;to&#160;report&#160;-&#160;7&#160;to&#160;assess&#160;-&#160;131&#160;not&#160;in&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-2575763287-r2" x="976" y="166.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-6)">
-</text><text class="terminal-2575763287-r2" x="976" y="190.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-7)">
-</text><text class="terminal-2575763287-r2" x="0" y="215.2" textLength="902.8" clip-path="url(#terminal-2575763287-line-8)">1&#160;vulnerability&#160;carries&#160;no&#160;CVE&#160;id,&#160;so&#160;the&#160;KEV&#160;catalogue&#160;could&#160;not&#160;be&#160;asked</text><text class="terminal-2575763287-r2" x="976" y="215.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-8)">
-</text><text class="terminal-2575763287-r2" x="0" y="239.6" textLength="902.8" clip-path="url(#terminal-2575763287-line-9)">about&#160;it.&#160;It&#160;is&#160;not&#160;absent&#160;from&#160;the&#160;catalogue:&#160;the&#160;question&#160;was&#160;never&#160;put.</text><text class="terminal-2575763287-r2" x="976" y="239.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-9)">
-</text><text class="terminal-2575763287-r2" x="0" y="264" textLength="902.8" clip-path="url(#terminal-2575763287-line-10)">Treat&#160;it&#160;as&#160;unassessed&#160;for&#160;exploitation,&#160;exactly&#160;as&#160;you&#160;would&#160;an&#160;unmatched</text><text class="terminal-2575763287-r2" x="976" y="264" textLength="12.2" clip-path="url(#terminal-2575763287-line-10)">
-</text><text class="terminal-2575763287-r2" x="0" y="288.4" textLength="317.2" clip-path="url(#terminal-2575763287-line-11)">component&#160;--&#160;not&#160;as&#160;clear.</text><text class="terminal-2575763287-r2" x="976" y="288.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-11)">
-</text><text class="terminal-2575763287-r2" x="976" y="312.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-12)">
-</text><text class="terminal-2575763287-r2" x="0" y="337.2" textLength="597.8" clip-path="url(#terminal-2575763287-line-13)">&#160;&#160;components&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(read&#160;from&#160;the&#160;SBOM)</text><text class="terminal-2575763287-r2" x="976" y="337.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-13)">
-</text><text class="terminal-2575763287-r2" x="0" y="361.6" textLength="658.8" clip-path="url(#terminal-2575763287-line-14)">&#160;&#160;vulnerabilities&#160;&#160;&#160;&#160;&#160;&#160;138&#160;&#160;&#160;(matched&#160;against&#160;OSV.dev)</text><text class="terminal-2575763287-r2" x="976" y="361.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-14)">
-</text><text class="terminal-2575763287-r2" x="0" y="386" textLength="695.4" clip-path="url(#terminal-2575763287-line-15)">&#160;&#160;component-CVE&#160;pairs&#160;&#160;140&#160;&#160;&#160;(one&#160;per&#160;affected&#160;component)</text><text class="terminal-2575763287-r2" x="976" y="386" textLength="12.2" clip-path="url(#terminal-2575763287-line-15)">
-</text><text class="terminal-2575763287-r2" x="0" y="410.4" textLength="646.6" clip-path="url(#terminal-2575763287-line-16)">&#160;&#160;components&#160;queried&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(36&#160;answered&#160;from&#160;cache)</text><text class="terminal-2575763287-r2" x="976" y="410.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-16)">
-</text><text class="terminal-2575763287-r2" x="0" y="434.8" textLength="878.4" clip-path="url(#terminal-2575763287-line-17)">&#160;&#160;records&#160;fetched&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;(vulnerability&#160;records&#160;downloaded&#160;this&#160;run)</text><text class="terminal-2575763287-r2" x="976" y="434.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-17)">
-</text><text class="terminal-2575763287-r2" x="0" y="459.2" textLength="939.4" clip-path="url(#terminal-2575763287-line-18)">&#160;&#160;CVEs&#160;checked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;136&#160;&#160;&#160;(distinct&#160;CVE&#160;ids&#160;put&#160;to&#160;the&#160;EUVD&#160;KEV&#160;catalogue)</text><text class="terminal-2575763287-r2" x="976" y="459.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-18)">
-</text><text class="terminal-2575763287-r2" x="0" y="483.6" textLength="658.8" clip-path="url(#terminal-2575763287-line-19)">&#160;&#160;known&#160;exploited&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5&#160;&#160;&#160;(listed&#160;in&#160;the&#160;catalogue)</text><text class="terminal-2575763287-r2" x="976" y="483.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-19)">
-</text><text class="terminal-2575763287-r2" x="0" y="508" textLength="902.8" clip-path="url(#terminal-2575763287-line-20)">&#160;&#160;not&#160;checkable&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(no&#160;CVE&#160;id;&#160;the&#160;catalogue&#160;could&#160;not&#160;be&#160;asked)</text><text class="terminal-2575763287-r2" x="976" y="508" textLength="12.2" clip-path="url(#terminal-2575763287-line-20)">
-</text><text class="terminal-2575763287-r2" x="976" y="532.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-21)">
-</text><text class="terminal-2575763287-r2" x="0" y="556.8" textLength="902.8" clip-path="url(#terminal-2575763287-line-22)">&#160;&#160;REPORT&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;(confirmed&#160;present;&#160;the&#160;24h&#160;clock&#160;is&#160;running)</text><text class="terminal-2575763287-r2" x="976" y="556.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-22)">
-</text><text class="terminal-2575763287-r2" x="0" y="581.2" textLength="963.8" clip-path="url(#terminal-2575763287-line-23)">&#160;&#160;ASSESS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7&#160;&#160;&#160;(in&#160;the&#160;KEV&#160;catalogue;&#160;needs&#160;a&#160;human&#160;decision&#160;now)</text><text class="terminal-2575763287-r2" x="976" y="581.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-23)">
-</text><text class="terminal-2575763287-r2" x="0" y="605.6" textLength="671" clip-path="url(#terminal-2575763287-line-24)">&#160;&#160;NO&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;131&#160;&#160;&#160;(not&#160;in&#160;the&#160;KEV&#160;catalogue)</text><text class="terminal-2575763287-r2" x="976" y="605.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-24)">
-</text><text class="terminal-2575763287-r2" x="0" y="630" textLength="902.8" clip-path="url(#terminal-2575763287-line-25)">&#160;&#160;unchecked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(no&#160;CVE&#160;id;&#160;the&#160;catalogue&#160;could&#160;not&#160;be&#160;asked)</text><text class="terminal-2575763287-r2" x="976" y="630" textLength="12.2" clip-path="url(#terminal-2575763287-line-25)">
-</text><text class="terminal-2575763287-r3" x="0" y="654.4" textLength="170.8" clip-path="url(#terminal-2575763287-line-26)">CVE&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r3" x="207.4" y="654.4" textLength="353.8" clip-path="url(#terminal-2575763287-line-26)">component&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r3" x="597.8" y="654.4" textLength="36.6" clip-path="url(#terminal-2575763287-line-26)">D/T</text><text class="terminal-2575763287-r3" x="671" y="654.4" textLength="73.2" clip-path="url(#terminal-2575763287-line-26)">bucket</text><text class="terminal-2575763287-r3" x="780.8" y="654.4" textLength="109.8" clip-path="url(#terminal-2575763287-line-26)">listed&#160;by</text><text class="terminal-2575763287-r2" x="976" y="654.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-26)">
-</text><text class="terminal-2575763287-r2" x="0" y="678.8" textLength="890.6" clip-path="url(#terminal-2575763287-line-27)">─────────────────────────────────────────────────────────────────────────</text><text class="terminal-2575763287-r2" x="976" y="678.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-27)">
-</text><text class="terminal-2575763287-r2" x="0" y="703.2" textLength="170.8" clip-path="url(#terminal-2575763287-line-28)">CVE-2022-22965</text><text class="terminal-2575763287-r2" x="207.4" y="703.2" textLength="353.8" clip-path="url(#terminal-2575763287-line-28)">spring-boot-starter-web@2.5.6</text><text class="terminal-2575763287-r2" x="597.8" y="703.2" textLength="36.6" clip-path="url(#terminal-2575763287-line-28)">D&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="703.2" textLength="73.2" clip-path="url(#terminal-2575763287-line-28)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="703.2" textLength="109.8" clip-path="url(#terminal-2575763287-line-28)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="703.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-28)">
-</text><text class="terminal-2575763287-r2" x="0" y="727.6" textLength="170.8" clip-path="url(#terminal-2575763287-line-29)">CVE-2022-22965</text><text class="terminal-2575763287-r2" x="207.4" y="727.6" textLength="353.8" clip-path="url(#terminal-2575763287-line-29)">spring-webmvc@5.3.12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="727.6" textLength="36.6" clip-path="url(#terminal-2575763287-line-29)">T&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="727.6" textLength="73.2" clip-path="url(#terminal-2575763287-line-29)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="727.6" textLength="109.8" clip-path="url(#terminal-2575763287-line-29)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="727.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-29)">
-</text><text class="terminal-2575763287-r2" x="0" y="752" textLength="170.8" clip-path="url(#terminal-2575763287-line-30)">CVE-2022-22965</text><text class="terminal-2575763287-r2" x="207.4" y="752" textLength="353.8" clip-path="url(#terminal-2575763287-line-30)">spring-beans@5.3.12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="752" textLength="36.6" clip-path="url(#terminal-2575763287-line-30)">T&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="752" textLength="73.2" clip-path="url(#terminal-2575763287-line-30)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="752" textLength="109.8" clip-path="url(#terminal-2575763287-line-30)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="752" textLength="12.2" clip-path="url(#terminal-2575763287-line-30)">
-</text><text class="terminal-2575763287-r2" x="0" y="776.4" textLength="170.8" clip-path="url(#terminal-2575763287-line-31)">CVE-2021-45046</text><text class="terminal-2575763287-r2" x="207.4" y="776.4" textLength="353.8" clip-path="url(#terminal-2575763287-line-31)">log4j-core@2.14.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="776.4" textLength="36.6" clip-path="url(#terminal-2575763287-line-31)">D&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="776.4" textLength="73.2" clip-path="url(#terminal-2575763287-line-31)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="776.4" textLength="109.8" clip-path="url(#terminal-2575763287-line-31)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="776.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-31)">
-</text><text class="terminal-2575763287-r2" x="0" y="800.8" textLength="170.8" clip-path="url(#terminal-2575763287-line-32)">CVE-2021-44228</text><text class="terminal-2575763287-r2" x="207.4" y="800.8" textLength="353.8" clip-path="url(#terminal-2575763287-line-32)">log4j-core@2.14.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="800.8" textLength="36.6" clip-path="url(#terminal-2575763287-line-32)">D&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="800.8" textLength="73.2" clip-path="url(#terminal-2575763287-line-32)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="800.8" textLength="109.8" clip-path="url(#terminal-2575763287-line-32)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="800.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-32)">
-</text><text class="terminal-2575763287-r2" x="0" y="825.2" textLength="170.8" clip-path="url(#terminal-2575763287-line-33)">CVE-2025-24813</text><text class="terminal-2575763287-r2" x="207.4" y="825.2" textLength="353.8" clip-path="url(#terminal-2575763287-line-33)">tomcat-embed-core@9.0.54&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="825.2" textLength="36.6" clip-path="url(#terminal-2575763287-line-33)">T&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="825.2" textLength="73.2" clip-path="url(#terminal-2575763287-line-33)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="825.2" textLength="109.8" clip-path="url(#terminal-2575763287-line-33)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="825.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-33)">
-</text><text class="terminal-2575763287-r2" x="0" y="849.6" textLength="170.8" clip-path="url(#terminal-2575763287-line-34)">CVE-2023-44487</text><text class="terminal-2575763287-r2" x="207.4" y="849.6" textLength="353.8" clip-path="url(#terminal-2575763287-line-34)">tomcat-embed-core@9.0.54&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-2575763287-r2" x="597.8" y="849.6" textLength="36.6" clip-path="url(#terminal-2575763287-line-34)">T&#160;&#160;</text><text class="terminal-2575763287-r4" x="671" y="849.6" textLength="73.2" clip-path="url(#terminal-2575763287-line-34)">ASSESS</text><text class="terminal-2575763287-r2" x="780.8" y="849.6" textLength="109.8" clip-path="url(#terminal-2575763287-line-34)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-2575763287-r2" x="976" y="849.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-34)">
-</text><text class="terminal-2575763287-r5" x="0" y="874" textLength="854" clip-path="url(#terminal-2575763287-line-35)">D&#160;=&#160;direct&#160;dependency,&#160;T&#160;=&#160;transitive&#160;(pulled&#160;in&#160;by&#160;another&#160;component)</text><text class="terminal-2575763287-r2" x="976" y="874" textLength="12.2" clip-path="url(#terminal-2575763287-line-35)">
-</text><text class="terminal-2575763287-r5" x="0" y="898.4" textLength="463.6" clip-path="url(#terminal-2575763287-line-36)">+&#160;131&#160;item(s)&#160;not&#160;in&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-2575763287-r2" x="976" y="898.4" textLength="12.2" clip-path="url(#terminal-2575763287-line-36)">
-</text><text class="terminal-2575763287-r2" x="976" y="922.8" textLength="12.2" clip-path="url(#terminal-2575763287-line-37)">
-</text><text class="terminal-2575763287-r2" x="0" y="947.2" textLength="866.2" clip-path="url(#terminal-2575763287-line-38)">7&#160;item(s)&#160;need&#160;a&#160;decision.&#160;Run&#160;again&#160;with&#160;--brief&#160;for&#160;the&#160;full&#160;decision</text><text class="terminal-2575763287-r2" x="976" y="947.2" textLength="12.2" clip-path="url(#terminal-2575763287-line-38)">
-</text><text class="terminal-2575763287-r2" x="0" y="971.6" textLength="915" clip-path="url(#terminal-2575763287-line-39)">brief&#160;on&#160;each:&#160;where&#160;it&#160;sits,&#160;what&#160;it&#160;is,&#160;who&#160;says&#160;it&#160;is&#160;exploited,&#160;and&#160;the</text><text class="terminal-2575763287-r2" x="976" y="971.6" textLength="12.2" clip-path="url(#terminal-2575763287-line-39)">
-</text><text class="terminal-2575763287-r2" x="0" y="996" textLength="512.4" clip-path="url(#terminal-2575763287-line-40)">one&#160;question&#160;to&#160;answer&#160;about&#160;this&#160;product.</text><text class="terminal-2575763287-r2" x="976" y="996" textLength="12.2" clip-path="url(#terminal-2575763287-line-40)">
+    <g class="terminal-4343201-matrix">
+    <text class="terminal-4343201-r1" x="0" y="20" textLength="427" clip-path="url(#terminal-4343201-line-0)">$&#160;art14&#160;examples/log4j-app.cdx.json</text><text class="terminal-4343201-r2" x="976" y="20" textLength="12.2" clip-path="url(#terminal-4343201-line-0)">
+</text><text class="terminal-4343201-r2" x="0" y="44.4" textLength="585.6" clip-path="url(#terminal-4343201-line-1)">art14&#160;0.1.0.dev0&#160;-&#160;CycloneDX&#160;1.6&#160;-&#160;gateway@3.2.0</text><text class="terminal-4343201-r2" x="976" y="44.4" textLength="12.2" clip-path="url(#terminal-4343201-line-1)">
+</text><text class="terminal-4343201-r2" x="976" y="68.8" textLength="12.2" clip-path="url(#terminal-4343201-line-2)">
+</text><text class="terminal-4343201-r2" x="0" y="93.2" textLength="756.4" clip-path="url(#terminal-4343201-line-3)">input:&#160;36&#160;components&#160;-&#160;0&#160;without&#160;PURL&#160;(0%)&#160;-&#160;0&#160;without&#160;version</text><text class="terminal-4343201-r2" x="976" y="93.2" textLength="12.2" clip-path="url(#terminal-4343201-line-3)">
+</text><text class="terminal-4343201-r2" x="0" y="117.6" textLength="488" clip-path="url(#terminal-4343201-line-4)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;matching&#160;quality:&#160;ok&#160;-&#160;see&#160;README</text><text class="terminal-4343201-r2" x="976" y="117.6" textLength="12.2" clip-path="url(#terminal-4343201-line-4)">
+</text><text class="terminal-4343201-r2" x="0" y="142" textLength="963.8" clip-path="url(#terminal-4343201-line-5)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;vulnerability&#160;with&#160;no&#160;CVE&#160;id&#160;-&#160;not&#160;checkable&#160;against&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-4343201-r2" x="976" y="142" textLength="12.2" clip-path="url(#terminal-4343201-line-5)">
+</text><text class="terminal-4343201-r2" x="0" y="166.4" textLength="780.8" clip-path="url(#terminal-4343201-line-6)">result:&#160;0&#160;to&#160;report&#160;-&#160;7&#160;to&#160;assess&#160;-&#160;131&#160;not&#160;in&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-4343201-r2" x="976" y="166.4" textLength="12.2" clip-path="url(#terminal-4343201-line-6)">
+</text><text class="terminal-4343201-r2" x="976" y="190.8" textLength="12.2" clip-path="url(#terminal-4343201-line-7)">
+</text><text class="terminal-4343201-r2" x="0" y="215.2" textLength="902.8" clip-path="url(#terminal-4343201-line-8)">1&#160;vulnerability&#160;carries&#160;no&#160;CVE&#160;id,&#160;so&#160;the&#160;KEV&#160;catalogue&#160;could&#160;not&#160;be&#160;asked</text><text class="terminal-4343201-r2" x="976" y="215.2" textLength="12.2" clip-path="url(#terminal-4343201-line-8)">
+</text><text class="terminal-4343201-r2" x="0" y="239.6" textLength="902.8" clip-path="url(#terminal-4343201-line-9)">about&#160;it.&#160;It&#160;is&#160;not&#160;absent&#160;from&#160;the&#160;catalogue:&#160;the&#160;question&#160;was&#160;never&#160;put.</text><text class="terminal-4343201-r2" x="976" y="239.6" textLength="12.2" clip-path="url(#terminal-4343201-line-9)">
+</text><text class="terminal-4343201-r2" x="0" y="264" textLength="902.8" clip-path="url(#terminal-4343201-line-10)">Treat&#160;it&#160;as&#160;unassessed&#160;for&#160;exploitation,&#160;exactly&#160;as&#160;you&#160;would&#160;an&#160;unmatched</text><text class="terminal-4343201-r2" x="976" y="264" textLength="12.2" clip-path="url(#terminal-4343201-line-10)">
+</text><text class="terminal-4343201-r2" x="0" y="288.4" textLength="317.2" clip-path="url(#terminal-4343201-line-11)">component&#160;--&#160;not&#160;as&#160;clear.</text><text class="terminal-4343201-r2" x="976" y="288.4" textLength="12.2" clip-path="url(#terminal-4343201-line-11)">
+</text><text class="terminal-4343201-r2" x="976" y="312.8" textLength="12.2" clip-path="url(#terminal-4343201-line-12)">
+</text><text class="terminal-4343201-r2" x="0" y="337.2" textLength="597.8" clip-path="url(#terminal-4343201-line-13)">&#160;&#160;components&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(read&#160;from&#160;the&#160;SBOM)</text><text class="terminal-4343201-r2" x="976" y="337.2" textLength="12.2" clip-path="url(#terminal-4343201-line-13)">
+</text><text class="terminal-4343201-r2" x="0" y="361.6" textLength="756.4" clip-path="url(#terminal-4343201-line-14)">&#160;&#160;vulnerabilities&#160;&#160;&#160;&#160;&#160;&#160;138&#160;&#160;&#160;(records&#160;matched&#160;against&#160;OSV.dev)</text><text class="terminal-4343201-r2" x="976" y="361.6" textLength="12.2" clip-path="url(#terminal-4343201-line-14)">
+</text><text class="terminal-4343201-r2" x="0" y="386" textLength="866.2" clip-path="url(#terminal-4343201-line-15)">&#160;&#160;component-CVE&#160;pairs&#160;&#160;140&#160;&#160;&#160;(one&#160;record&#160;can&#160;affect&#160;several&#160;components;</text><text class="terminal-4343201-r2" x="976" y="386" textLength="12.2" clip-path="url(#terminal-4343201-line-15)">
+</text><text class="terminal-4343201-r2" x="0" y="410.4" textLength="902.8" clip-path="url(#terminal-4343201-line-16)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;several&#160;can&#160;name&#160;one&#160;CVE:&#160;139&#160;distinct&#160;pairs)</text><text class="terminal-4343201-r2" x="976" y="410.4" textLength="12.2" clip-path="url(#terminal-4343201-line-16)">
+</text><text class="terminal-4343201-r2" x="0" y="434.8" textLength="646.6" clip-path="url(#terminal-4343201-line-17)">&#160;&#160;components&#160;queried&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(36&#160;answered&#160;from&#160;cache)</text><text class="terminal-4343201-r2" x="976" y="434.8" textLength="12.2" clip-path="url(#terminal-4343201-line-17)">
+</text><text class="terminal-4343201-r2" x="0" y="459.2" textLength="878.4" clip-path="url(#terminal-4343201-line-18)">&#160;&#160;records&#160;fetched&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;(vulnerability&#160;records&#160;downloaded&#160;this&#160;run)</text><text class="terminal-4343201-r2" x="976" y="459.2" textLength="12.2" clip-path="url(#terminal-4343201-line-18)">
+</text><text class="terminal-4343201-r2" x="0" y="483.6" textLength="939.4" clip-path="url(#terminal-4343201-line-19)">&#160;&#160;CVEs&#160;checked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;136&#160;&#160;&#160;(distinct&#160;CVE&#160;ids&#160;put&#160;to&#160;the&#160;EUVD&#160;KEV&#160;catalogue)</text><text class="terminal-4343201-r2" x="976" y="483.6" textLength="12.2" clip-path="url(#terminal-4343201-line-19)">
+</text><text class="terminal-4343201-r2" x="0" y="508" textLength="866.2" clip-path="url(#terminal-4343201-line-20)">&#160;&#160;known&#160;exploited&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5&#160;&#160;&#160;(distinct&#160;CVE&#160;ids&#160;listed&#160;in&#160;the&#160;catalogue,</text><text class="terminal-4343201-r2" x="976" y="508" textLength="12.2" clip-path="url(#terminal-4343201-line-20)">
+</text><text class="terminal-4343201-r2" x="0" y="532.4" textLength="707.6" clip-path="url(#terminal-4343201-line-21)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;across&#160;7&#160;component-CVE&#160;pairs)</text><text class="terminal-4343201-r2" x="976" y="532.4" textLength="12.2" clip-path="url(#terminal-4343201-line-21)">
+</text><text class="terminal-4343201-r2" x="0" y="556.8" textLength="878.4" clip-path="url(#terminal-4343201-line-22)">&#160;&#160;not&#160;checkable&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(records&#160;with&#160;no&#160;CVE&#160;id;&#160;no&#160;key&#160;to&#160;look&#160;up)</text><text class="terminal-4343201-r2" x="976" y="556.8" textLength="12.2" clip-path="url(#terminal-4343201-line-22)">
+</text><text class="terminal-4343201-r2" x="976" y="581.2" textLength="12.2" clip-path="url(#terminal-4343201-line-23)">
+</text><text class="terminal-4343201-r2" x="0" y="605.6" textLength="927.2" clip-path="url(#terminal-4343201-line-24)">&#160;&#160;REPORT&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;(component-CVE&#160;pairs;&#160;the&#160;24h&#160;clock&#160;is&#160;running)</text><text class="terminal-4343201-r2" x="976" y="605.6" textLength="12.2" clip-path="url(#terminal-4343201-line-24)">
+</text><text class="terminal-4343201-r2" x="0" y="630" textLength="963.8" clip-path="url(#terminal-4343201-line-25)">&#160;&#160;ASSESS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7&#160;&#160;&#160;(pairs&#160;in&#160;the&#160;KEV&#160;catalogue;&#160;needs&#160;a&#160;decision&#160;now)</text><text class="terminal-4343201-r2" x="976" y="630" textLength="12.2" clip-path="url(#terminal-4343201-line-25)">
+</text><text class="terminal-4343201-r2" x="0" y="654.4" textLength="744.2" clip-path="url(#terminal-4343201-line-26)">&#160;&#160;NO&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;131&#160;&#160;&#160;(pairs&#160;not&#160;in&#160;the&#160;KEV&#160;catalogue)</text><text class="terminal-4343201-r2" x="976" y="654.4" textLength="12.2" clip-path="url(#terminal-4343201-line-26)">
+</text><text class="terminal-4343201-r2" x="0" y="678.8" textLength="817.4" clip-path="url(#terminal-4343201-line-27)">&#160;&#160;unchecked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(pairs&#160;whose&#160;record&#160;carries&#160;no&#160;CVE&#160;id)</text><text class="terminal-4343201-r2" x="976" y="678.8" textLength="12.2" clip-path="url(#terminal-4343201-line-27)">
+</text><text class="terminal-4343201-r3" x="0" y="703.2" textLength="170.8" clip-path="url(#terminal-4343201-line-28)">CVE&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r3" x="207.4" y="703.2" textLength="353.8" clip-path="url(#terminal-4343201-line-28)">component&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r3" x="597.8" y="703.2" textLength="36.6" clip-path="url(#terminal-4343201-line-28)">D/T</text><text class="terminal-4343201-r3" x="671" y="703.2" textLength="73.2" clip-path="url(#terminal-4343201-line-28)">bucket</text><text class="terminal-4343201-r3" x="780.8" y="703.2" textLength="109.8" clip-path="url(#terminal-4343201-line-28)">listed&#160;by</text><text class="terminal-4343201-r2" x="976" y="703.2" textLength="12.2" clip-path="url(#terminal-4343201-line-28)">
+</text><text class="terminal-4343201-r2" x="0" y="727.6" textLength="890.6" clip-path="url(#terminal-4343201-line-29)">─────────────────────────────────────────────────────────────────────────</text><text class="terminal-4343201-r2" x="976" y="727.6" textLength="12.2" clip-path="url(#terminal-4343201-line-29)">
+</text><text class="terminal-4343201-r2" x="0" y="752" textLength="170.8" clip-path="url(#terminal-4343201-line-30)">CVE-2022-22965</text><text class="terminal-4343201-r2" x="207.4" y="752" textLength="353.8" clip-path="url(#terminal-4343201-line-30)">spring-boot-starter-web@2.5.6</text><text class="terminal-4343201-r2" x="597.8" y="752" textLength="36.6" clip-path="url(#terminal-4343201-line-30)">D&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="752" textLength="73.2" clip-path="url(#terminal-4343201-line-30)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="752" textLength="109.8" clip-path="url(#terminal-4343201-line-30)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="752" textLength="12.2" clip-path="url(#terminal-4343201-line-30)">
+</text><text class="terminal-4343201-r2" x="0" y="776.4" textLength="170.8" clip-path="url(#terminal-4343201-line-31)">CVE-2022-22965</text><text class="terminal-4343201-r2" x="207.4" y="776.4" textLength="353.8" clip-path="url(#terminal-4343201-line-31)">spring-webmvc@5.3.12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="776.4" textLength="36.6" clip-path="url(#terminal-4343201-line-31)">T&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="776.4" textLength="73.2" clip-path="url(#terminal-4343201-line-31)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="776.4" textLength="109.8" clip-path="url(#terminal-4343201-line-31)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="776.4" textLength="12.2" clip-path="url(#terminal-4343201-line-31)">
+</text><text class="terminal-4343201-r2" x="0" y="800.8" textLength="170.8" clip-path="url(#terminal-4343201-line-32)">CVE-2022-22965</text><text class="terminal-4343201-r2" x="207.4" y="800.8" textLength="353.8" clip-path="url(#terminal-4343201-line-32)">spring-beans@5.3.12&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="800.8" textLength="36.6" clip-path="url(#terminal-4343201-line-32)">T&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="800.8" textLength="73.2" clip-path="url(#terminal-4343201-line-32)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="800.8" textLength="109.8" clip-path="url(#terminal-4343201-line-32)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="800.8" textLength="12.2" clip-path="url(#terminal-4343201-line-32)">
+</text><text class="terminal-4343201-r2" x="0" y="825.2" textLength="170.8" clip-path="url(#terminal-4343201-line-33)">CVE-2021-45046</text><text class="terminal-4343201-r2" x="207.4" y="825.2" textLength="353.8" clip-path="url(#terminal-4343201-line-33)">log4j-core@2.14.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="825.2" textLength="36.6" clip-path="url(#terminal-4343201-line-33)">D&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="825.2" textLength="73.2" clip-path="url(#terminal-4343201-line-33)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="825.2" textLength="109.8" clip-path="url(#terminal-4343201-line-33)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="825.2" textLength="12.2" clip-path="url(#terminal-4343201-line-33)">
+</text><text class="terminal-4343201-r2" x="0" y="849.6" textLength="170.8" clip-path="url(#terminal-4343201-line-34)">CVE-2021-44228</text><text class="terminal-4343201-r2" x="207.4" y="849.6" textLength="353.8" clip-path="url(#terminal-4343201-line-34)">log4j-core@2.14.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="849.6" textLength="36.6" clip-path="url(#terminal-4343201-line-34)">D&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="849.6" textLength="73.2" clip-path="url(#terminal-4343201-line-34)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="849.6" textLength="109.8" clip-path="url(#terminal-4343201-line-34)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="849.6" textLength="12.2" clip-path="url(#terminal-4343201-line-34)">
+</text><text class="terminal-4343201-r2" x="0" y="874" textLength="170.8" clip-path="url(#terminal-4343201-line-35)">CVE-2025-24813</text><text class="terminal-4343201-r2" x="207.4" y="874" textLength="353.8" clip-path="url(#terminal-4343201-line-35)">tomcat-embed-core@9.0.54&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="874" textLength="36.6" clip-path="url(#terminal-4343201-line-35)">T&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="874" textLength="73.2" clip-path="url(#terminal-4343201-line-35)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="874" textLength="109.8" clip-path="url(#terminal-4343201-line-35)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="874" textLength="12.2" clip-path="url(#terminal-4343201-line-35)">
+</text><text class="terminal-4343201-r2" x="0" y="898.4" textLength="170.8" clip-path="url(#terminal-4343201-line-36)">CVE-2023-44487</text><text class="terminal-4343201-r2" x="207.4" y="898.4" textLength="353.8" clip-path="url(#terminal-4343201-line-36)">tomcat-embed-core@9.0.54&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-4343201-r2" x="597.8" y="898.4" textLength="36.6" clip-path="url(#terminal-4343201-line-36)">T&#160;&#160;</text><text class="terminal-4343201-r4" x="671" y="898.4" textLength="73.2" clip-path="url(#terminal-4343201-line-36)">ASSESS</text><text class="terminal-4343201-r2" x="780.8" y="898.4" textLength="109.8" clip-path="url(#terminal-4343201-line-36)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-4343201-r2" x="976" y="898.4" textLength="12.2" clip-path="url(#terminal-4343201-line-36)">
+</text><text class="terminal-4343201-r5" x="0" y="922.8" textLength="854" clip-path="url(#terminal-4343201-line-37)">D&#160;=&#160;direct&#160;dependency,&#160;T&#160;=&#160;transitive&#160;(pulled&#160;in&#160;by&#160;another&#160;component)</text><text class="terminal-4343201-r2" x="976" y="922.8" textLength="12.2" clip-path="url(#terminal-4343201-line-37)">
+</text><text class="terminal-4343201-r5" x="0" y="947.2" textLength="463.6" clip-path="url(#terminal-4343201-line-38)">+&#160;131&#160;item(s)&#160;not&#160;in&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-4343201-r2" x="976" y="947.2" textLength="12.2" clip-path="url(#terminal-4343201-line-38)">
+</text><text class="terminal-4343201-r2" x="976" y="971.6" textLength="12.2" clip-path="url(#terminal-4343201-line-39)">
+</text><text class="terminal-4343201-r2" x="0" y="996" textLength="866.2" clip-path="url(#terminal-4343201-line-40)">7&#160;item(s)&#160;need&#160;a&#160;decision.&#160;Run&#160;again&#160;with&#160;--brief&#160;for&#160;the&#160;full&#160;decision</text><text class="terminal-4343201-r2" x="976" y="996" textLength="12.2" clip-path="url(#terminal-4343201-line-40)">
+</text><text class="terminal-4343201-r2" x="0" y="1020.4" textLength="915" clip-path="url(#terminal-4343201-line-41)">brief&#160;on&#160;each:&#160;where&#160;it&#160;sits,&#160;what&#160;it&#160;is,&#160;who&#160;says&#160;it&#160;is&#160;exploited,&#160;and&#160;the</text><text class="terminal-4343201-r2" x="976" y="1020.4" textLength="12.2" clip-path="url(#terminal-4343201-line-41)">
+</text><text class="terminal-4343201-r2" x="0" y="1044.8" textLength="512.4" clip-path="url(#terminal-4343201-line-42)">one&#160;question&#160;to&#160;answer&#160;about&#160;this&#160;product.</text><text class="terminal-4343201-r2" x="976" y="1044.8" textLength="12.2" clip-path="url(#terminal-4343201-line-42)">
 </text>
     </g>
     </g>
