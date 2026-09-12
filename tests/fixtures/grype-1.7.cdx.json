@@ -1,0 +1,122 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:8f3a6c0e-4a1e-4c2d-9f5b-0c1a2b3d4e5f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-12T09:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "author": "anchore",
+          "name": "grype",
+          "version": "0.100.0"
+        }
+      ]
+    },
+    "component": {
+      "bom-ref": "app",
+      "type": "container",
+      "name": "ghcr.io/acme/gateway",
+      "version": "1.4",
+      "purl": "pkg:oci/gateway@sha256%3Adeadbeef"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "log4j-core",
+      "type": "library",
+      "name": "log4j-core",
+      "group": "org.apache.logging.log4j",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "omniborId": ["gitoid:blob:sha256:1111111111111111111111111111111111111111111111111111111111111111"],
+      "swhid": ["swh:1:cnt:2222222222222222222222222222222222222222"],
+      "tags": ["java", "logging"]
+    },
+    {
+      "bom-ref": "log4j-api",
+      "type": "library",
+      "name": "log4j-api",
+      "group": "org.apache.logging.log4j",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.14.1"
+    },
+    {
+      "bom-ref": "openssl",
+      "type": "library",
+      "name": "openssl",
+      "version": "1.1.1n",
+      "purl": "pkg:deb/debian/openssl@1.1.1n?arch=amd64&distro=debian-11",
+      "isExternal": false
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app",
+      "dependsOn": ["log4j-core", "openssl"]
+    },
+    {
+      "ref": "log4j-core",
+      "dependsOn": ["log4j-api"],
+      "provides": ["log4j-api"]
+    },
+    {
+      "ref": "log4j-api",
+      "dependsOn": []
+    },
+    {
+      "ref": "openssl",
+      "dependsOn": []
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "bom-ref": "vuln-log4shell",
+      "id": "CVE-2021-44228",
+      "source": {
+        "name": "nvd",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+      },
+      "description": "JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP endpoints.",
+      "cwes": [917],
+      "ratings": [
+        {
+          "source": {"name": "nvd"},
+          "score": 10.0,
+          "severity": "critical",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+        }
+      ],
+      "affects": [
+        {"ref": "log4j-core"}
+      ]
+    },
+    {
+      "bom-ref": "vuln-openssl",
+      "id": "CVE-2022-0778",
+      "source": {"name": "nvd"},
+      "description": "Infinite loop in BN_mod_sqrt() reachable when parsing certificates.",
+      "cwes": [835],
+      "ratings": [
+        {
+          "source": {"name": "nvd"},
+          "score": 7.5,
+          "severity": "high",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "affects": [
+        {"ref": "openssl"}
+      ],
+      "analysis": {
+        "state": "not_affected",
+        "justification": "code_not_reachable",
+        "detail": "The product never parses externally supplied certificates."
+      }
+    }
+  ]
+}

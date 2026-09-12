@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.zvec-grep/
+.cache/
+.coverage
+.idea/
+.vscode/
+uv.lock
+
+# The SVGs are committed; the PNG beside them is a local convenience for
+# places that will not render one, and it needs a renderPM backend not every
+# machine has. tools/make_shots.py writes both.
+docs/img/*.png

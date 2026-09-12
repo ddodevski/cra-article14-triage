@@ -1,0 +1,140 @@
+# Decisions taken on gateway@3.2.0, recorded.
+#
+#   art14 examples/log4j-app.cdx.json
+#   art14 examples/log4j-app.cdx.json --config examples/dispositions.toml
+#
+# Run those two in order and the difference between them is the whole point of
+# the tool. The first says seven things are in the KEV catalogue and somebody
+# has to decide about them. The second is what it looks like once somebody has.
+#
+# Every KEV match starts in ASSESS. A KEV entry means the CVE is exploited
+# somewhere in the world; it does not mean the vulnerable path is live in your
+# product, and art14 will not guess which. Two things move an item out of
+# ASSESS, and both of them are an entry in this file:
+#
+#   [[report]]   the vulnerable functionality is present and reachable here.
+#                The item goes to REPORT and the run exits 2.
+#   [[no]]       it was looked at and ruled out, for the reason given. The
+#                item goes to NO, and the run prints the reason underneath
+#                rather than folding it into the count.
+#
+# `rationale` is required in both directions and is stored verbatim. It is the
+# thing a CSIRT or a market surveillance authority asks for, and it is what a
+# VEX statement is written from. An entry without one would be a verdict with
+# nothing behind it, so the file is rejected rather than read.
+#
+# There is no auto-discovery. This file takes effect only when --config names
+# it, so the command line always records what a verdict rested on.
+#
+# `component` accepts three spellings:
+#
+#   the PURL                       "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+#   name@version                   "log4j-core@2.14.1"
+#   the bom-ref from the SBOM      "log4j-core"
+#
+# Prefer the PURL. A bare name is rejected outright, because it would match
+# every version forever and an entry written for 2.14.1 would carry itself
+# onto the upgrade that fixed it. A bom-ref is accepted but only pins as
+# tightly as whoever wrote the SBOM made it pin. Qualifiers are ignored, so
+# the `?type=jar` cdxgen puts on a Maven PURL is optional here.
+#
+# When an entry matches nothing, the item stays in ASSESS and the run says so
+# out loud rather than leaving you to believe otherwise.
+#
+# One of the seven is deliberately not in this file. See the note at the end.
+
+
+# --- reportable -----------------------------------------------------------
+
+[[report]]
+component = "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+cve = "CVE-2021-44228"
+rationale = """
+Reachable and confirmed by test. GatewayRequestFilter logs the X-Forwarded-For
+header at INFO on every inbound request, the value is attacker-controlled, and
+the shipped configuration uses the default PatternLayout with message lookups
+enabled (log4j2.formatMsgNoLookups is not set and the JRE is 8u292, below the
+com.sun.jndi.ldap.object.trustURLCodebase default change). A JNDI callback was
+observed against an internal listener on 2026-09-11. Mitigation in progress;
+upgrade to 2.17.1 scheduled, but the product is shipping today.
+Decided 2026-09-11 by the platform security team.
+"""
+
+
+# --- ruled out ------------------------------------------------------------
+
+[[no]]
+component = "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+cve = "CVE-2021-45046"
+rationale = """
+Not reachable in this configuration. CVE-2021-45046 requires a non-default
+PatternLayout using a Context Lookup ($${ctx:...}) or a Thread Context Map
+pattern, which is how attacker-controlled data reaches the lookup a second
+time. log4j2.xml here uses the default pattern with no ctx/MDC conversion
+specifier, and nothing writes to the Thread Context Map. This is a separate
+question from CVE-2021-44228 above and was assessed separately.
+Decided 2026-09-11 by the platform security team.
+"""
+
+[[no]]
+component = "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.5.6"
+cve = "CVE-2022-22965"
+rationale = """
+Precondition not met. Spring4Shell requires the application to be deployed as
+a WAR on a servlet container running on JDK 9 or later. gateway ships as an
+executable jar on the embedded Tomcat and runs on JDK 8u292; neither the
+packaging nor the runtime satisfies the exploit. Verified against the built
+artefact, not against the build file, because the two can disagree.
+Decided 2026-09-11 by the platform security team.
+"""
+
+[[no]]
+component = "pkg:maven/org.springframework/spring-webmvc@5.3.12"
+cve = "CVE-2022-22965"
+rationale = """
+Same precondition as spring-boot-starter-web above, recorded separately
+because the two are separate components and a VEX consumer reads them as
+separate statements. The vulnerable path is WebDataBinder binding a request
+parameter onto a POJO whose class loader is reachable through
+class.module.classLoader, which the Spring Boot jar launcher does not expose.
+No controller in this product binds to a plain POJO from query parameters.
+Decided 2026-09-11 by the platform security team.
+"""
+
+[[no]]
+component = "pkg:maven/org.springframework/spring-beans@5.3.12"
+cve = "CVE-2022-22965"
+rationale = """
+spring-beans carries the CachedIntrospectionResults code the advisory names,
+and it arrives transitively through spring-webmvc. It is ruled out for the
+same reason and on the same evidence: the packaging and JDK preconditions are
+not met in the shipped artefact. Listed in its own right so that the
+inventory and the determination cover the same set of components.
+Decided 2026-09-11 by the platform security team.
+"""
+
+[[no]]
+component = "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54"
+cve = "CVE-2025-24813"
+rationale = """
+Not reachable. The partial-PUT path requires the default servlet to be running
+with readonly=false and either file-based session persistence or a library
+that deserialises uploaded content. gateway leaves the default servlet
+read-only, has no PUT route, and uses Redis-backed sessions rather than the
+FileStore. Confirmed against the packaged conf/web.xml and the session
+configuration in application.yml.
+Decided 2026-09-11 by the platform security team.
+"""
+
+
+# --- still open -----------------------------------------------------------
+#
+# CVE-2023-44487 on tomcat-embed-core@9.0.54 (HTTP/2 rapid reset) has no entry
+# here, on purpose. It is in the KEV catalogue, HTTP/2 is enabled on the
+# public connector, and the question the brief asks -- whether the upstream
+# load balancer terminates HTTP/2 before it reaches this connector -- has not
+# been answered by the team that owns the edge.
+#
+# So it stays in ASSESS and the run keeps saying so. That is the tool working:
+# an item nobody has decided about does not quietly become a decision, and the
+# absence of a line in this file is the honest record of where the work is.

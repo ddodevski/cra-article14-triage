@@ -1,0 +1,216 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "app",
+      "type": "application",
+      "name": "demo-app",
+      "version": "1.0.0",
+      "purl": "pkg:generic/demo-app@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "a",
+      "type": "library",
+      "name": "alpha",
+      "version": "1.0.0",
+      "purl": "pkg:maven/example/alpha@1.0.0",
+      "components": [
+        {
+          "bom-ref": "n",
+          "type": "library",
+          "name": "nested",
+          "version": "0.5.0",
+          "purl": "pkg:maven/example/nested@0.5.0"
+        }
+      ]
+    },
+    {
+      "bom-ref": "b",
+      "type": "library",
+      "name": "bravo",
+      "version": "2.0.0",
+      "purl": "pkg:maven/example/bravo@2.0.0"
+    },
+    {
+      "bom-ref": "c",
+      "type": "library",
+      "name": "charlie",
+      "version": "3.0.0",
+      "purl": "pkg:maven/example/charlie@3.0.0"
+    },
+    {
+      "bom-ref": "d",
+      "type": "library",
+      "name": "delta",
+      "version": "4.0.0",
+      "purl": "pkg:maven/example/delta@4.0.0"
+    },
+    {
+      "bom-ref": "o",
+      "type": "library",
+      "name": "orphan",
+      "version": "9.9.9",
+      "purl": "pkg:maven/example/orphan@9.9.9"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app",
+      "dependsOn": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "ref": "a",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "ref": "b",
+      "dependsOn": [
+        "n"
+      ]
+    },
+    {
+      "ref": "c",
+      "dependsOn": [
+        "d"
+      ]
+    },
+    {
+      "ref": "d",
+      "dependsOn": [
+        "c",
+        "b"
+      ]
+    },
+    {
+      "ref": "n",
+      "dependsOn": []
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "bom-ref": "vuln-1",
+      "id": "CVE-2021-44228",
+      "source": {
+        "name": "NVD"
+      },
+      "description": "JNDI lookup in log message handling enables remote code execution.",
+      "cwes": [
+        917
+      ],
+      "ratings": [
+        {
+          "source": {
+            "name": "NVD"
+          },
+          "method": "CVSSv2",
+          "score": 9.3,
+          "severity": "high"
+        },
+        {
+          "source": {
+            "name": "NVD"
+          },
+          "method": "CVSSv31",
+          "score": 10.0,
+          "severity": "critical",
+          "vector": "AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+        }
+      ],
+      "affects": [
+        {
+          "ref": "b"
+        }
+      ]
+    },
+    {
+      "bom-ref": "vuln-2",
+      "id": "CVE-2026-0002",
+      "description": "Affects two components in this SBOM.",
+      "cwes": [
+        "CWE-79"
+      ],
+      "ratings": [
+        {
+          "method": "CVSSv3",
+          "score": 6.1,
+          "severity": "medium"
+        }
+      ],
+      "affects": [
+        {
+          "ref": "a",
+          "versions": [
+            {
+              "version": "1.0.0",
+              "status": "unknown"
+            }
+          ]
+        },
+        {
+          "ref": "c"
+        }
+      ]
+    },
+    {
+      "bom-ref": "vuln-3",
+      "id": "CVE-2026-0003",
+      "description": "Points at a component this SBOM does not contain.",
+      "affects": [
+        {
+          "ref": "ghost"
+        }
+      ]
+    },
+    {
+      "bom-ref": "vuln-4",
+      "id": "CVE-2026-0004",
+      "description": "Affects a component that is absent from the dependency graph.",
+      "affects": [
+        {
+          "ref": "o"
+        }
+      ]
+    },
+    {
+      "bom-ref": "vuln-5",
+      "id": "CVE-2026-0005",
+      "description": "The SBOM asserts this component is not affected.",
+      "affects": [
+        {
+          "ref": "d",
+          "versions": [
+            {
+              "version": "4.0.0",
+              "status": "unaffected"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bom-ref": "vuln-6",
+      "id": "CVE-2026-0006",
+      "description": "Explicitly affected in a version range.",
+      "affects": [
+        {
+          "ref": "d",
+          "versions": [
+            {
+              "range": "vers:maven/>=4.0.0|<5.0.0",
+              "status": "affected"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

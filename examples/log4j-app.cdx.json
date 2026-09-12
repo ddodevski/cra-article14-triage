@@ -1,0 +1,555 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-10T08:12:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "11.2.4"
+        }
+      ]
+    },
+    "component": {
+      "bom-ref": "pkg:maven/com.acme/gateway@3.2.0?type=jar",
+      "type": "application",
+      "group": "com.acme",
+      "name": "gateway",
+      "version": "3.2.0",
+      "purl": "pkg:maven/com.acme/gateway@3.2.0?type=jar"
+    },
+    "properties": [
+      {
+        "name": "art14:fixture",
+        "value": "Constructed example, not a scan of a real product. The component list, versions and dependency edges are hand-written in the shape cdxgen 11.x emits for a Maven project; no such application exists. Every component and version is real, which is the point: the vulnerabilities come from OSV.dev at run time and are not carried here."
+      },
+      {
+        "name": "art14:kev-checked",
+        "value": "The KEV hits this example is written around were verified against the live EUVD KEV catalogue on 2026-09-12. The catalogue changes; if an entry is withdrawn the run will show fewer rows than the README does, and that is the catalogue talking, not a bug."
+      }
+    ]
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.5.6?type=jar",
+      "type": "library",
+      "group": "org.springframework.boot",
+      "name": "spring-boot-starter-web",
+      "version": "2.5.6",
+      "purl": "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.5.6?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1?type=jar",
+      "type": "library",
+      "group": "org.apache.logging.log4j",
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.14.1?type=jar",
+      "type": "library",
+      "group": "org.apache.logging.log4j",
+      "name": "log4j-api",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.14.1?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.5?type=jar",
+      "type": "library",
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-databind",
+      "version": "2.12.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.5?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.13?type=jar",
+      "type": "library",
+      "group": "org.apache.httpcomponents",
+      "name": "httpclient",
+      "version": "4.5.13",
+      "purl": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.13?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.acme.gateway/gateway-protocol@1.4.0?type=jar",
+      "type": "library",
+      "group": "com.acme.gateway",
+      "name": "gateway-protocol",
+      "version": "1.4.0",
+      "purl": "pkg:maven/com.acme.gateway/gateway-protocol@1.4.0?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.springframework/spring-web@5.3.12?type=jar",
+      "type": "library",
+      "group": "org.springframework",
+      "name": "spring-web",
+      "version": "5.3.12",
+      "purl": "pkg:maven/org.springframework/spring-web@5.3.12?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.springframework/spring-webmvc@5.3.12?type=jar",
+      "type": "library",
+      "group": "org.springframework",
+      "name": "spring-webmvc",
+      "version": "5.3.12",
+      "purl": "pkg:maven/org.springframework/spring-webmvc@5.3.12?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.springframework/spring-beans@5.3.12?type=jar",
+      "type": "library",
+      "group": "org.springframework",
+      "name": "spring-beans",
+      "version": "5.3.12",
+      "purl": "pkg:maven/org.springframework/spring-beans@5.3.12?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.springframework/spring-core@5.3.12?type=jar",
+      "type": "library",
+      "group": "org.springframework",
+      "name": "spring-core",
+      "version": "5.3.12",
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.12?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54?type=jar",
+      "type": "library",
+      "group": "org.apache.tomcat.embed",
+      "name": "tomcat-embed-core",
+      "version": "9.0.54",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@9.0.54?type=jar",
+      "type": "library",
+      "group": "org.apache.tomcat.embed",
+      "name": "tomcat-embed-websocket",
+      "version": "9.0.54",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@9.0.54?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.yaml/snakeyaml@1.28?type=jar",
+      "type": "library",
+      "group": "org.yaml",
+      "name": "snakeyaml",
+      "version": "1.28",
+      "purl": "pkg:maven/org.yaml/snakeyaml@1.28?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/ch.qos.logback/logback-classic@1.2.6?type=jar",
+      "type": "library",
+      "group": "ch.qos.logback",
+      "name": "logback-classic",
+      "version": "1.2.6",
+      "purl": "pkg:maven/ch.qos.logback/logback-classic@1.2.6?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.slf4j/slf4j-api@1.7.32?type=jar",
+      "type": "library",
+      "group": "org.slf4j",
+      "name": "slf4j-api",
+      "version": "1.7.32",
+      "purl": "pkg:maven/org.slf4j/slf4j-api@1.7.32?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.12.5?type=jar",
+      "type": "library",
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-core",
+      "version": "2.12.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.12.5?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.12.5?type=jar",
+      "type": "library",
+      "group": "com.fasterxml.jackson.core",
+      "name": "jackson-annotations",
+      "version": "2.12.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.12.5?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/io.netty/netty-handler@4.1.68.Final?type=jar",
+      "type": "library",
+      "group": "io.netty",
+      "name": "netty-handler",
+      "version": "4.1.68.Final",
+      "purl": "pkg:maven/io.netty/netty-handler@4.1.68.Final?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/io.netty/netty-common@4.1.68.Final?type=jar",
+      "type": "library",
+      "group": "io.netty",
+      "name": "netty-common",
+      "version": "4.1.68.Final",
+      "purl": "pkg:maven/io.netty/netty-common@4.1.68.Final?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/commons-io/commons-io@2.8.0?type=jar",
+      "type": "library",
+      "group": "commons-io",
+      "name": "commons-io",
+      "version": "2.8.0",
+      "purl": "pkg:maven/commons-io/commons-io@2.8.0?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+      "type": "library",
+      "group": "org.apache.commons",
+      "name": "commons-lang3",
+      "version": "3.12.0",
+      "purl": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.commons/commons-compress@1.21?type=jar",
+      "type": "library",
+      "group": "org.apache.commons",
+      "name": "commons-compress",
+      "version": "1.21",
+      "purl": "pkg:maven/org.apache.commons/commons-compress@1.21?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.google.guava/guava@30.1.1-jre?type=jar",
+      "type": "library",
+      "group": "com.google.guava",
+      "name": "guava",
+      "version": "30.1.1-jre",
+      "purl": "pkg:maven/com.google.guava/guava@30.1.1-jre?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.69?type=jar",
+      "type": "library",
+      "group": "org.bouncycastle",
+      "name": "bcprov-jdk15on",
+      "version": "1.69",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.69?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.hibernate/hibernate-core@5.4.32.Final?type=jar",
+      "type": "library",
+      "group": "org.hibernate",
+      "name": "hibernate-core",
+      "version": "5.4.32.Final",
+      "purl": "pkg:maven/org.hibernate/hibernate-core@5.4.32.Final?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.zaxxer/HikariCP@4.0.3?type=jar",
+      "type": "library",
+      "group": "com.zaxxer",
+      "name": "HikariCP",
+      "version": "4.0.3",
+      "purl": "pkg:maven/com.zaxxer/HikariCP@4.0.3?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/mysql/mysql-connector-java@8.0.26?type=jar",
+      "type": "library",
+      "group": "mysql",
+      "name": "mysql-connector-java",
+      "version": "8.0.26",
+      "purl": "pkg:maven/mysql/mysql-connector-java@8.0.26?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.postgresql/postgresql@42.2.24?type=jar",
+      "type": "library",
+      "group": "org.postgresql",
+      "name": "postgresql",
+      "version": "42.2.24",
+      "purl": "pkg:maven/org.postgresql/postgresql@42.2.24?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/io.projectreactor/reactor-core@3.4.11?type=jar",
+      "type": "library",
+      "group": "io.projectreactor",
+      "name": "reactor-core",
+      "version": "3.4.11",
+      "purl": "pkg:maven/io.projectreactor/reactor-core@3.4.11?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.kafka/kafka-clients@2.8.1?type=jar",
+      "type": "library",
+      "group": "org.apache.kafka",
+      "name": "kafka-clients",
+      "version": "2.8.1",
+      "purl": "pkg:maven/org.apache.kafka/kafka-clients@2.8.1?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.zookeeper/zookeeper@3.6.3?type=jar",
+      "type": "library",
+      "group": "org.apache.zookeeper",
+      "name": "zookeeper",
+      "version": "3.6.3",
+      "purl": "pkg:maven/org.apache.zookeeper/zookeeper@3.6.3?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.jsoup/jsoup@1.14.2?type=jar",
+      "type": "library",
+      "group": "org.jsoup",
+      "name": "jsoup",
+      "version": "1.14.2",
+      "purl": "pkg:maven/org.jsoup/jsoup@1.14.2?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.xerial/sqlite-jdbc@3.36.0.3?type=jar",
+      "type": "library",
+      "group": "org.xerial",
+      "name": "sqlite-jdbc",
+      "version": "3.36.0.3",
+      "purl": "pkg:maven/org.xerial/sqlite-jdbc@3.36.0.3?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.eclipse.jetty/jetty-util@9.4.44.v20210927?type=jar",
+      "type": "library",
+      "group": "org.eclipse.jetty",
+      "name": "jetty-util",
+      "version": "9.4.44.v20210927",
+      "purl": "pkg:maven/org.eclipse.jetty/jetty-util@9.4.44.v20210927?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/com.thoughtworks.xstream/xstream@1.4.18?type=jar",
+      "type": "library",
+      "group": "com.thoughtworks.xstream",
+      "name": "xstream",
+      "version": "1.4.18",
+      "purl": "pkg:maven/com.thoughtworks.xstream/xstream@1.4.18?type=jar",
+      "scope": "required"
+    },
+    {
+      "bom-ref": "pkg:maven/org.codehaus.groovy/groovy@3.0.9?type=jar",
+      "type": "library",
+      "group": "org.codehaus.groovy",
+      "name": "groovy",
+      "version": "3.0.9",
+      "purl": "pkg:maven/org.codehaus.groovy/groovy@3.0.9?type=jar",
+      "scope": "required"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:maven/com.acme/gateway@3.2.0?type=jar",
+      "dependsOn": [
+        "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.5.6?type=jar",
+        "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1?type=jar",
+        "pkg:maven/org.apache.logging.log4j/log4j-api@2.14.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.5?type=jar",
+        "pkg:maven/org.apache.httpcomponents/httpclient@4.5.13?type=jar",
+        "pkg:maven/com.acme.gateway/gateway-protocol@1.4.0?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.5.6?type=jar",
+      "dependsOn": [
+        "pkg:maven/org.springframework/spring-web@5.3.12?type=jar",
+        "pkg:maven/org.springframework/spring-webmvc@5.3.12?type=jar",
+        "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54?type=jar",
+        "pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@9.0.54?type=jar",
+        "pkg:maven/org.yaml/snakeyaml@1.28?type=jar",
+        "pkg:maven/ch.qos.logback/logback-classic@1.2.6?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.14.1?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.5?type=jar",
+      "dependsOn": [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.12.5?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.12.5?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.13?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.acme.gateway/gateway-protocol@1.4.0?type=jar",
+      "dependsOn": [
+        "pkg:maven/io.netty/netty-handler@4.1.68.Final?type=jar",
+        "pkg:maven/commons-io/commons-io@2.8.0?type=jar",
+        "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+        "pkg:maven/org.apache.commons/commons-compress@1.21?type=jar",
+        "pkg:maven/com.google.guava/guava@30.1.1-jre?type=jar",
+        "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.69?type=jar",
+        "pkg:maven/org.hibernate/hibernate-core@5.4.32.Final?type=jar",
+        "pkg:maven/com.zaxxer/HikariCP@4.0.3?type=jar",
+        "pkg:maven/mysql/mysql-connector-java@8.0.26?type=jar",
+        "pkg:maven/org.postgresql/postgresql@42.2.24?type=jar",
+        "pkg:maven/io.projectreactor/reactor-core@3.4.11?type=jar",
+        "pkg:maven/org.apache.kafka/kafka-clients@2.8.1?type=jar",
+        "pkg:maven/org.apache.zookeeper/zookeeper@3.6.3?type=jar",
+        "pkg:maven/org.jsoup/jsoup@1.14.2?type=jar",
+        "pkg:maven/org.xerial/sqlite-jdbc@3.36.0.3?type=jar",
+        "pkg:maven/org.eclipse.jetty/jetty-util@9.4.44.v20210927?type=jar",
+        "pkg:maven/com.thoughtworks.xstream/xstream@1.4.18?type=jar",
+        "pkg:maven/org.codehaus.groovy/groovy@3.0.9?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework/spring-web@5.3.12?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.springframework/spring-webmvc@5.3.12?type=jar",
+      "dependsOn": [
+        "pkg:maven/org.springframework/spring-beans@5.3.12?type=jar",
+        "pkg:maven/org.springframework/spring-core@5.3.12?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework/spring-beans@5.3.12?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.springframework/spring-core@5.3.12?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@9.0.54?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.yaml/snakeyaml@1.28?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/ch.qos.logback/logback-classic@1.2.6?type=jar",
+      "dependsOn": [
+        "pkg:maven/org.slf4j/slf4j-api@1.7.32?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.slf4j/slf4j-api@1.7.32?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.12.5?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.12.5?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/io.netty/netty-handler@4.1.68.Final?type=jar",
+      "dependsOn": [
+        "pkg:maven/io.netty/netty-common@4.1.68.Final?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/io.netty/netty-common@4.1.68.Final?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/commons-io/commons-io@2.8.0?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.commons/commons-compress@1.21?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.google.guava/guava@30.1.1-jre?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.bouncycastle/bcprov-jdk15on@1.69?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.hibernate/hibernate-core@5.4.32.Final?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.zaxxer/HikariCP@4.0.3?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/mysql/mysql-connector-java@8.0.26?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.postgresql/postgresql@42.2.24?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/io.projectreactor/reactor-core@3.4.11?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.kafka/kafka-clients@2.8.1?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.apache.zookeeper/zookeeper@3.6.3?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.jsoup/jsoup@1.14.2?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.xerial/sqlite-jdbc@3.36.0.3?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.eclipse.jetty/jetty-util@9.4.44.v20210927?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/com.thoughtworks.xstream/xstream@1.4.18?type=jar",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:maven/org.codehaus.groovy/groovy@3.0.9?type=jar",
+      "dependsOn": []
+    }
+  ]
+}

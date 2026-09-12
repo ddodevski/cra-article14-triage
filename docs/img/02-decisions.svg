@@ -1,0 +1,372 @@
+<svg class="rich-terminal" viewBox="0 0 994 2075.2" xmlns="http://www.w3.org/2000/svg">
+    <!-- Generated with Rich https://www.textualize.io -->
+    <style>
+    .terminal-389216278-matrix {
+        font-family: "Cascadia Mono", "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
+        font-size: 20px;
+        line-height: 24.4px;
+    }
+
+    .terminal-389216278-title {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: arial;
+    }
+
+    .terminal-389216278-r1 { fill: #98a84b;font-weight: bold }
+.terminal-389216278-r2 { fill: #c5c8c6 }
+.terminal-389216278-r3 { fill: #cc555a;font-weight: bold }
+.terminal-389216278-r4 { fill: #c5c8c6;font-weight: bold }
+.terminal-389216278-r5 { fill: #d0b344 }
+.terminal-389216278-r6 { fill: #868887 }
+    </style>
+
+    <defs>
+    <clipPath id="terminal-389216278-clip-terminal">
+      <rect x="0" y="0" width="975.0" height="2024.1999999999998" />
+    </clipPath>
+    <clipPath id="terminal-389216278-line-0">
+    <rect x="0" y="1.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-1">
+    <rect x="0" y="25.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-2">
+    <rect x="0" y="50.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-3">
+    <rect x="0" y="74.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-4">
+    <rect x="0" y="99.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-5">
+    <rect x="0" y="123.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-6">
+    <rect x="0" y="147.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-7">
+    <rect x="0" y="172.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-8">
+    <rect x="0" y="196.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-9">
+    <rect x="0" y="221.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-10">
+    <rect x="0" y="245.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-11">
+    <rect x="0" y="269.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-12">
+    <rect x="0" y="294.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-13">
+    <rect x="0" y="318.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-14">
+    <rect x="0" y="343.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-15">
+    <rect x="0" y="367.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-16">
+    <rect x="0" y="391.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-17">
+    <rect x="0" y="416.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-18">
+    <rect x="0" y="440.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-19">
+    <rect x="0" y="465.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-20">
+    <rect x="0" y="489.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-21">
+    <rect x="0" y="513.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-22">
+    <rect x="0" y="538.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-23">
+    <rect x="0" y="562.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-24">
+    <rect x="0" y="587.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-25">
+    <rect x="0" y="611.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-26">
+    <rect x="0" y="635.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-27">
+    <rect x="0" y="660.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-28">
+    <rect x="0" y="684.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-29">
+    <rect x="0" y="709.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-30">
+    <rect x="0" y="733.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-31">
+    <rect x="0" y="757.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-32">
+    <rect x="0" y="782.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-33">
+    <rect x="0" y="806.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-34">
+    <rect x="0" y="831.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-35">
+    <rect x="0" y="855.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-36">
+    <rect x="0" y="879.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-37">
+    <rect x="0" y="904.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-38">
+    <rect x="0" y="928.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-39">
+    <rect x="0" y="953.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-40">
+    <rect x="0" y="977.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-41">
+    <rect x="0" y="1001.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-42">
+    <rect x="0" y="1026.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-43">
+    <rect x="0" y="1050.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-44">
+    <rect x="0" y="1075.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-45">
+    <rect x="0" y="1099.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-46">
+    <rect x="0" y="1123.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-47">
+    <rect x="0" y="1148.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-48">
+    <rect x="0" y="1172.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-49">
+    <rect x="0" y="1197.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-50">
+    <rect x="0" y="1221.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-51">
+    <rect x="0" y="1245.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-52">
+    <rect x="0" y="1270.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-53">
+    <rect x="0" y="1294.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-54">
+    <rect x="0" y="1319.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-55">
+    <rect x="0" y="1343.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-56">
+    <rect x="0" y="1367.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-57">
+    <rect x="0" y="1392.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-58">
+    <rect x="0" y="1416.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-59">
+    <rect x="0" y="1441.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-60">
+    <rect x="0" y="1465.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-61">
+    <rect x="0" y="1489.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-62">
+    <rect x="0" y="1514.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-63">
+    <rect x="0" y="1538.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-64">
+    <rect x="0" y="1563.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-65">
+    <rect x="0" y="1587.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-66">
+    <rect x="0" y="1611.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-67">
+    <rect x="0" y="1636.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-68">
+    <rect x="0" y="1660.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-69">
+    <rect x="0" y="1685.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-70">
+    <rect x="0" y="1709.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-71">
+    <rect x="0" y="1733.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-72">
+    <rect x="0" y="1758.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-73">
+    <rect x="0" y="1782.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-74">
+    <rect x="0" y="1807.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-75">
+    <rect x="0" y="1831.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-76">
+    <rect x="0" y="1855.9" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-77">
+    <rect x="0" y="1880.3" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-78">
+    <rect x="0" y="1904.7" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-79">
+    <rect x="0" y="1929.1" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-80">
+    <rect x="0" y="1953.5" width="976" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-389216278-line-81">
+    <rect x="0" y="1977.9" width="976" height="24.65"/>
+            </clipPath>
+    </defs>
+
+    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="992" height="2073.2" rx="8"/><text class="terminal-389216278-title" fill="#c5c8c6" text-anchor="middle" x="496" y="27">art14</text>
+            <g transform="translate(26,22)">
+            <circle cx="0" cy="0" r="7" fill="#ff5f57"/>
+            <circle cx="22" cy="0" r="7" fill="#febc2e"/>
+            <circle cx="44" cy="0" r="7" fill="#28c840"/>
+            </g>
+        
+    <g transform="translate(9, 41)" clip-path="url(#terminal-389216278-clip-terminal)">
+    
+    <g class="terminal-389216278-matrix">
+    <text class="terminal-389216278-r1" x="0" y="20" textLength="866.2" clip-path="url(#terminal-389216278-line-0)">$&#160;art14&#160;examples/log4j-app.cdx.json&#160;--config&#160;examples/dispositions.toml</text><text class="terminal-389216278-r2" x="976" y="20" textLength="12.2" clip-path="url(#terminal-389216278-line-0)">
+</text><text class="terminal-389216278-r2" x="0" y="44.4" textLength="585.6" clip-path="url(#terminal-389216278-line-1)">art14&#160;0.1.0.dev0&#160;-&#160;CycloneDX&#160;1.6&#160;-&#160;gateway@3.2.0</text><text class="terminal-389216278-r2" x="976" y="44.4" textLength="12.2" clip-path="url(#terminal-389216278-line-1)">
+</text><text class="terminal-389216278-r2" x="976" y="68.8" textLength="12.2" clip-path="url(#terminal-389216278-line-2)">
+</text><text class="terminal-389216278-r2" x="0" y="93.2" textLength="756.4" clip-path="url(#terminal-389216278-line-3)">input:&#160;36&#160;components&#160;-&#160;0&#160;without&#160;PURL&#160;(0%)&#160;-&#160;0&#160;without&#160;version</text><text class="terminal-389216278-r2" x="976" y="93.2" textLength="12.2" clip-path="url(#terminal-389216278-line-3)">
+</text><text class="terminal-389216278-r2" x="0" y="117.6" textLength="488" clip-path="url(#terminal-389216278-line-4)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;matching&#160;quality:&#160;ok&#160;-&#160;see&#160;README</text><text class="terminal-389216278-r2" x="976" y="117.6" textLength="12.2" clip-path="url(#terminal-389216278-line-4)">
+</text><text class="terminal-389216278-r2" x="0" y="142" textLength="963.8" clip-path="url(#terminal-389216278-line-5)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;vulnerability&#160;with&#160;no&#160;CVE&#160;id&#160;-&#160;not&#160;checkable&#160;against&#160;the&#160;KEV&#160;catalogue</text><text class="terminal-389216278-r2" x="976" y="142" textLength="12.2" clip-path="url(#terminal-389216278-line-5)">
+</text><text class="terminal-389216278-r3" x="0" y="166.4" textLength="646.6" clip-path="url(#terminal-389216278-line-6)">result:&#160;1&#160;to&#160;report&#160;-&#160;1&#160;to&#160;assess&#160;-&#160;136&#160;not&#160;to&#160;report</text><text class="terminal-389216278-r2" x="976" y="166.4" textLength="12.2" clip-path="url(#terminal-389216278-line-6)">
+</text><text class="terminal-389216278-r2" x="976" y="190.8" textLength="12.2" clip-path="url(#terminal-389216278-line-7)">
+</text><text class="terminal-389216278-r2" x="0" y="215.2" textLength="902.8" clip-path="url(#terminal-389216278-line-8)">1&#160;vulnerability&#160;carries&#160;no&#160;CVE&#160;id,&#160;so&#160;the&#160;KEV&#160;catalogue&#160;could&#160;not&#160;be&#160;asked</text><text class="terminal-389216278-r2" x="976" y="215.2" textLength="12.2" clip-path="url(#terminal-389216278-line-8)">
+</text><text class="terminal-389216278-r2" x="0" y="239.6" textLength="902.8" clip-path="url(#terminal-389216278-line-9)">about&#160;it.&#160;It&#160;is&#160;not&#160;absent&#160;from&#160;the&#160;catalogue:&#160;the&#160;question&#160;was&#160;never&#160;put.</text><text class="terminal-389216278-r2" x="976" y="239.6" textLength="12.2" clip-path="url(#terminal-389216278-line-9)">
+</text><text class="terminal-389216278-r2" x="0" y="264" textLength="902.8" clip-path="url(#terminal-389216278-line-10)">Treat&#160;it&#160;as&#160;unassessed&#160;for&#160;exploitation,&#160;exactly&#160;as&#160;you&#160;would&#160;an&#160;unmatched</text><text class="terminal-389216278-r2" x="976" y="264" textLength="12.2" clip-path="url(#terminal-389216278-line-10)">
+</text><text class="terminal-389216278-r2" x="0" y="288.4" textLength="317.2" clip-path="url(#terminal-389216278-line-11)">component&#160;--&#160;not&#160;as&#160;clear.</text><text class="terminal-389216278-r2" x="976" y="288.4" textLength="12.2" clip-path="url(#terminal-389216278-line-11)">
+</text><text class="terminal-389216278-r2" x="976" y="312.8" textLength="12.2" clip-path="url(#terminal-389216278-line-12)">
+</text><text class="terminal-389216278-r2" x="0" y="337.2" textLength="597.8" clip-path="url(#terminal-389216278-line-13)">&#160;&#160;components&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(read&#160;from&#160;the&#160;SBOM)</text><text class="terminal-389216278-r2" x="976" y="337.2" textLength="12.2" clip-path="url(#terminal-389216278-line-13)">
+</text><text class="terminal-389216278-r2" x="0" y="361.6" textLength="658.8" clip-path="url(#terminal-389216278-line-14)">&#160;&#160;vulnerabilities&#160;&#160;&#160;&#160;&#160;&#160;138&#160;&#160;&#160;(matched&#160;against&#160;OSV.dev)</text><text class="terminal-389216278-r2" x="976" y="361.6" textLength="12.2" clip-path="url(#terminal-389216278-line-14)">
+</text><text class="terminal-389216278-r2" x="0" y="386" textLength="695.4" clip-path="url(#terminal-389216278-line-15)">&#160;&#160;component-CVE&#160;pairs&#160;&#160;140&#160;&#160;&#160;(one&#160;per&#160;affected&#160;component)</text><text class="terminal-389216278-r2" x="976" y="386" textLength="12.2" clip-path="url(#terminal-389216278-line-15)">
+</text><text class="terminal-389216278-r2" x="0" y="410.4" textLength="646.6" clip-path="url(#terminal-389216278-line-16)">&#160;&#160;components&#160;queried&#160;&#160;&#160;&#160;36&#160;&#160;&#160;(36&#160;answered&#160;from&#160;cache)</text><text class="terminal-389216278-r2" x="976" y="410.4" textLength="12.2" clip-path="url(#terminal-389216278-line-16)">
+</text><text class="terminal-389216278-r2" x="0" y="434.8" textLength="878.4" clip-path="url(#terminal-389216278-line-17)">&#160;&#160;records&#160;fetched&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;(vulnerability&#160;records&#160;downloaded&#160;this&#160;run)</text><text class="terminal-389216278-r2" x="976" y="434.8" textLength="12.2" clip-path="url(#terminal-389216278-line-17)">
+</text><text class="terminal-389216278-r2" x="0" y="459.2" textLength="939.4" clip-path="url(#terminal-389216278-line-18)">&#160;&#160;CVEs&#160;checked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;136&#160;&#160;&#160;(distinct&#160;CVE&#160;ids&#160;put&#160;to&#160;the&#160;EUVD&#160;KEV&#160;catalogue)</text><text class="terminal-389216278-r2" x="976" y="459.2" textLength="12.2" clip-path="url(#terminal-389216278-line-18)">
+</text><text class="terminal-389216278-r2" x="0" y="483.6" textLength="658.8" clip-path="url(#terminal-389216278-line-19)">&#160;&#160;known&#160;exploited&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5&#160;&#160;&#160;(listed&#160;in&#160;the&#160;catalogue)</text><text class="terminal-389216278-r2" x="976" y="483.6" textLength="12.2" clip-path="url(#terminal-389216278-line-19)">
+</text><text class="terminal-389216278-r2" x="0" y="508" textLength="902.8" clip-path="url(#terminal-389216278-line-20)">&#160;&#160;not&#160;checkable&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(no&#160;CVE&#160;id;&#160;the&#160;catalogue&#160;could&#160;not&#160;be&#160;asked)</text><text class="terminal-389216278-r2" x="976" y="508" textLength="12.2" clip-path="url(#terminal-389216278-line-20)">
+</text><text class="terminal-389216278-r2" x="976" y="532.4" textLength="12.2" clip-path="url(#terminal-389216278-line-21)">
+</text><text class="terminal-389216278-r3" x="0" y="556.8" textLength="902.8" clip-path="url(#terminal-389216278-line-22)">&#160;&#160;REPORT&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(confirmed&#160;present;&#160;the&#160;24h&#160;clock&#160;is&#160;running)</text><text class="terminal-389216278-r2" x="976" y="556.8" textLength="12.2" clip-path="url(#terminal-389216278-line-22)">
+</text><text class="terminal-389216278-r2" x="0" y="581.2" textLength="963.8" clip-path="url(#terminal-389216278-line-23)">&#160;&#160;ASSESS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(in&#160;the&#160;KEV&#160;catalogue;&#160;needs&#160;a&#160;human&#160;decision&#160;now)</text><text class="terminal-389216278-r2" x="976" y="581.2" textLength="12.2" clip-path="url(#terminal-389216278-line-23)">
+</text><text class="terminal-389216278-r2" x="0" y="605.6" textLength="536.8" clip-path="url(#terminal-389216278-line-24)">&#160;&#160;NO&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;136&#160;&#160;&#160;(not&#160;to&#160;report)</text><text class="terminal-389216278-r2" x="976" y="605.6" textLength="12.2" clip-path="url(#terminal-389216278-line-24)">
+</text><text class="terminal-389216278-r2" x="0" y="630" textLength="951.6" clip-path="url(#terminal-389216278-line-25)">&#160;&#160;of&#160;which&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5&#160;&#160;&#160;ruled&#160;out&#160;in&#160;configuration;&#160;the&#160;reasons&#160;are&#160;below</text><text class="terminal-389216278-r2" x="976" y="630" textLength="12.2" clip-path="url(#terminal-389216278-line-25)">
+</text><text class="terminal-389216278-r2" x="0" y="654.4" textLength="902.8" clip-path="url(#terminal-389216278-line-26)">&#160;&#160;unchecked&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1&#160;&#160;&#160;(no&#160;CVE&#160;id;&#160;the&#160;catalogue&#160;could&#160;not&#160;be&#160;asked)</text><text class="terminal-389216278-r2" x="976" y="654.4" textLength="12.2" clip-path="url(#terminal-389216278-line-26)">
+</text><text class="terminal-389216278-r4" x="0" y="678.8" textLength="170.8" clip-path="url(#terminal-389216278-line-27)">CVE&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-389216278-r4" x="207.4" y="678.8" textLength="292.8" clip-path="url(#terminal-389216278-line-27)">component&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-389216278-r4" x="536.8" y="678.8" textLength="36.6" clip-path="url(#terminal-389216278-line-27)">D/T</text><text class="terminal-389216278-r4" x="610" y="678.8" textLength="73.2" clip-path="url(#terminal-389216278-line-27)">bucket</text><text class="terminal-389216278-r4" x="719.8" y="678.8" textLength="109.8" clip-path="url(#terminal-389216278-line-27)">listed&#160;by</text><text class="terminal-389216278-r2" x="976" y="678.8" textLength="12.2" clip-path="url(#terminal-389216278-line-27)">
+</text><text class="terminal-389216278-r2" x="0" y="703.2" textLength="829.6" clip-path="url(#terminal-389216278-line-28)">────────────────────────────────────────────────────────────────────</text><text class="terminal-389216278-r2" x="976" y="703.2" textLength="12.2" clip-path="url(#terminal-389216278-line-28)">
+</text><text class="terminal-389216278-r2" x="0" y="727.6" textLength="170.8" clip-path="url(#terminal-389216278-line-29)">CVE-2021-44228</text><text class="terminal-389216278-r2" x="207.4" y="727.6" textLength="292.8" clip-path="url(#terminal-389216278-line-29)">log4j-core@2.14.1&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text><text class="terminal-389216278-r2" x="536.8" y="727.6" textLength="36.6" clip-path="url(#terminal-389216278-line-29)">D&#160;&#160;</text><text class="terminal-389216278-r3" x="610" y="727.6" textLength="73.2" clip-path="url(#terminal-389216278-line-29)">REPORT</text><text class="terminal-389216278-r2" x="719.8" y="727.6" textLength="109.8" clip-path="url(#terminal-389216278-line-29)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-389216278-r2" x="976" y="727.6" textLength="12.2" clip-path="url(#terminal-389216278-line-29)">
+</text><text class="terminal-389216278-r2" x="0" y="752" textLength="170.8" clip-path="url(#terminal-389216278-line-30)">CVE-2023-44487</text><text class="terminal-389216278-r2" x="207.4" y="752" textLength="292.8" clip-path="url(#terminal-389216278-line-30)">tomcat-embed-core@9.0.54</text><text class="terminal-389216278-r2" x="536.8" y="752" textLength="36.6" clip-path="url(#terminal-389216278-line-30)">T&#160;&#160;</text><text class="terminal-389216278-r5" x="610" y="752" textLength="73.2" clip-path="url(#terminal-389216278-line-30)">ASSESS</text><text class="terminal-389216278-r2" x="719.8" y="752" textLength="109.8" clip-path="url(#terminal-389216278-line-30)">&#160;&#160;&#160;&#160;&#160;CISA</text><text class="terminal-389216278-r2" x="976" y="752" textLength="12.2" clip-path="url(#terminal-389216278-line-30)">
+</text><text class="terminal-389216278-r6" x="0" y="776.4" textLength="854" clip-path="url(#terminal-389216278-line-31)">D&#160;=&#160;direct&#160;dependency,&#160;T&#160;=&#160;transitive&#160;(pulled&#160;in&#160;by&#160;another&#160;component)</text><text class="terminal-389216278-r2" x="976" y="776.4" textLength="12.2" clip-path="url(#terminal-389216278-line-31)">
+</text><text class="terminal-389216278-r6" x="0" y="800.8" textLength="329.4" clip-path="url(#terminal-389216278-line-32)">+&#160;136&#160;item(s)&#160;not&#160;to&#160;report</text><text class="terminal-389216278-r2" x="976" y="800.8" textLength="12.2" clip-path="url(#terminal-389216278-line-32)">
+</text><text class="terminal-389216278-r2" x="976" y="825.2" textLength="12.2" clip-path="url(#terminal-389216278-line-33)">
+</text><text class="terminal-389216278-r2" x="0" y="849.6" textLength="927.2" clip-path="url(#terminal-389216278-line-34)">5&#160;item(s)&#160;in&#160;the&#160;KEV&#160;catalogue&#160;were&#160;ruled&#160;out&#160;in&#160;examples/dispositions.toml.</text><text class="terminal-389216278-r2" x="976" y="849.6" textLength="12.2" clip-path="url(#terminal-389216278-line-34)">
+</text><text class="terminal-389216278-r2" x="0" y="874" textLength="915" clip-path="url(#terminal-389216278-line-35)">They&#160;are&#160;in&#160;NO&#160;on&#160;the&#160;rationale&#160;recorded&#160;below,&#160;which&#160;is&#160;the&#160;manufacturer&#x27;s</text><text class="terminal-389216278-r2" x="976" y="874" textLength="12.2" clip-path="url(#terminal-389216278-line-35)">
+</text><text class="terminal-389216278-r2" x="0" y="898.4" textLength="915" clip-path="url(#terminal-389216278-line-36)">own&#160;determination&#160;and&#160;not&#160;one&#160;art14&#160;made&#160;or&#160;checked.&#160;This&#160;is&#160;the&#160;material&#160;a</text><text class="terminal-389216278-r2" x="976" y="898.4" textLength="12.2" clip-path="url(#terminal-389216278-line-36)">
+</text><text class="terminal-389216278-r2" x="0" y="922.8" textLength="610" clip-path="url(#terminal-389216278-line-37)">VEX&#160;statement&#160;and&#160;an&#160;audit&#160;trail&#160;are&#160;written&#160;from.</text><text class="terminal-389216278-r2" x="976" y="922.8" textLength="12.2" clip-path="url(#terminal-389216278-line-37)">
+</text><text class="terminal-389216278-r2" x="0" y="947.2" textLength="585.6" clip-path="url(#terminal-389216278-line-38)">&#160;&#160;-&#160;CVE-2022-22965&#160;spring-boot-starter-web@2.5.6</text><text class="terminal-389216278-r2" x="976" y="947.2" textLength="12.2" clip-path="url(#terminal-389216278-line-38)">
+</text><text class="terminal-389216278-r2" x="0" y="971.6" textLength="866.2" clip-path="url(#terminal-389216278-line-39)">&#160;&#160;&#160;&#160;&#160;&#160;Precondition&#160;not&#160;met.&#160;Spring4Shell&#160;requires&#160;the&#160;application&#160;to&#160;be</text><text class="terminal-389216278-r2" x="976" y="971.6" textLength="12.2" clip-path="url(#terminal-389216278-line-39)">
+</text><text class="terminal-389216278-r2" x="0" y="996" textLength="890.6" clip-path="url(#terminal-389216278-line-40)">&#160;&#160;&#160;&#160;&#160;&#160;deployed&#160;as&#160;a&#160;WAR&#160;on&#160;a&#160;servlet&#160;container&#160;running&#160;on&#160;JDK&#160;9&#160;or&#160;later.</text><text class="terminal-389216278-r2" x="976" y="996" textLength="12.2" clip-path="url(#terminal-389216278-line-40)">
+</text><text class="terminal-389216278-r2" x="0" y="1020.4" textLength="915" clip-path="url(#terminal-389216278-line-41)">&#160;&#160;&#160;&#160;&#160;&#160;gateway&#160;ships&#160;as&#160;an&#160;executable&#160;jar&#160;on&#160;the&#160;embedded&#160;Tomcat&#160;and&#160;runs&#160;on</text><text class="terminal-389216278-r2" x="976" y="1020.4" textLength="12.2" clip-path="url(#terminal-389216278-line-41)">
+</text><text class="terminal-389216278-r2" x="0" y="1044.8" textLength="829.6" clip-path="url(#terminal-389216278-line-42)">&#160;&#160;&#160;&#160;&#160;&#160;JDK&#160;8u292;&#160;neither&#160;the&#160;packaging&#160;nor&#160;the&#160;runtime&#160;satisfies&#160;the</text><text class="terminal-389216278-r2" x="976" y="1044.8" textLength="12.2" clip-path="url(#terminal-389216278-line-42)">
+</text><text class="terminal-389216278-r2" x="0" y="1069.2" textLength="890.6" clip-path="url(#terminal-389216278-line-43)">&#160;&#160;&#160;&#160;&#160;&#160;exploit.&#160;Verified&#160;against&#160;the&#160;built&#160;artefact,&#160;not&#160;against&#160;the&#160;build</text><text class="terminal-389216278-r2" x="976" y="1069.2" textLength="12.2" clip-path="url(#terminal-389216278-line-43)">
+</text><text class="terminal-389216278-r2" x="0" y="1093.6" textLength="927.2" clip-path="url(#terminal-389216278-line-44)">&#160;&#160;&#160;&#160;&#160;&#160;file,&#160;because&#160;the&#160;two&#160;can&#160;disagree.&#160;Decided&#160;2026-09-11&#160;by&#160;the&#160;platform</text><text class="terminal-389216278-r2" x="976" y="1093.6" textLength="12.2" clip-path="url(#terminal-389216278-line-44)">
+</text><text class="terminal-389216278-r2" x="0" y="1118" textLength="244" clip-path="url(#terminal-389216278-line-45)">&#160;&#160;&#160;&#160;&#160;&#160;security&#160;team.</text><text class="terminal-389216278-r2" x="976" y="1118" textLength="12.2" clip-path="url(#terminal-389216278-line-45)">
+</text><text class="terminal-389216278-r2" x="0" y="1142.4" textLength="475.8" clip-path="url(#terminal-389216278-line-46)">&#160;&#160;-&#160;CVE-2022-22965&#160;spring-webmvc@5.3.12</text><text class="terminal-389216278-r2" x="976" y="1142.4" textLength="12.2" clip-path="url(#terminal-389216278-line-46)">
+</text><text class="terminal-389216278-r2" x="0" y="1166.8" textLength="805.2" clip-path="url(#terminal-389216278-line-47)">&#160;&#160;&#160;&#160;&#160;&#160;Same&#160;precondition&#160;as&#160;spring-boot-starter-web&#160;above,&#160;recorded</text><text class="terminal-389216278-r2" x="976" y="1166.8" textLength="12.2" clip-path="url(#terminal-389216278-line-47)">
+</text><text class="terminal-389216278-r2" x="0" y="1191.2" textLength="915" clip-path="url(#terminal-389216278-line-48)">&#160;&#160;&#160;&#160;&#160;&#160;separately&#160;because&#160;the&#160;two&#160;are&#160;separate&#160;components&#160;and&#160;a&#160;VEX&#160;consumer</text><text class="terminal-389216278-r2" x="976" y="1191.2" textLength="12.2" clip-path="url(#terminal-389216278-line-48)">
+</text><text class="terminal-389216278-r2" x="0" y="1215.6" textLength="768.6" clip-path="url(#terminal-389216278-line-49)">&#160;&#160;&#160;&#160;&#160;&#160;reads&#160;them&#160;as&#160;separate&#160;statements.&#160;The&#160;vulnerable&#160;path&#160;is</text><text class="terminal-389216278-r2" x="976" y="1215.6" textLength="12.2" clip-path="url(#terminal-389216278-line-49)">
+</text><text class="terminal-389216278-r2" x="0" y="1240" textLength="866.2" clip-path="url(#terminal-389216278-line-50)">&#160;&#160;&#160;&#160;&#160;&#160;WebDataBinder&#160;binding&#160;a&#160;request&#160;parameter&#160;onto&#160;a&#160;POJO&#160;whose&#160;class</text><text class="terminal-389216278-r2" x="976" y="1240" textLength="12.2" clip-path="url(#terminal-389216278-line-50)">
+</text><text class="terminal-389216278-r2" x="0" y="1264.4" textLength="927.2" clip-path="url(#terminal-389216278-line-51)">&#160;&#160;&#160;&#160;&#160;&#160;loader&#160;is&#160;reachable&#160;through&#160;class.module.classLoader,&#160;which&#160;the&#160;Spring</text><text class="terminal-389216278-r2" x="976" y="1264.4" textLength="12.2" clip-path="url(#terminal-389216278-line-51)">
+</text><text class="terminal-389216278-r2" x="0" y="1288.8" textLength="927.2" clip-path="url(#terminal-389216278-line-52)">&#160;&#160;&#160;&#160;&#160;&#160;Boot&#160;jar&#160;launcher&#160;does&#160;not&#160;expose.&#160;No&#160;controller&#160;in&#160;this&#160;product&#160;binds</text><text class="terminal-389216278-r2" x="976" y="1288.8" textLength="12.2" clip-path="url(#terminal-389216278-line-52)">
+</text><text class="terminal-389216278-r2" x="0" y="1313.2" textLength="854" clip-path="url(#terminal-389216278-line-53)">&#160;&#160;&#160;&#160;&#160;&#160;to&#160;a&#160;plain&#160;POJO&#160;from&#160;query&#160;parameters.&#160;Decided&#160;2026-09-11&#160;by&#160;the</text><text class="terminal-389216278-r2" x="976" y="1313.2" textLength="12.2" clip-path="url(#terminal-389216278-line-53)">
+</text><text class="terminal-389216278-r2" x="0" y="1337.6" textLength="353.8" clip-path="url(#terminal-389216278-line-54)">&#160;&#160;&#160;&#160;&#160;&#160;platform&#160;security&#160;team.</text><text class="terminal-389216278-r2" x="976" y="1337.6" textLength="12.2" clip-path="url(#terminal-389216278-line-54)">
+</text><text class="terminal-389216278-r2" x="0" y="1362" textLength="463.6" clip-path="url(#terminal-389216278-line-55)">&#160;&#160;-&#160;CVE-2022-22965&#160;spring-beans@5.3.12</text><text class="terminal-389216278-r2" x="976" y="1362" textLength="12.2" clip-path="url(#terminal-389216278-line-55)">
+</text><text class="terminal-389216278-r2" x="0" y="1386.4" textLength="915" clip-path="url(#terminal-389216278-line-56)">&#160;&#160;&#160;&#160;&#160;&#160;spring-beans&#160;carries&#160;the&#160;CachedIntrospectionResults&#160;code&#160;the&#160;advisory</text><text class="terminal-389216278-r2" x="976" y="1386.4" textLength="12.2" clip-path="url(#terminal-389216278-line-56)">
+</text><text class="terminal-389216278-r2" x="0" y="1410.8" textLength="915" clip-path="url(#terminal-389216278-line-57)">&#160;&#160;&#160;&#160;&#160;&#160;names,&#160;and&#160;it&#160;arrives&#160;transitively&#160;through&#160;spring-webmvc.&#160;It&#160;is&#160;ruled</text><text class="terminal-389216278-r2" x="976" y="1410.8" textLength="12.2" clip-path="url(#terminal-389216278-line-57)">
+</text><text class="terminal-389216278-r2" x="0" y="1435.2" textLength="890.6" clip-path="url(#terminal-389216278-line-58)">&#160;&#160;&#160;&#160;&#160;&#160;out&#160;for&#160;the&#160;same&#160;reason&#160;and&#160;on&#160;the&#160;same&#160;evidence:&#160;the&#160;packaging&#160;and</text><text class="terminal-389216278-r2" x="976" y="1435.2" textLength="12.2" clip-path="url(#terminal-389216278-line-58)">
+</text><text class="terminal-389216278-r2" x="0" y="1459.6" textLength="902.8" clip-path="url(#terminal-389216278-line-59)">&#160;&#160;&#160;&#160;&#160;&#160;JDK&#160;preconditions&#160;are&#160;not&#160;met&#160;in&#160;the&#160;shipped&#160;artefact.&#160;Listed&#160;in&#160;its</text><text class="terminal-389216278-r2" x="976" y="1459.6" textLength="12.2" clip-path="url(#terminal-389216278-line-59)">
+</text><text class="terminal-389216278-r2" x="0" y="1484" textLength="902.8" clip-path="url(#terminal-389216278-line-60)">&#160;&#160;&#160;&#160;&#160;&#160;own&#160;right&#160;so&#160;that&#160;the&#160;inventory&#160;and&#160;the&#160;determination&#160;cover&#160;the&#160;same</text><text class="terminal-389216278-r2" x="976" y="1484" textLength="12.2" clip-path="url(#terminal-389216278-line-60)">
+</text><text class="terminal-389216278-r2" x="0" y="1508.4" textLength="902.8" clip-path="url(#terminal-389216278-line-61)">&#160;&#160;&#160;&#160;&#160;&#160;set&#160;of&#160;components.&#160;Decided&#160;2026-09-11&#160;by&#160;the&#160;platform&#160;security&#160;team.</text><text class="terminal-389216278-r2" x="976" y="1508.4" textLength="12.2" clip-path="url(#terminal-389216278-line-61)">
+</text><text class="terminal-389216278-r2" x="0" y="1532.8" textLength="439.2" clip-path="url(#terminal-389216278-line-62)">&#160;&#160;-&#160;CVE-2021-45046&#160;log4j-core@2.14.1</text><text class="terminal-389216278-r2" x="976" y="1532.8" textLength="12.2" clip-path="url(#terminal-389216278-line-62)">
+</text><text class="terminal-389216278-r2" x="0" y="1557.2" textLength="829.6" clip-path="url(#terminal-389216278-line-63)">&#160;&#160;&#160;&#160;&#160;&#160;Not&#160;reachable&#160;in&#160;this&#160;configuration.&#160;CVE-2021-45046&#160;requires&#160;a</text><text class="terminal-389216278-r2" x="976" y="1557.2" textLength="12.2" clip-path="url(#terminal-389216278-line-63)">
+</text><text class="terminal-389216278-r2" x="0" y="1581.6" textLength="890.6" clip-path="url(#terminal-389216278-line-64)">&#160;&#160;&#160;&#160;&#160;&#160;non-default&#160;PatternLayout&#160;using&#160;a&#160;Context&#160;Lookup&#160;($${ctx:...})&#160;or&#160;a</text><text class="terminal-389216278-r2" x="976" y="1581.6" textLength="12.2" clip-path="url(#terminal-389216278-line-64)">
+</text><text class="terminal-389216278-r2" x="0" y="1606" textLength="866.2" clip-path="url(#terminal-389216278-line-65)">&#160;&#160;&#160;&#160;&#160;&#160;Thread&#160;Context&#160;Map&#160;pattern,&#160;which&#160;is&#160;how&#160;attacker-controlled&#160;data</text><text class="terminal-389216278-r2" x="976" y="1606" textLength="12.2" clip-path="url(#terminal-389216278-line-65)">
+</text><text class="terminal-389216278-r2" x="0" y="1630.4" textLength="878.4" clip-path="url(#terminal-389216278-line-66)">&#160;&#160;&#160;&#160;&#160;&#160;reaches&#160;the&#160;lookup&#160;a&#160;second&#160;time.&#160;log4j2.xml&#160;here&#160;uses&#160;the&#160;default</text><text class="terminal-389216278-r2" x="976" y="1630.4" textLength="12.2" clip-path="url(#terminal-389216278-line-66)">
+</text><text class="terminal-389216278-r2" x="0" y="1654.8" textLength="890.6" clip-path="url(#terminal-389216278-line-67)">&#160;&#160;&#160;&#160;&#160;&#160;pattern&#160;with&#160;no&#160;ctx/MDC&#160;conversion&#160;specifier,&#160;and&#160;nothing&#160;writes&#160;to</text><text class="terminal-389216278-r2" x="976" y="1654.8" textLength="12.2" clip-path="url(#terminal-389216278-line-67)">
+</text><text class="terminal-389216278-r2" x="0" y="1679.2" textLength="756.4" clip-path="url(#terminal-389216278-line-68)">&#160;&#160;&#160;&#160;&#160;&#160;the&#160;Thread&#160;Context&#160;Map.&#160;This&#160;is&#160;a&#160;separate&#160;question&#160;from</text><text class="terminal-389216278-r2" x="976" y="1679.2" textLength="12.2" clip-path="url(#terminal-389216278-line-68)">
+</text><text class="terminal-389216278-r2" x="0" y="1703.6" textLength="902.8" clip-path="url(#terminal-389216278-line-69)">&#160;&#160;&#160;&#160;&#160;&#160;CVE-2021-44228&#160;above&#160;and&#160;was&#160;assessed&#160;separately.&#160;Decided&#160;2026-09-11</text><text class="terminal-389216278-r2" x="976" y="1703.6" textLength="12.2" clip-path="url(#terminal-389216278-line-69)">
+</text><text class="terminal-389216278-r2" x="0" y="1728" textLength="439.2" clip-path="url(#terminal-389216278-line-70)">&#160;&#160;&#160;&#160;&#160;&#160;by&#160;the&#160;platform&#160;security&#160;team.</text><text class="terminal-389216278-r2" x="976" y="1728" textLength="12.2" clip-path="url(#terminal-389216278-line-70)">
+</text><text class="terminal-389216278-r2" x="0" y="1752.4" textLength="524.6" clip-path="url(#terminal-389216278-line-71)">&#160;&#160;-&#160;CVE-2025-24813&#160;tomcat-embed-core@9.0.54</text><text class="terminal-389216278-r2" x="976" y="1752.4" textLength="12.2" clip-path="url(#terminal-389216278-line-71)">
+</text><text class="terminal-389216278-r2" x="0" y="1776.8" textLength="927.2" clip-path="url(#terminal-389216278-line-72)">&#160;&#160;&#160;&#160;&#160;&#160;Not&#160;reachable.&#160;The&#160;partial-PUT&#160;path&#160;requires&#160;the&#160;default&#160;servlet&#160;to&#160;be</text><text class="terminal-389216278-r2" x="976" y="1776.8" textLength="12.2" clip-path="url(#terminal-389216278-line-72)">
+</text><text class="terminal-389216278-r2" x="0" y="1801.2" textLength="915" clip-path="url(#terminal-389216278-line-73)">&#160;&#160;&#160;&#160;&#160;&#160;running&#160;with&#160;readonly=false&#160;and&#160;either&#160;file-based&#160;session&#160;persistence</text><text class="terminal-389216278-r2" x="976" y="1801.2" textLength="12.2" clip-path="url(#terminal-389216278-line-73)">
+</text><text class="terminal-389216278-r2" x="0" y="1825.6" textLength="890.6" clip-path="url(#terminal-389216278-line-74)">&#160;&#160;&#160;&#160;&#160;&#160;or&#160;a&#160;library&#160;that&#160;deserialises&#160;uploaded&#160;content.&#160;gateway&#160;leaves&#160;the</text><text class="terminal-389216278-r2" x="976" y="1825.6" textLength="12.2" clip-path="url(#terminal-389216278-line-74)">
+</text><text class="terminal-389216278-r2" x="0" y="1850" textLength="878.4" clip-path="url(#terminal-389216278-line-75)">&#160;&#160;&#160;&#160;&#160;&#160;default&#160;servlet&#160;read-only,&#160;has&#160;no&#160;PUT&#160;route,&#160;and&#160;uses&#160;Redis-backed</text><text class="terminal-389216278-r2" x="976" y="1850" textLength="12.2" clip-path="url(#terminal-389216278-line-75)">
+</text><text class="terminal-389216278-r2" x="0" y="1874.4" textLength="878.4" clip-path="url(#terminal-389216278-line-76)">&#160;&#160;&#160;&#160;&#160;&#160;sessions&#160;rather&#160;than&#160;the&#160;FileStore.&#160;Confirmed&#160;against&#160;the&#160;packaged</text><text class="terminal-389216278-r2" x="976" y="1874.4" textLength="12.2" clip-path="url(#terminal-389216278-line-76)">
+</text><text class="terminal-389216278-r2" x="0" y="1898.8" textLength="927.2" clip-path="url(#terminal-389216278-line-77)">&#160;&#160;&#160;&#160;&#160;&#160;conf/web.xml&#160;and&#160;the&#160;session&#160;configuration&#160;in&#160;application.yml.&#160;Decided</text><text class="terminal-389216278-r2" x="976" y="1898.8" textLength="12.2" clip-path="url(#terminal-389216278-line-77)">
+</text><text class="terminal-389216278-r2" x="0" y="1923.2" textLength="573.4" clip-path="url(#terminal-389216278-line-78)">&#160;&#160;&#160;&#160;&#160;&#160;2026-09-11&#160;by&#160;the&#160;platform&#160;security&#160;team.</text><text class="terminal-389216278-r2" x="976" y="1923.2" textLength="12.2" clip-path="url(#terminal-389216278-line-78)">
+</text><text class="terminal-389216278-r2" x="976" y="1947.6" textLength="12.2" clip-path="url(#terminal-389216278-line-79)">
+</text><text class="terminal-389216278-r2" x="0" y="1972" textLength="866.2" clip-path="url(#terminal-389216278-line-80)">2&#160;item(s)&#160;need&#160;a&#160;decision.&#160;Run&#160;again&#160;with&#160;--brief&#160;for&#160;the&#160;full&#160;decision</text><text class="terminal-389216278-r2" x="976" y="1972" textLength="12.2" clip-path="url(#terminal-389216278-line-80)">
+</text><text class="terminal-389216278-r2" x="0" y="1996.4" textLength="915" clip-path="url(#terminal-389216278-line-81)">brief&#160;on&#160;each:&#160;where&#160;it&#160;sits,&#160;what&#160;it&#160;is,&#160;who&#160;says&#160;it&#160;is&#160;exploited,&#160;and&#160;the</text><text class="terminal-389216278-r2" x="976" y="1996.4" textLength="12.2" clip-path="url(#terminal-389216278-line-81)">
+</text><text class="terminal-389216278-r2" x="0" y="2020.8" textLength="512.4" clip-path="url(#terminal-389216278-line-82)">one&#160;question&#160;to&#160;answer&#160;about&#160;this&#160;product.</text><text class="terminal-389216278-r2" x="976" y="2020.8" textLength="12.2" clip-path="url(#terminal-389216278-line-82)">
+</text>
+    </g>
+    </g>
+</svg>

@@ -1,0 +1,5 @@
+# The tree is checked out on Linux, macOS and Windows. A `run.sh` carrying CRLF
+# line endings fails there with "bad interpreter", so endings are pinned here
+# rather than left to whatever core.autocrlf each contributor happens to have.
+* text=auto eol=lf
+*.cmd text eol=crlf
