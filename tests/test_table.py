@@ -12,6 +12,7 @@ capture does not draw the same rule.
 
 from __future__ import annotations
 
+from dataclasses import replace
 
 from rich import box
 from rich.console import Console
@@ -182,6 +183,38 @@ def test_the_catalogue_is_named_rather_than_art14():
     result = _mixed()
     assert _listed_by(result.report[0]) == "CISA, EU"
     assert _listed_by(result.no[0]) == "-"
+
+
+def test_both_spellings_of_the_eu_tag_read_as_eu():
+    """The dump writes `eukev_kev`; the API documentation writes `eu_kev`.
+
+    Every fixture in this suite once used the documented spelling, so the
+    suite agreed with the documentation while the live catalogue tagged all
+    of its EU-listed records the other way and they printed as the raw field
+    name in the column that exists to name the authority.
+    """
+    result = _mixed()
+    item = result.report[0]
+    for sources, expected in (
+        (("eu_kev",), "EU"),
+        (("eukev_kev",), "EU"),
+        (("cisa_kev", "eukev_kev"), "CISA, EU"),
+        # Both spellings on one record still name the authority once.
+        (("eu_kev", "eukev_kev"), "EU"),
+    ):
+        entry = replace(item.entry, sources=sources)
+        assert _listed_by(replace(item, entry=entry)) == expected
+
+
+def test_an_unknown_catalogue_tag_reaches_the_reader():
+    """A spelling we have not met prints as sent rather than disappearing.
+
+    The column would otherwise be silent about a source the catalogue named,
+    which is the failure mode this tool exists to refuse.
+    """
+    item = _mixed().report[0]
+    entry = replace(item.entry, sources=("cisa_kev", "some_new_list"))
+    assert _listed_by(replace(item, entry=entry)) == "CISA, some_new_list"
 
 
 def test_the_table_never_carries_a_severity_column(capsys):

@@ -46,7 +46,15 @@ MAX_WIDTH = 120
 
 # Catalogue ids are machine-shaped; the column is eight characters wide and
 # the reader needs to recognise the authority, not the field name.
-SOURCE_LABELS = {"cisa_kev": "CISA", "eu_kev": "EU"}
+#
+# Two spellings for the EU list. The EUVD API documentation writes `eu_kev`;
+# the live dump writes `eukev_kev` on every EU-listed record we have seen.
+# Both are carried, because a tag that is absent from this map prints raw --
+# the reader would meet `eukev_kev` in the "listed by" column, which is the
+# machine field name the map exists to keep out of the output. The raw tag is
+# what `--json` still carries; this is presentation, and the record of what
+# the catalogue actually said is not rewritten to match the label.
+SOURCE_LABELS = {"cisa_kev": "CISA", "eu_kev": "EU", "eukev_kev": "EU"}
 
 BUCKET_STYLES = {REPORT: "bold red", ASSESS: "yellow"}
 
@@ -289,8 +297,19 @@ def _row(item: Item) -> Row:
 
 
 def _listed_by(item: Item) -> str:
-    """Which catalogue says so. Never art14's own word for it."""
+    """Which catalogue says so. Never art14's own word for it.
+
+    A tag with no label prints as the catalogue sent it, so a spelling we
+    have not met reaches the reader rather than vanishing. Labels are
+    deduplicated because the EU list has two spellings and a record carrying
+    both would otherwise read "EU, EU".
+    """
     entry = item.entry
     if entry is None or not entry.sources:
         return "-"
-    return ", ".join(SOURCE_LABELS.get(source, source) for source in entry.sources)
+    labels: list[str] = []
+    for source in entry.sources:
+        label = SOURCE_LABELS.get(source, source)
+        if label not in labels:
+            labels.append(label)
+    return ", ".join(labels)

@@ -103,6 +103,11 @@ def record(vuln_id, *, modified="2026-01-01T00:00:00Z", aliases=(), **extra):
 # The catalogue every CLI test runs against unless it says otherwise. Log4Shell
 # is in it because that is the demo the whole tool is built around, and a test
 # that needs it absent removes it rather than working around its presence.
+#
+# The EU-only entry carries `eukev_kev`, which is how the live dump spells that
+# tag. The documented spelling is `eu_kev` and both are handled, but a suite
+# that only ever fed itself the documented one agreed with the documentation
+# and not with the catalogue -- which is the failure this fixture now pins.
 KEV_DUMP = [
     {
         "cveId": "CVE-2021-44228",
@@ -114,7 +119,7 @@ KEV_DUMP = [
         "cveId": "CVE-2026-0002",
         "euvdId": "EUVD-2026-0002",
         "dateAdded": "2026-02-01",
-        "sources": ["eu_kev"],
+        "sources": ["eukev_kev"],
     },
 ]
 
@@ -127,7 +132,7 @@ IRRELEVANT_KEV_DUMP = [
         "cveId": "CVE-1999-0001",
         "euvdId": "EUVD-1999-0001",
         "dateAdded": "1999-01-01",
-        "sources": ["eu_kev"],
+        "sources": ["eukev_kev"],
     },
 ]
 

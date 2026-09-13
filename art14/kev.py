@@ -91,9 +91,12 @@ class KevEntry:
     cve_id: str
     euvd_id: str | None = None
     date_added: str | None = None
-    # Which catalogues contain it -- cisa_kev, eu_kev. Always shown in output
-    # per section 3, so the user sees where the signal comes from rather than
-    # taking art14's word for it.
+    # Which catalogues contain it -- `cisa_kev`, and the EU list, which the
+    # API documentation spells `eu_kev` and the live dump spells `eukev_kev`.
+    # Kept exactly as the catalogue sent them: this is the record of what was
+    # said, and `table.SOURCE_LABELS` does the reading-for-humans. Always
+    # shown in output per section 3, so the user sees where the signal comes
+    # from rather than taking art14's word for it.
     sources: tuple[str, ...] = ()
 
     def as_json(self) -> dict[str, object]:

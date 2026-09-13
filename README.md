@@ -371,6 +371,17 @@ item into REPORT is an entry in `--config` naming the component and the CVE,
 with the reason you concluded it is reachable. There is no auto-discovery of
 that file either: the command line always records what a verdict rested on.
 
+Being in a catalogue is not the trigger. [Article 3(42)][cra] defines an
+actively exploited vulnerability as one for which there is reliable evidence
+that a malicious actor has exploited it in a system without permission of the
+system owner, and [Recital 68][cra] puts good-faith testing, investigation,
+correction and disclosure outside that. A catalogue is a record that somebody
+found such evidence. It is not the definition, and it is neither necessary
+nor sufficient: exploitation seen only against your own customers is in no
+catalogue at all, and a listed CVE in a component whose vulnerable path your
+product never reaches is a catalogue hit with nothing behind it. Which is
+why the third stage ends in a question rather than a verdict.
+
 Severity is deliberately not in the table. The bucket is the verdict, and a
 severity word beside it invites the reader to treat the two as views of the
 same thing. Severity is in `--brief` and `--json`, where a reader has already
@@ -398,6 +409,20 @@ stopped skimming.
 
   context    critical - CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:H
 ```
+
+That brief asks a question instead of starting a clock, which is the order
+the regulation puts them in. The 24 hours in [Article 14(2)][cra] run from
+when the manufacturer became aware, and the Commission's guidance on the CRA
+([C(2026) 5252][cra-guidance] of 27 July 2026, paragraph 213) reads becoming
+aware as the point at which, after an initial assessment, there is a
+reasonable degree of certainty that a vulnerability in the product is being
+actively exploited. A catalogue hit is the suspicious event that assessment
+starts from. The same guidance is explicit that nothing is retroactive
+(paragraph 217): exploitation a manufacturer already knew of before
+11 September 2026 is not notifiable. It is also explicit that it binds
+nobody (paragraph 8) and that only the Court of Justice can settle the
+question -- the same instruction as the one at the top of this page, pointed
+at a different document.
 
 ### Exit codes
 
@@ -593,10 +618,13 @@ worse than no tool.
   art14 names the silence and will not certify a run nothing answered, but it
   cannot tell you what a source covers -- only what came back. Measured, with
   the output, in [A source that said nothing](#a-source-that-said-nothing).
-- **The EUVD KEV catalogue is narrower than commercial equivalents.** It is
-  public and needs no key, which is why it is the source. A CVE absent from it
-  may still be exploited in the wild and listed by a commercial feed such as
-  VulnCheck. Absence of the signal is not absence of the thing.
+- **The EUVD exploited list is close to CISA KEV plus a small EU margin.** On
+  2026-09-12 the dump this tool reads held 1721 records, of which 1710 were
+  also listed by CISA and 11 by the EU alone. It is public and needs no key,
+  which is why it is the source. A CVE absent from it may still be exploited
+  in the wild and listed by a commercial feed such as VulnCheck, which
+  [reported][vulncheck-euvd] the EU list as a strict subset of CISA KEV in May
+  2025. Absence of the signal is not absence of the thing.
 - **Every result is a point-in-time snapshot.** The catalogue changes daily.
 - **Unmatched components are reported, never treated as clean.** So are
   vulnerabilities with no CVE id: they are counted apart and never fall into
@@ -647,3 +675,5 @@ MIT. See [LICENSE](LICENSE).
 
 [cra-reporting]: https://digital-strategy.ec.europa.eu/en/policies/cra-reporting
 [cra]: https://eur-lex.europa.eu/eli/reg/2024/2847/oj
+[cra-guidance]: https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation
+[vulncheck-euvd]: https://www.vulncheck.com/blog/enisa-euvd
