@@ -619,8 +619,9 @@ worse than no tool.
   cannot tell you what a source covers -- only what came back. Measured, with
   the output, in [A source that said nothing](#a-source-that-said-nothing).
 - **The EUVD exploited list is close to CISA KEV plus a small EU margin.** On
-  2026-09-12 the dump this tool reads held 1721 records, of which 1710 were
-  also listed by CISA and 11 by the EU alone. It is public and needs no key,
+  2026-09-12 the dump this tool reads held 1721 records, of which 1710 carry
+  CISA's tag and 11 the EU's alone. CISA's own catalogue that day held 1709
+  entries, every one of them already in the dump. It is public and needs no key,
   which is why it is the source. A CVE absent from it may still be exploited
   in the wild and listed by a commercial feed such as VulnCheck, which
   [reported][vulncheck-euvd] the EU list as a strict subset of CISA KEV in May
