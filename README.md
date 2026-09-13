@@ -628,11 +628,13 @@ worse than no tool.
   exploited in the wild: VulnCheck KEV [says][vulncheck-kev] it carries roughly
   80% more CVEs exploited in the wild than any other public catalogue, and it
   is free to registered community members - but it takes an account and an API
-  key, and this tool asks for neither by design. The difference is a rate, not
-  a backlog: VulnCheck [counted][vulncheck-2024] 768 CVEs first publicly
-  reported as exploited during 2024, against the 186 entries CISA KEV carries
-  with a 2024 date. That is more exploitation research, not a queue waiting to
-  drain into CISA. Absence of the signal is not absence of the thing.
+  key, and this tool asks for neither by design. Making the exploitation source
+  pluggable is the obvious extension, and it would need that key, which v0.1
+  does not ask for. The difference is a rate, not a backlog: VulnCheck
+  [counted][vulncheck-2024] 768 CVEs first publicly reported as exploited
+  during 2024, against the 186 entries CISA KEV carries with a 2024 date. That
+  is more exploitation research, not a queue waiting to drain into CISA.
+  Absence of the signal is not absence of the thing.
 - **Every result is a point-in-time snapshot.** The catalogue changes daily.
 - **Unmatched components are reported, never treated as clean.** So are
   vulnerabilities with no CVE id: they are counted apart and never fall into
