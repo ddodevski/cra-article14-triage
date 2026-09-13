@@ -31,7 +31,7 @@ decide](docs/img/01-funnel.svg)
 beyond the file:
 
 ```
-art14 0.1.0.dev0 - CycloneDX 1.6 - gateway@3.2.0
+art14 0.1.0 - CycloneDX 1.6 - gateway@3.2.0
 
 input: 36 components - 0 without PURL (0%) - 0 without version
        matching quality: ok - see README
@@ -209,7 +209,7 @@ have run it once.
 
 ```
 $ grype alpine:3.10 -o cyclonedx-json | art14 -
-art14 0.1.0.dev0 - CycloneDX 1.7 - alpine@3.10
+art14 0.1.0 - CycloneDX 1.7 - alpine@3.10
 
 input: 15 package components - 1 without PURL (7%) - 0 without version
        76 entries in the document; 61 are not packages (file) and are not graded
@@ -252,7 +252,7 @@ is not answered by turning up the first.
 
 ```
 $ syft alpine:3.10 -o cyclonedx-json | art14 -
-art14 0.1.0.dev0 - CycloneDX 1.7 - alpine@3.10
+art14 0.1.0 - CycloneDX 1.7 - alpine@3.10
 
 input: 15 package components - 1 without PURL (7%) - 0 without version
        76 entries in the document; 61 are not packages (file) and are not graded
