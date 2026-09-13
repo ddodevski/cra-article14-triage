@@ -621,11 +621,18 @@ worse than no tool.
 - **The EUVD exploited list is close to CISA KEV plus a small EU margin.** On
   2026-09-12 the dump this tool reads held 1721 records, of which 1710 carry
   CISA's tag and 11 the EU's alone. CISA's own catalogue that day held 1709
-  entries, every one of them already in the dump. It is public and needs no key,
-  which is why it is the source. A CVE absent from it may still be exploited
-  in the wild and listed by a commercial feed such as VulnCheck, which
-  [reported][vulncheck-euvd] the EU list as a strict subset of CISA KEV in May
-  2025. Absence of the signal is not absence of the thing.
+  entries, every one of them already in the dump. VulnCheck
+  [found][vulncheck-euvd] the EU list a strict subset of CISA KEV in May 2025;
+  the margin has appeared since, and it is small. The list is public and takes
+  no key, which is why it is the source here. A CVE absent from it may still be
+  exploited in the wild: VulnCheck KEV [says][vulncheck-kev] it carries roughly
+  80% more CVEs exploited in the wild than any other public catalogue, and it
+  is free to registered community members - but it takes an account and an API
+  key, and this tool asks for neither by design. The difference is a rate, not
+  a backlog: VulnCheck [counted][vulncheck-2024] 768 CVEs first publicly
+  reported as exploited during 2024, against the 186 entries CISA KEV carries
+  with a 2024 date. That is more exploitation research, not a queue waiting to
+  drain into CISA. Absence of the signal is not absence of the thing.
 - **Every result is a point-in-time snapshot.** The catalogue changes daily.
 - **Unmatched components are reported, never treated as clean.** So are
   vulnerabilities with no CVE id: they are counted apart and never fall into
@@ -682,3 +689,5 @@ MIT. See [LICENSE](LICENSE).
 [cra]: https://eur-lex.europa.eu/eli/reg/2024/2847/oj
 [cra-guidance]: https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation
 [vulncheck-euvd]: https://www.vulncheck.com/blog/enisa-euvd
+[vulncheck-kev]: https://www.vulncheck.com/kev
+[vulncheck-2024]: https://www.vulncheck.com/blog/2024-exploitation-trends
