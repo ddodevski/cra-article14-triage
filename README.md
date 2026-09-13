@@ -652,6 +652,10 @@ stop.
 There are no notification templates here either. What to send, to whom, and
 when is not a thing to template out of a repository.
 
+Other CRA tooling bundles the scanner, or files the report for you. This does
+neither on purpose: the scan belongs to the tools that already do it well, and
+the filing belongs to whoever has to sign it.
+
 ## Tests
 
 ```
