@@ -24,12 +24,14 @@ import textwrap
 from typing import Sequence
 
 from dataclasses import replace
+from pathlib import Path
 
 from . import (
     __version__,
     kev as kev_module,
     provenance as provenance_module,
     quality as quality_module,
+    report as report_module,
     table as table_module,
     triage as triage_module,
 )
@@ -102,6 +104,15 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="machine readable output for CI and downstream processing",
     )
     parser.add_argument(
+        "--report",
+        metavar="PATH",
+        help=(
+            "write a self-contained HTML report to PATH, alongside whatever"
+            " else this run prints. No network at render time or view time:"
+            " it opens from a memory stick and prints to A4"
+        ),
+    )
+    parser.add_argument(
         "--config",
         metavar="PATH",
         help=(
@@ -149,6 +160,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     except Art14Error as exc:
         print(f"art14: {exc}", file=sys.stderr)
+        return EXIT_ERROR
+
+    # Also before the network, and for a sharper reason than tidiness. A
+    # misspelt directory discovered after the run would leave the exit code
+    # deciding between a REPORT item and a failed write, and those are not the
+    # same statement. Failing on the typo first means that choice never comes
+    # up: --report never touches the exit code.
+    if args.report and not _writable(args.report):
         return EXIT_ERROR
 
     try:
@@ -213,21 +232,27 @@ def main(argv: Sequence[str] | None = None) -> int:
         kev=_kev_stamp(catalogue),
     )
 
-    if args.as_json:
-        json.dump(
-            _inventory(
-                document,
-                quality,
-                result,
-                review,
-                provenance,
-                result_triage,
-                report_items=report_items,
-                assess_items=assess_items,
-            ),
-            sys.stdout,
-            indent=2,
+    # Built once and rendered twice at most. The HTML report reads this dict
+    # and nothing else, so it is a consumer of the documented schema rather
+    # than a second path into the objects behind it.
+    payload = (
+        _inventory(
+            document,
+            quality,
+            result,
+            review,
+            provenance,
+            result_triage,
+            source=args.sbom,
+            report_items=report_items,
+            assess_items=assess_items,
         )
+        if args.as_json or args.report
+        else None
+    )
+
+    if args.as_json:
+        json.dump(payload, sys.stdout, indent=2)
         print()
     else:
         _print_inventory(
@@ -242,12 +267,46 @@ def main(argv: Sequence[str] | None = None) -> int:
             brief=args.brief,
         )
 
+    if args.report:
+        assert payload is not None  # built above whenever --report was given
+        Path(args.report).write_text(
+            report_module.render(payload), encoding="utf-8", newline="\n"
+        )
+        # stderr, so that --json --report still writes one parseable document
+        # to stdout and nothing else.
+        print(f"art14: wrote {args.report}", file=sys.stderr)
+
     return _exit_code(
         quality,
         report_items=report_items,
         assess_items=assess_items,
         untested_input=version_caveat(document.spec_version) is not None,
     )
+
+
+def _writable(path: str) -> bool:
+    """Whether `--report PATH` can be written, asked before the run starts.
+
+    Touching the file rather than inspecting the directory: the question is
+    whether this process can write here, and permissions, a read-only mount
+    and a path that is itself a directory all answer it the same way. Append
+    mode leaves an existing report intact, and a file the probe created is
+    removed again, so a run that dies further down leaves nothing behind that
+    could be mistaken for a report.
+    """
+    existed = Path(path).exists()
+    try:
+        with open(path, "a", encoding="utf-8"):
+            pass
+    except OSError as exc:
+        print(f"art14: cannot write the report to {path}: {exc}", file=sys.stderr)
+        return False
+    if not existed:
+        try:
+            Path(path).unlink()
+        except OSError:
+            pass
+    return True
 
 
 def _match(sbom: Sbom, *, offline: bool) -> MatchResult | None:
@@ -367,6 +426,7 @@ def _inventory(
     provenance: Provenance,
     result_triage: Triage | None,
     *,
+    source: str,
     report_items: int,
     assess_items: int,
 ) -> dict[str, object]:
@@ -382,6 +442,11 @@ def _inventory(
         # Null unless the document is newer than this build was read
         # against, in which case it says what was assumed.
         "specVersionCaveat": version_caveat(sbom.spec_version),
+        # What the command line named, verbatim, `-` included. A run is
+        # evidence about a particular file and the document has to say which
+        # one; the product name is the manufacturer's word for it, not an
+        # identifier anybody can go back to.
+        "source": source,
         "product": sbom.root.label if sbom.root else None,
         # Always present, and the same shape on every run: a consumer reads
         # `provenance.mode` without first branching on what kind of run it got.
@@ -457,17 +522,22 @@ def _matching_json(result: MatchResult | None) -> dict[str, object]:
     return {
         "source": "osv",
         "queried": len(result.queried),
-        "answered": source.answered,
-        # Answer rates by PURL type. Zero for one group while another answered
-        # is a blind spot over part of the product, and it is invisible in the
-        # totals -- which is the whole reason this is grouped.
+        # How many came back carrying at least one record -- not how many the
+        # source responded to, which was all of them. The distinction is the
+        # one this tool exists to keep, so the key is named for what it counts
+        # rather than for the round trip.
+        "withRecords": source.answered,
+        # The same count by PURL type. Zero for one group while another came
+        # back with records is a blind spot over part of the product, and it
+        # is invisible in the totals -- which is the whole reason this is
+        # grouped.
         "coverage": {
             "level": source.level,
             "ecosystems": [
                 {
                     "purlType": ecosystem.label,
                     "queried": ecosystem.queried,
-                    "answered": ecosystem.answered,
+                    "withRecords": ecosystem.answered,
                 }
                 for ecosystem in source.ecosystems
             ],

@@ -311,6 +311,41 @@ Against your own SBOM it is `art14 your-sbom.cdx.json`. If you have an image
 and no SBOM, `grype <image> -o cyclonedx-json | art14 -` makes one on the way
 through.
 
+## The report
+
+`--report PATH` writes one self-contained HTML file, laid out for A4, for
+the reader who decides and will never open a terminal.
+
+![Page one of the report printed to A4: the product gateway@3.2.0, a
+provenance block naming the SBOM file, the CycloneDX version, the run
+timestamp, the tool version and the age of each cache, and then the funnel --
+36 components, 28 with records, 136 CVE ids, 5 known exploited and 1 to
+report](docs/img/03-report.svg)
+
+That is page one of five, from the same run as the decision record above:
+
+```
+art14 examples/log4j-app.cdx.json \
+      --config examples/dispositions.toml --report report.html
+```
+
+The verdict, the coverage gate, the decision briefs and the recorded NO
+rulings follow on the pages after it.
+
+The file is written alongside whatever else the run prints, and it is
+standalone in the literal sense: the stylesheet is inline, the funnel is
+inline SVG, there is no JavaScript and nothing is fetched at render time or at
+view time, so it opens from a memory stick on a machine with no network and
+looks the same in three years. It is made to be printed and attached to an
+email, and it carries the provenance block, the funnel, the bucket counts, the
+coverage gate above the findings rather than below them, and the full decision
+brief for every REPORT and ASSESS item. The NO bucket is one line there too.
+
+It is built from the same document `--json` writes and from nothing else, which
+makes it a worked example of that schema for anyone building their own view.
+There is no severity chart, no top-N table, no health score and no remediation
+advice; severity appears once per brief, as context.
+
 ## How it decides
 
 Three stages, and only the third is interesting:
@@ -496,6 +531,7 @@ Neither axis can suppress a REPORT item.
 ```
 --brief                 the full decision brief for every REPORT and ASSESS item
 --json                  machine readable, for CI and downstream processing
+--report PATH           an HTML report to print and file -- see The report
 --config PATH           the TOML file of recorded decisions
 --adopt-upstream-vex    honour the SBOM's own not_affected claims
 --offline               cache only, never open a connection
@@ -607,7 +643,7 @@ built around.
 
 ## Licence
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).
 
 [cra-reporting]: https://digital-strategy.ec.europa.eu/en/policies/cra-reporting
 [cra]: https://eur-lex.europa.eu/eli/reg/2024/2847/oj

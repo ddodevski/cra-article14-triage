@@ -214,10 +214,10 @@ def test_the_coverage_axis_is_in_the_json_with_its_rates(
     # The identifier axis is untouched: nothing was wrong with the SBOM.
     assert payload["input"]["quality"] == "ok"
     matching = payload["matching"]
-    assert matching["answered"] == 0
+    assert matching["withRecords"] == 0
     assert matching["coverage"]["level"] == "none"
     assert matching["coverage"]["ecosystems"] == [
-        {"purlType": "pkg:maven/example", "queried": 6, "answered": 0}
+        {"purlType": "pkg:maven/example", "queried": 6, "withRecords": 0}
     ]
 
 
