@@ -209,16 +209,27 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     # Layer 3. None when there was no catalogue: with no catalogue there is no
     # NO bucket either, and an empty triage block would read as one.
-    result_triage = (
-        None
-        if review is None
-        else triage_module.triage(
-            document,
-            review,
-            confirmations,
-            adopt_upstream_vex=args.adopt_upstream_vex,
+    #
+    # The one thing in here that can fail is a configuration question the
+    # parser could not answer on its own: a [[report]] for a CVE no catalogue
+    # lists needs a `basis`, and whether it needs one is not known until the
+    # catalogue has been read. Same stance as the load above -- a verdict this
+    # tool cannot render faithfully is worse than no verdict - so it is the
+    # same failure, just later than the rest.
+    try:
+        result_triage = (
+            None
+            if review is None
+            else triage_module.triage(
+                document,
+                review,
+                confirmations,
+                adopt_upstream_vex=args.adopt_upstream_vex,
+            )
         )
-    )
+    except Art14Error as exc:
+        print(f"art14: {exc}", file=sys.stderr)
+        return EXIT_ERROR
     # The single place these numbers are produced. Every consumer takes them as
     # required keywords, so a miswiring is a TypeError rather than a silently
     # reverted precedence rule.

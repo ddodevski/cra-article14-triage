@@ -409,3 +409,60 @@ def test_every_gloss_agrees_with_the_number_beside_it():
         "1 carry no usable",
     ):
         assert wrong not in html
+
+
+# --- own evidence in the document -----------------------------------------
+
+
+def _flat(html):
+    return " ".join(re.sub(r"<[^>]+>", " ", html).split())
+
+
+def _own_evidence_payload(tmp_path, capsys, kev_state, *, listed):
+    """One REPORT item, with and without a catalogue entry behind it.
+
+    The same config either way: what changes is whether the catalogue names
+    the CVE, which is the difference the document has to keep visible.
+    """
+    if not listed:
+        kev_state["dump"] = list(IRRELEVANT_KEV_DUMP)
+    config = tmp_path / "dispositions.toml"
+    config.write_text(
+        '[[report]]\ncomponent = "pkg:maven/example/bravo@2.0.0"\n'
+        'cve = "CVE-2021-44228"\nbasis = "vendor advisory"\n'
+        "aware = 2026-09-12\n"
+        'rationale = "Named as exploited in the vendor advisory of 2026-09-11."\n',
+        encoding="utf-8",
+    )
+    return _payload(["--config", str(config), str(FIXTURE)], capsys)
+
+
+def test_an_unlisted_report_does_not_read_as_a_catalogue_hit(
+    tmp_path, capsys, kev_state
+):
+    payload = _own_evidence_payload(tmp_path, capsys, kev_state, listed=False)
+    text = _flat(report.render(payload))
+    assert "not in the KEV catalogue - reported on a vendor advisory" in text
+    # The disposition points at the basis rather than at a catalogue date
+    # there is none of.
+    assert "does not rest on the catalogue" in text
+    assert "not from the catalogue date above" not in text
+
+
+def test_a_listed_report_still_points_at_the_catalogue_date(
+    tmp_path, capsys, kev_state
+):
+    payload = _own_evidence_payload(tmp_path, capsys, kev_state, listed=True)
+    text = _flat(report.render(payload))
+    assert "not from the catalogue date above" in text
+    assert "does not rest on the catalogue" not in text
+
+
+def test_the_awareness_date_is_a_field_rather_than_prose(
+    tmp_path, capsys, kev_state
+):
+    """The whole point of recording it: until now the date existed only inside
+    the rationale, where nothing could read it."""
+    payload = _own_evidence_payload(tmp_path, capsys, kev_state, listed=True)
+    assert payload["triage"]["items"][0]["aware"] == "2026-09-12"
+    assert "Aware 2026-09-12" in _flat(report.render(payload))

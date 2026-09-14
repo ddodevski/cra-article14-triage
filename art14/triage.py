@@ -3,7 +3,9 @@
 Three buckets, and no fourth:
 
     REPORT   a KEV entry, and the user has confirmed in configuration that the
-             vulnerable functionality is present in this product.
+             vulnerable functionality is present in this product -- or, where
+             no catalogue lists the CVE, the user has confirmed it on a basis
+             of their own and said which.
     ASSESS   a KEV entry, and nothing more. The default for every KEV match.
     NO       checked against the catalogue and absent.
 
@@ -28,6 +30,15 @@ provenance block, every suppression it causes is listed with its justification
 and its author, and the item lands in NO on upstream's authority rather than
 on a determination made here.
 
+A catalogue is not the world. It lags, and a manufacturer with their own
+telemetry, an incident, or a vendor advisory can know a CVE is being exploited
+before CISA or the EUVD list it. A confirmation applies whether or not the
+catalogue listed it, and carries a `basis` naming what it rests on when the
+catalogue did not, so the two positions stay visibly different rather than
+collapsing into one REPORT row that reads the same either way. Nothing is
+synthesised to make that work: an entry naming a pair this run never matched
+still stands down, because the pairs are the SBOM's and OSV's to make.
+
 Two things deliberately have no bucket. Vulnerabilities carrying no CVE alias
 were never checkable, so they are not NO -- they are a coverage statement, the
 same kind as an unmatched component. And a confirmation that matched nothing is
@@ -41,6 +52,7 @@ from __future__ import annotations
 import textwrap
 import tomllib
 from dataclasses import dataclass
+from datetime import date, datetime
 from pathlib import Path
 from typing import Iterable, Sequence
 
@@ -52,6 +64,24 @@ from .models import ROOT, Component, Finding, Location, Sbom, VexClaim, Vulnerab
 REPORT = "REPORT"
 ASSESS = "ASSESS"
 NO = "NO"
+
+# What a [[report]] rests on when the KEV catalogue does not list the CVE.
+#
+# A catalogue lags the world it describes: a manufacturer with their own
+# telemetry, an incident, or a vendor advisory naming in-the-wild exploitation
+# can know before CISA or the EUVD list it. Without a way to say so, that
+# position and "the catalogue confirms it" collapse into one REPORT entry that
+# reads identically, which is a worse record than either.
+#
+# The set is closed and it is these three, because the field exists to be read
+# by a brief, a JSON consumer and an HTML report without any of them
+# reimplementing judgement. Free text here would put the fact back where the
+# awareness date used to be: inside a rationale, where nothing can read it.
+BASES: dict[str, str] = {
+    "operator evidence": "the manufacturer's own evidence",
+    "vendor advisory": "a vendor advisory",
+    "incident": "an incident",
+}
 
 
 # --- configuration --------------------------------------------------------
@@ -80,6 +110,15 @@ class Confirmation:
     `name@version` label -- never against a bare name. A bare name matches
     every version forever, which is how a confirmation written for 2.14.1
     silently carries itself onto 2.20.0 after the upgrade that fixed it.
+
+    `basis` names what a `[[report]]` rests on when the catalogue is silent,
+    and it is required in exactly that case: a REPORT on a CVE no catalogue
+    lists is a different claim from one confirming a catalogue hit, and the
+    output has to let a reader see which they are looking at. `aware` is the
+    day the manufacturer recorded becoming aware. It is parsed, carried and
+    printed, and nothing else -- no deadline, no elapsed time, no arithmetic
+    on it anywhere. The alternative is where that date used to live, which
+    is inside the rationale where nothing can read it.
     """
 
     component: str
@@ -87,6 +126,8 @@ class Confirmation:
     rationale: str
     source: str = "<config>"
     verdict: str = REPORT
+    basis: str | None = None
+    aware: date | None = None
 
     @property
     def rules_out(self) -> bool:
@@ -99,6 +140,11 @@ class ConfirmationUse:
 
     confirmation: Confirmation
     matched_component: bool
+    # Whether this run produced the (CVE, component) pair the entry names, as
+    # against merely the component. The two failures underneath a matched
+    # component are different and one of them is a typo, so they are told
+    # apart on the fact rather than inferred from the verdict.
+    matched_pair: bool = False
 
     def explain(self) -> str:
         if not self.matched_component:
@@ -108,11 +154,30 @@ class ConfirmationUse:
                 " name@version. Check the spelling, and check the version - an"
                 " upgrade changes it."
             )
+        if not self.matched_pair:
+            # No vulnerability record in this run tied that CVE to that
+            # component, so there is no item for the entry to land on.
+            # Manufacturing one would mean art14 asserting a
+            # component-to-CVE match that neither the SBOM nor OSV made.
+            return (
+                f"[{self.confirmation.verdict}]"
+                f" {self.confirmation.component}: the component is in this"
+                " SBOM, but nothing in this run matched"
+                f" {self.confirmation.cve_id} to it, so there is no item to"
+                " carry the entry. art14 judges the pairs the SBOM and OSV put"
+                " in front of it. Check the CVE id, and check that the match"
+                " was made at all -- an unmatched component is named in the"
+                " coverage line."
+            )
+        # The pair is here and the entry still did not apply, which leaves one
+        # case: a [[no]] on a CVE the catalogue does not list. A [[report]]
+        # always applies to a pair that exists.
         return (
             f"[{self.confirmation.verdict}] {self.confirmation.component}: the"
-            f" component is in this SBOM, but {self.confirmation.cve_id} is not"
-            " in the KEV catalogue for it on this run. Nothing is being"
-            " withheld; the entry simply does not apply."
+            f" component is in this SBOM, but {self.confirmation.cve_id} is"
+            " not in the KEV catalogue for it on this run. Nothing is being"
+            " withheld; the item is in NO already and the entry has nothing"
+            " left to rule out."
         )
 
 
@@ -184,9 +249,74 @@ def _entries(
                 rationale=rationale,
                 source=given or str(location),
                 verdict=verdict,
+                basis=_basis(item, location, index, table),
+                aware=_aware(item, location, index, table),
             )
         )
     return out
+
+
+def _basis(item: dict, location: Path, index: int, table: str) -> str | None:
+    """What this entry rests on, when it is not the catalogue.
+
+    Optional here and checked again at bucketing, because whether it is
+    required depends on something this function cannot see: a `[[report]]`
+    needs one exactly when the catalogue does not list the CVE, and the
+    catalogue has not been consulted yet. Meaningless on a `[[no]]`, which
+    rests on the rationale beside it and rules nothing in.
+    """
+    value = item.get("basis")
+    if value is None:
+        return None
+    if table != "report":
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} carries a `basis`. The"
+            " field names what a REPORT rests on when the KEV catalogue does"
+            " not list the CVE; a [[no]] rests on the rationale beside it and"
+            " needs nothing else."
+        )
+    if not isinstance(value, str):
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} needs `basis` written as a"
+            " string."
+        )
+    # One spelling rule, stated: case is ignored and a hyphen or underscore
+    # reads as a space, so `operator-evidence` and `Operator Evidence` both
+    # arrive as the same value. Everything else is refused by name.
+    key = " ".join(value.replace("-", " ").replace("_", " ").lower().split())
+    if key not in BASES:
+        permitted = ", ".join(f"`{name}`" for name in BASES)
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} names `{value}` as its"
+            f" basis, which is not one of {permitted}. The set is closed so"
+            " that a reader can see which claims rest on the catalogue and"
+            " which on the manufacturer's own knowledge; free text here would"
+            " be one more thing nothing can read."
+        )
+    return key
+
+
+def _aware(item: dict, location: Path, index: int, table: str) -> date | None:
+    """The day the manufacturer recorded becoming aware. A date, not a clock.
+
+    A bare TOML date and nothing else. A date-time is refused rather than
+    truncated, because accepting one would invite an expectation this tool
+    deliberately does not meet: the value is recorded and printed, never
+    subtracted from anything. The moment two dates are subtracted here, this
+    is a scheduler.
+    """
+    value = item.get("aware")
+    if value is None:
+        return None
+    # `datetime` subclasses `date`, so it has to be refused first.
+    if isinstance(value, datetime) or not isinstance(value, date):
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} needs `aware` written as a"
+            " bare TOML date, `aware = 2026-09-12` -- not a string and not a"
+            " date-time. It is a day on the record; nothing is computed from"
+            " it."
+        )
+    return value
 
 
 def _required(item: dict, key: str, location: Path, index: int, table: str) -> str:
@@ -224,6 +354,11 @@ class Item:
     # not, which is the half that becomes the VEX entry.
     rationale: str | None = None
     confirmed_by: str | None = None
+    # What the entry rests on when the catalogue does not list the CVE, and
+    # the day the operator recorded becoming aware. Both come straight off the
+    # confirmation: carried and printed, never computed from.
+    basis: str | None = None
+    aware: date | None = None
     # Set only when `--adopt-upstream-vex` moved this item to NO on the
     # strength of the SBOM's own claim. It is the same object as `vex`; the
     # separate field is what distinguishes "a claim was made" from "a claim
@@ -364,26 +499,67 @@ def triage(
         # Otherwise a confirmation whose CVE is absent from the catalogue -- the
         # correct, quiet outcome -- gets reported as a component that does not
         # exist, which sends the user hunting for a typo that is not there.
-        index.observe(finding.component)
         cve_ids = [cve.upper() for cve in finding.vulnerability.cve_ids]
+        index.observe(finding.component, cve_ids)
         if not cve_ids:
             unassessed.append(finding)
             continue
 
         hits = [cve for cve in cve_ids if cve in listed]
         if not hits:
-            # Nothing listed anywhere in this record. One NO for the pair, not
-            # one per alias: the aliases are the same vulnerability.
-            key = (cve_ids[0], finding.component.bom_ref)
+            # Nothing listed anywhere in this record, which is not the same as
+            # nothing being exploited. The catalogues lag, and a manufacturer
+            # with their own telemetry, an incident, or a vendor advisory can
+            # know first. A [[report]] is how they say so, and it applies here
+            # exactly as it does on a listed CVE, carrying a `basis` that
+            # keeps the two claims distinguishable everywhere they are shown.
+            # Until it did, the entry was refused in silence: the item stayed
+            # in NO, the run exited 0, and the only trace was a line saying
+            # the entry did not apply.
+            #
+            # A [[no]] is not consulted here. The item is in NO already, and
+            # listing it under the table would turn a non-event into a
+            # recorded decision.
+            confirmation = index.match(finding.component, cve_ids, verdict=REPORT)
+            # One item for the pair, not one per alias: the aliases are the
+            # same vulnerability. The CVE on it is the one the operator wrote
+            # down, wherever they wrote one.
+            cve_id = confirmation.cve_id if confirmation else cve_ids[0]
+            key = (cve_id, finding.component.bom_ref)
             if key in seen:
                 continue
             seen.add(key)
-            absent.append(
+            if confirmation is None:
+                absent.append(
+                    Item(
+                        bucket=NO,
+                        cve_id=cve_id,
+                        finding=finding,
+                        osv_ids=osv_ids.get(cve_id, ()),
+                    )
+                )
+                continue
+            if confirmation.basis is None:
+                permitted = ", ".join(f"`{name}`" for name in BASES)
+                raise Art14Error(
+                    f"{confirmation.source}: the [[report]] entry for"
+                    f" {confirmation.cve_id} on {confirmation.component} needs"
+                    f" a `basis`, one of {permitted}. The catalogue this run"
+                    " read does not list that CVE, so the entry is the only"
+                    " thing putting the item in REPORT and the output has to"
+                    " say what it rests on. A reader cannot otherwise tell it"
+                    " from an entry confirming a catalogue hit."
+                )
+            report.append(
                 Item(
-                    bucket=NO,
-                    cve_id=cve_ids[0],
+                    bucket=REPORT,
+                    cve_id=cve_id,
                     finding=finding,
-                    osv_ids=osv_ids.get(cve_ids[0], ()),
+                    osv_ids=osv_ids.get(cve_id, ()),
+                    rationale=confirmation.rationale,
+                    confirmed_by=confirmation.source,
+                    basis=confirmation.basis,
+                    aware=confirmation.aware,
                 )
             )
             continue
@@ -393,7 +569,7 @@ def triage(
             if key in seen:
                 continue
             seen.add(key)
-            confirmation = index.match(finding.component, cve_id)
+            confirmation = index.match(finding.component, (cve_id,))
             claim = finding.vulnerability.analysis
             adopted = (
                 claim
@@ -422,6 +598,8 @@ def triage(
                 osv_ids=osv_ids.get(cve_id, ()),
                 rationale=confirmation.rationale if confirmation else None,
                 confirmed_by=confirmation.source if confirmation else None,
+                basis=confirmation.basis if confirmation else None,
+                aware=confirmation.aware if confirmation else None,
                 suppressed_by=adopted,
             )
             if confirmation and not confirmation.rules_out:
@@ -451,24 +629,55 @@ class _ConfirmationIndex:
     def __init__(self, confirmations: Sequence[Confirmation]) -> None:
         self._confirmations = tuple(confirmations)
         self._matched_component: set[int] = set()
+        self._matched_pair: set[int] = set()
         self._applied: set[int] = set()
 
-    def observe(self, component: Component) -> None:
-        """Record which confirmations name a component this run actually saw."""
-        for position, confirmation in enumerate(self._confirmations):
-            if _identifies(confirmation.component, component):
-                self._matched_component.add(position)
+    def observe(self, component: Component, cve_ids: Sequence[str] = ()) -> None:
+        """Record what this run put in front of each confirmation.
 
-    def match(self, component: Component, cve_id: str) -> Confirmation | None:
-        found: Confirmation | None = None
+        Two facts, because an entry that did not apply failed for one of two
+        reasons and they need opposite responses. The component was never
+        here: a typo or a stale version, and the entry is wrong. The component
+        was here but this pair was not: the entry may be perfectly correct and
+        simply had nothing to act on.
+        """
         for position, confirmation in enumerate(self._confirmations):
-            if confirmation.cve_id != cve_id:
-                continue
             if not _identifies(confirmation.component, component):
                 continue
-            self._applied.add(position)
-            if found is None:
-                found = confirmation
+            self._matched_component.add(position)
+            if confirmation.cve_id in cve_ids:
+                self._matched_pair.add(position)
+
+    def match(
+        self,
+        component: Component,
+        cve_ids: Sequence[str],
+        *,
+        verdict: str | None = None,
+    ) -> Confirmation | None:
+        """The first entry naming this component and one of these CVEs.
+
+        A sequence, because one OSV record can carry several CVE aliases and
+        the operator wrote down whichever one they met. Every entry that
+        matches is marked applied, not only the one returned: a duplicate for
+        the same pair did take effect, and reporting it as unused would send
+        someone hunting for a typo that is not there.
+
+        `verdict` narrows the search. On the path where the catalogue listed
+        nothing, only a `[[report]]` has anything to change.
+        """
+        found: Confirmation | None = None
+        for cve_id in cve_ids:
+            for position, confirmation in enumerate(self._confirmations):
+                if confirmation.cve_id != cve_id:
+                    continue
+                if verdict is not None and confirmation.verdict != verdict:
+                    continue
+                if not _identifies(confirmation.component, component):
+                    continue
+                self._applied.add(position)
+                if found is None:
+                    found = confirmation
         return found
 
     def unused(self) -> tuple[ConfirmationUse, ...]:
@@ -476,6 +685,7 @@ class _ConfirmationIndex:
             ConfirmationUse(
                 confirmation=confirmation,
                 matched_component=position in self._matched_component,
+                matched_pair=position in self._matched_pair,
             )
             for position, confirmation in enumerate(self._confirmations)
             if position not in self._applied
@@ -576,11 +786,12 @@ def counts(result: Triage | None) -> list[str]:
 def unused_warning(result: Triage | None) -> list[str]:
     """Paragraphs for confirmations that did not apply. Loud, not counted.
 
-    Split by cause, because the two mean opposite things. One is a typo or a
-    stale version and needs fixing; the other is the configuration correctly
-    standing down because the CVE is not in the catalogue. The second half has
-    to say where the item actually is, or a [[no]] entry reads as a decision
-    waiting to be applied when the item is already in NO without it.
+    Split on whether the component was there at all, because that is the one
+    that means a typo and needs fixing. Underneath a component that was there,
+    the individual lines split again: a CVE this run never matched to it, or a
+    [[no]] on a CVE the catalogue does not list. That second one has to say
+    where the item actually is, or the entry reads as a decision waiting to be
+    applied when the item is already in NO without it.
     """
     if result is None or not result.unused:
         return []
@@ -598,10 +809,12 @@ def unused_warning(result: Triage | None) -> list[str]:
     if standing_down:
         out.append(
             f"{len(standing_down)} configured entr(ies) did not apply on this"
-            " run. That is the expected outcome when the CVE is not in the KEV"
-            " catalogue: the item is in NO for that reason rather than on the"
-            " reason written in the file, and the entry takes effect if the CVE"
-            " is ever listed."
+            " run. The component is in the SBOM, so nothing here is misspelt."
+            " Each line says which of the two remaining reasons it was, and"
+            " they want different things from you: a CVE that was never"
+            " matched to that component leaves the entry with no item to land"
+            " on and is worth checking, and a [[no]] on a CVE the catalogue"
+            " does not list has simply nothing left to rule out."
         )
         out.extend(f"  - {use.explain()}" for use in standing_down)
     return out
@@ -631,6 +844,8 @@ def disposition_lines(result: Triage | None) -> list[str]:
     ]
     for item in result.ruled_out:
         out.append(f"  - {item.cve_id} {item.component.label}")
+        if item.aware is not None:
+            out.append(f"      aware {item.aware.isoformat()}")
         rationale = _flat(item.rationale)
         if rationale:
             # In full, never truncated. Everything else this tool prints can
@@ -717,18 +932,28 @@ def brief_lines(item: Item, sbom: Sbom) -> list[str]:
     out = [f"[{item.bucket}] {_header(item)}", ""]
     out.append(f"  Where      {_where(item, sbom)}")
     out.append(f"  What       {_wrap(_what(item))}")
-    out.append(f"  Signal     {_signal(item)}")
+    out.append(f"  Signal     {_wrap(_signal(item))}")
     if item.vex is not None:
         out.append(f"  Upstream   {_wrap(_upstream(item))}")
     if item.bucket == REPORT:
         out.append(f"  Confirmed  {_wrap(item.rationale or '')}")
         out.append(f"             stated in {item.confirmed_by}")
+        if item.aware is not None:
+            # Recorded, not counted from. The line below still says where the
+            # clock starts; this says which day that was, in a field something
+            # other than a human reader can find.
+            out.append(f"  Aware      {item.aware.isoformat()}")
         out.append("")
         out.append(
             "  -> "
             + _wrap(
                 "The obligation is on the record. The 24h clock runs from when"
-                " you became aware, not from the catalogue date above.",
+                " you became aware, not from the catalogue date above."
+                if item.entry is not None
+                else "The obligation is on the record, and it does not rest on"
+                " the catalogue: no catalogue this run read lists this CVE, and"
+                " the Signal line above names what the entry rests on instead."
+                " The 24h clock runs from when you became aware.",
                 indent=5,
             )
         )
@@ -862,14 +1087,28 @@ def _what(item: Item) -> str:
 
 
 def _signal(item: Item) -> str:
-    """Who says it is exploited, and since when. Never a countdown."""
+    """Who says it is exploited, and since when. Never a countdown.
+
+    The one field that answers "on whose word", so it is where an entry's
+    `basis` belongs: a REPORT resting on the manufacturer's own evidence and
+    one resting on a catalogue listing are different claims, and this is the
+    line a reader is already looking at to tell them apart.
+    """
     entry = item.entry
+    basis = BASES.get(item.basis or "")
     if entry is None:
+        if basis:
+            return f"not in the KEV catalogue - reported on {basis}"
         return "not in the KEV catalogue"
     sources = ", ".join(entry.sources) if entry.sources else "EUVD KEV"
     if entry.date_added:
-        return f"{sources} - in catalogue since {entry.date_added}"
-    return f"{sources} - date added not stated"
+        signal = f"{sources} - in catalogue since {entry.date_added}"
+    else:
+        signal = f"{sources} - date added not stated"
+    # Kept when the catalogue does list it. The entry may have been written
+    # before the listing arrived, and the second basis is not made wrong by
+    # the first turning up.
+    return f"{signal}; also on {basis}" if basis else signal
 
 
 def _question(item: Item, sbom: Sbom) -> str:
@@ -1043,6 +1282,11 @@ def as_json(result: Triage | None, sbom: Sbom | None = None) -> dict[str, object
                 "component": use.confirmation.component,
                 "cve": use.confirmation.cve_id,
                 "matchedComponent": use.matched_component,
+                # Both facts, not only the first. The two ways an entry can
+                # stand down under a component that does exist want different
+                # things from the reader, and a consumer should not have to
+                # parse the prose below to tell them apart.
+                "matchedPair": use.matched_pair,
                 "reason": use.explain(),
             }
             for use in result.unused
@@ -1109,6 +1353,14 @@ def _item_json(item: Item, sbom: Sbom | None) -> dict[str, object]:
         "question": _question(item, sbom) if sbom else None,
         "rationale": item.rationale,
         "confirmedBy": item.confirmed_by,
+        # What the entry rests on when no catalogue lists the CVE. Null on the
+        # ordinary path, where `sources` above already names the basis.
+        # `signal` carries the same fact in prose.
+        "basis": item.basis,
+        # The day the manufacturer recorded becoming aware, as the operator
+        # wrote it. A recorded date: nothing here counts from it, and a
+        # consumer that wants to is doing so on its own authority.
+        "aware": item.aware.isoformat() if item.aware else None,
         # Present whenever the SBOM made a claim, whether or not it was
         # adopted; `adopted` says which. A consumer must be able to see the
         # claim on an item art14 is still asking about, not only on one that

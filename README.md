@@ -187,6 +187,43 @@ Exit code 2: one item is in REPORT. One item is still open on purpose --
 CVE-2023-44487 has not been looked at yet, and the configuration says nothing
 about it, so it stays visible.
 
+### When you know before the catalogue does
+
+A catalogue lags the world it describes. If your own telemetry, an incident,
+or a vendor advisory tells you a CVE is being exploited before CISA or the
+EUVD list it, a `[[report]]` entry says so and the item goes to REPORT with
+everything else. Two optional fields go with it:
+
+```toml
+[[report]]
+component = "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.5"
+cve = "CVE-2020-36518"
+basis = "operator evidence"
+aware = 2026-09-12
+rationale = """
+Exploitation attempts against customer deployments since 2026-09-12:
+nested-object payloads against the public /ingest endpoint. No catalogue
+lists this CVE. Decided 2026-09-13 by the platform security team.
+"""
+```
+
+`basis` names what the entry rests on when it is not the catalogue --
+`"operator evidence"`, `"vendor advisory"` or `"incident"`, and nothing else.
+It is required for exactly that case, a `[[report]]` on a CVE no catalogue in
+the run lists, and the run stops with a message rather than promoting the item
+without it. The brief's `Signal` line then reads `not in the KEV catalogue -
+reported on the manufacturer's own evidence` where a catalogue hit would read
+`cisa_kev - in catalogue since 2021-12-10`, the `listed by` column shows `-`,
+and the JSON carries `basis` beside an empty `sources`. A reader can see which
+claims rest on the catalogue and which on the manufacturer's own knowledge,
+which is the difference the tool would otherwise have flattened.
+
+`aware` is the day you became aware, written as a bare date. It is recorded
+and printed and nothing else: no deadline, no countdown, no elapsed time.
+Article 14's 24 hours run from that day, and art14 says so without ever
+counting from it -- the point is that the date sits in a field instead of only
+inside the rationale, where nothing could read it.
+
 Everything that leaves ASSESS leaves it on somebody's written word, and that
 word is printed under the table rather than folded into a count. It is the
 material a CSIRT or a market surveillance authority asks for.
@@ -649,7 +686,10 @@ worse than no tool.
 - **A `[[report]]` or `[[no]]` entry is somebody's word.** art14 records it,
   names the file it came from, prints it in full, and does not check it. The
   same goes for an upstream `not_affected` claim adopted with
-  `--adopt-upstream-vex`, which is additionally printed with its author.
+  `--adopt-upstream-vex`, which is additionally printed with its author. A
+  `[[report]]` resting on `basis` rather than on a catalogue listing is
+  unverified in exactly the same way, and is labelled as such everywhere it
+  appears rather than being folded in beside a catalogue hit.
 
 ## What this is not
 

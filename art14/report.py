@@ -934,6 +934,12 @@ def _brief(item: Mapping[str, Any]) -> str:
                 '<p class="note">stated in <span class="mono">'
                 f"{_e(confirmed_by)}</span></p>"
             )
+        # The basis is already in the Signal field above, which is where the
+        # question of whose word it is gets answered. This is the other half
+        # the file now records: the day, in a field rather than in prose.
+        aware = _text(item.get("aware"))
+        if aware:
+            parts.append(_field("Aware", _e(aware)))
     else:
         parts.append(_field("Question", _e(_text(item.get("question")) or "-")))
     parts.append(_dispositions(item, bucket, claim))
@@ -954,12 +960,28 @@ def _dispositions(item: Mapping[str, Any], bucket: str, claim: Any) -> str:
     component = _text(item.get("component")) or "this component"
     rows: list[tuple[str, str, str]] = []
     if bucket == "REPORT":
+        # Whether a catalogue entry stands behind this item. Read off the
+        # three fields a catalogue entry fills rather than asserted as a
+        # fourth: the JSON says what the entry held, and "there was one" is
+        # that and nothing more.
+        listed = bool(
+            item.get("sources") or item.get("euvd") or item.get("dateAdded")
+        )
         rows.append(
             (
                 "->",
                 "to-report",
+                # Two sentences, because there are two ways to be in REPORT
+                # and the difference is the point. On a CVE no catalogue
+                # lists there is no catalogue date to point away from, and
+                # the Signal field above is carrying the basis instead.
                 "The obligation is on the record. The 24h clock runs from when"
-                " you became aware, not from the catalogue date above.",
+                " you became aware, not from the catalogue date above."
+                if listed
+                else "The obligation is on the record, and it does not rest on"
+                " the catalogue: no catalogue this run read lists this CVE, and"
+                " the Signal field above names what the entry rests on instead."
+                " The 24h clock runs from when you became aware.",
             )
         )
     else:
@@ -1109,6 +1131,8 @@ def _closing(payload: Mapping[str, Any]) -> str:
 
 
 def _decided(item: Mapping[str, Any]) -> str:
+    aware = _text(item.get("aware"))
+    dated = f'<p class="note">aware {_e(aware)}</p>' if aware else ""
     confirmed_by = _text(item.get("confirmedBy"))
     stated = (
         f'<p class="note">stated in <span class="mono">{_e(confirmed_by)}</span>'
@@ -1121,7 +1145,7 @@ def _decided(item: Mapping[str, Any]) -> str:
         f'<h3>{_e(_text(item.get("cve")) or "-")} -'
         f' {_e(_text(item.get("component")) or "-")}</h3>'
         f'<p class="ids">{_e(_text(item.get("where")))}</p>'
-        f"{_paragraphs(item.get('rationale'))}{stated}</div>"
+        f"{dated}{_paragraphs(item.get('rationale'))}{stated}</div>"
     )
 
 

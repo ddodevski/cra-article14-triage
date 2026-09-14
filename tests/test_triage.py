@@ -10,6 +10,8 @@ silent, because silence there under-reports.
 
 from __future__ import annotations
 
+import datetime
+
 import pytest
 
 from art14.errors import Art14Error
@@ -335,16 +337,24 @@ def test_a_confirmation_that_matches_nothing_is_said_out_loud():
     assert "typo-core@1.0" in text
 
 
-def test_a_confirmation_standing_down_is_not_a_warning():
-    """The component is here and the CVE is not in the catalogue. The config is
-    correct and simply does not apply; calling that a problem trains the user
-    to ignore the paragraph that matters."""
+def test_a_ruling_out_standing_down_is_not_a_warning():
+    """The component is here, the CVE is not in the catalogue, and the entry
+    rules it out. The config is correct and has nothing left to do; calling
+    that a problem trains the user to ignore the paragraph that matters.
+
+    Only a [[no]] stands down this way. A [[report]] on an unlisted CVE is a
+    claim the catalogue cannot make, and it is honoured -- see
+    `test_a_report_on_an_unlisted_cve_is_honoured`.
+    """
     result = _run(
         [_vuln(aliases=("CVE-2019-0001",))],
         listed=(),
         confirmations=[
             Confirmation(
-                component=LOG4J.purl, cve_id="CVE-2019-0001", rationale="Reachable."
+                component=LOG4J.purl,
+                cve_id="CVE-2019-0001",
+                rationale="Not reachable.",
+                verdict=NO,
             )
         ],
     )
@@ -352,6 +362,51 @@ def test_a_confirmation_standing_down_is_not_a_warning():
     assert "WARNING" not in text
     assert "did not apply" in text
     assert "not in the KEV catalogue" in text
+    assert "nothing left to rule out" in text
+
+
+def test_a_report_naming_an_unmatched_cve_says_so_precisely():
+    """The component is in the SBOM and the CVE was never matched to it, so
+    there is no pair for the entry to land on. The old message said the CVE
+    was not in the catalogue, which after the change describes a different
+    case and would send the reader looking in the wrong place."""
+    result = _run(
+        [_vuln()],
+        confirmations=[
+            Confirmation(
+                component=LOG4J.purl,
+                cve_id="CVE-2019-0001",
+                rationale="Exploited against us.",
+                basis="operator evidence",
+            )
+        ],
+    )
+    text = " ".join(unused_warning(result))
+    assert "WARNING" not in text
+    assert "nothing in this run matched CVE-2019-0001 to it" in text
+    assert "not in the KEV catalogue" not in text
+
+
+def test_a_ruling_out_naming_an_unmatched_cve_says_so_too():
+    """Same failure, the other verdict. The reason has to key on what this run
+    put in front of the entry, not on whether it rules out: a [[no]] for a CVE
+    nothing matched to that component is a typo like any other, and telling the
+    reader the catalogue does not list it sends them to check the wrong thing.
+    """
+    result = _run(
+        [_vuln()],
+        confirmations=[
+            Confirmation(
+                component=LOG4J.purl,
+                cve_id="CVE-2019-0001",
+                rationale="Not reachable.",
+                verdict=NO,
+            )
+        ],
+    )
+    text = " ".join(unused_warning(result))
+    assert "nothing in this run matched CVE-2019-0001 to it" in text
+    assert "not in the KEV catalogue" not in text
 
 
 def test_a_confirmation_that_applied_raises_nothing():
@@ -1048,3 +1103,228 @@ def test_a_claim_on_a_record_with_no_cve_is_still_unassessed():
     assert [f.vulnerability.id for f in result.unassessed] == [vuln.id]
     assert result.no == ()
     assert result.suppressed == ()
+
+
+# --- own evidence, where the catalogue is silent ---------------------------
+#
+# A catalogue lags the world. A manufacturer with their own telemetry, an
+# incident or a vendor advisory can know a CVE is being exploited before CISA
+# or the EUVD list it, and before this the only way to say so was a [[report]]
+# that was silently refused: the item stayed in NO and the run exited 0.
+
+
+def _own(cve="CVE-2019-0001", **kwargs):
+    kwargs.setdefault("basis", "operator evidence")
+    return Confirmation(
+        component=LOG4J.purl,
+        cve_id=cve,
+        rationale="Exploitation attempts in our own telemetry since 2026-09-12.",
+        **kwargs,
+    )
+
+
+def test_a_report_on_an_unlisted_cve_is_honoured():
+    """The defect this closes. The pair was in NO, the exit code was 0, and
+    the only trace was a line saying the entry did not apply -- from a tool
+    whose product is the exit code."""
+    result = _run(
+        [_vuln(aliases=("CVE-2019-0001",))], listed=(), confirmations=[_own()]
+    )
+    assert [item.cve_id for item in result.report] == ["CVE-2019-0001"]
+    assert result.no == ()
+    assert result.unused == ()
+    item = result.report[0]
+    # No catalogue entry behind it, and that is the fact the output has to
+    # keep visible rather than smooth over.
+    assert item.entry is None
+    assert item.basis == "operator evidence"
+
+
+def test_an_unlisted_report_is_not_a_catalogue_hit_anywhere_it_is_shown():
+    result = _run(
+        [_vuln(aliases=("CVE-2019-0001",))], listed=(), confirmations=[_own()]
+    )
+    item = result.report[0]
+    brief = " ".join(" ".join(brief_lines(item, _sbom(
+        [_vuln(aliases=("CVE-2019-0001",))]
+    ))).split())
+    assert "not in the KEV catalogue - reported on the manufacturer's own" in brief
+    assert "does not rest on the catalogue" in brief
+    payload = as_json(result)["items"][0]
+    assert payload["basis"] == "operator evidence"
+    assert payload["sources"] == []
+    assert payload["dateAdded"] is None
+    assert "reported on the manufacturer's own evidence" in payload["signal"]
+
+
+def test_a_report_on_an_unlisted_cve_needs_a_basis():
+    """Without one it reads identically to an entry confirming a catalogue
+    hit, which is the collapse this field exists to prevent. Refused rather
+    than promoted quietly, on the same stance as an unreadable config."""
+    with pytest.raises(Art14Error) as exc:
+        _run(
+            [_vuln(aliases=("CVE-2019-0001",))],
+            listed=(),
+            confirmations=[_own(basis=None)],
+        )
+    assert "needs a `basis`" in str(exc.value)
+    assert "operator evidence" in str(exc.value)
+
+
+def test_a_listed_cve_needs_no_basis():
+    """The catalogue is the basis there, and requiring the field would mean a
+    working config breaking on the day CISA lists the CVE."""
+    result = _run([_vuln()], confirmations=[_own(cve="CVE-2021-44228", basis=None)])
+    assert [item.cve_id for item in result.report] == ["CVE-2021-44228"]
+
+
+def test_a_basis_on_a_listed_cve_is_kept_beside_the_catalogue():
+    """An entry written before the listing arrived is not made wrong by the
+    listing turning up."""
+    result = _run([_vuln()], confirmations=[_own(cve="CVE-2021-44228")])
+    item = result.report[0]
+    brief = " ".join(" ".join(brief_lines(item, _sbom([_vuln()]))).split())
+    assert "in catalogue since 2021-12-10" in brief
+    assert "also on the manufacturer's own evidence" in brief
+
+
+def test_a_ruling_out_never_promotes_an_unlisted_pair():
+    """The NO bucket is listed row by row only for items that are in the
+    catalogue and in NO on somebody's word. An item the catalogue never listed
+    is in NO on its own, and a [[no]] there would turn a non-event into a
+    recorded decision."""
+    result = _run(
+        [_vuln(aliases=("CVE-2019-0001",))],
+        listed=(),
+        confirmations=[
+            Confirmation(
+                component=LOG4J.purl,
+                cve_id="CVE-2019-0001",
+                rationale="Not reachable.",
+                verdict=NO,
+            )
+        ],
+    )
+    assert result.report == ()
+    assert result.ruled_out == ()
+    assert [item.bucket for item in result.no] == [NO]
+    assert result.no[0].rationale is None
+
+
+def test_an_unlisted_report_can_name_any_alias_on_the_record():
+    """One record, two CVE aliases, neither listed. The operator wrote down
+    whichever one they met, and the item carries that one."""
+    result = _run(
+        [_vuln(aliases=("CVE-2019-0001", "CVE-2019-0002"))],
+        listed=(),
+        confirmations=[_own(cve="CVE-2019-0002")],
+    )
+    assert [item.cve_id for item in result.report] == ["CVE-2019-0002"]
+    assert result.no == ()
+
+
+# --- the awareness date ---------------------------------------------------
+#
+# Recorded and printed, never counted from. It is the fact the 24h clock hangs
+# on and until now it existed only inside the free-text rationale, where
+# nothing could read it.
+
+
+def test_an_awareness_date_reaches_the_brief_and_the_json():
+    result = _run(
+        [_vuln()],
+        confirmations=[
+            _own(cve="CVE-2021-44228", aware=datetime.date(2026, 9, 12))
+        ],
+    )
+    item = result.report[0]
+    assert item.aware == datetime.date(2026, 9, 12)
+    assert "  Aware      2026-09-12" in brief_lines(item, _sbom([_vuln()]))
+    assert as_json(result)["items"][0]["aware"] == "2026-09-12"
+
+
+def test_an_awareness_date_on_a_ruling_out_is_printed_with_it():
+    result = _run(
+        [_vuln()],
+        confirmations=[
+            Confirmation(
+                component=LOG4J.purl,
+                cve_id="CVE-2021-44228",
+                rationale="Not reachable.",
+                verdict=NO,
+                aware=datetime.date(2026, 9, 12),
+            )
+        ],
+    )
+    assert "      aware 2026-09-12" in disposition_lines(result)
+
+
+def test_nothing_is_computed_from_the_awareness_date():
+    """The line that would make this a case-management tool is the one that
+    subtracts two dates. There is none, and the brief still says only where
+    the clock starts."""
+    result = _run(
+        [_vuln()],
+        confirmations=[
+            _own(cve="CVE-2021-44228", aware=datetime.date(2020, 1, 1))
+        ],
+    )
+    brief = " ".join(" ".join(brief_lines(result.report[0], _sbom([_vuln()]))).split())
+    assert "runs from when you became aware" in brief
+    for word in ("overdue", "deadline", "remaining", "elapsed", "hours left"):
+        assert word not in brief.lower()
+
+
+# --- the two new fields, as the parser sees them --------------------------
+
+
+def test_a_basis_and_an_awareness_date_round_trip(tmp_path):
+    path = _config(
+        tmp_path,
+        """
+[[report]]
+component = "a@1.0"
+cve = "CVE-2019-0001"
+basis = "Vendor-Advisory"
+aware = 2026-09-12
+rationale = "Named as exploited in the vendor advisory."
+""",
+    )
+    confirmation = load_confirmations(path)[0]
+    # One spelling rule: case ignored, hyphen or underscore reads as a space.
+    assert confirmation.basis == "vendor advisory"
+    assert confirmation.aware == datetime.date(2026, 9, 12)
+
+
+def test_an_unknown_basis_is_refused_by_name(tmp_path):
+    body = (
+        '[[report]]\ncomponent = "a@1.0"\ncve = "CVE-2019-0001"\n'
+        'basis = "a hunch"\nrationale = "Reachable."\n'
+    )
+    with pytest.raises(Art14Error) as exc:
+        load_confirmations(_config(tmp_path, body))
+    assert "a hunch" in str(exc.value)
+    assert "`operator evidence`" in str(exc.value)
+
+
+def test_a_basis_on_a_ruling_out_is_refused(tmp_path):
+    body = (
+        '[[no]]\ncomponent = "a@1.0"\ncve = "CVE-2019-0001"\n'
+        'basis = "incident"\nrationale = "Not reachable."\n'
+    )
+    with pytest.raises(Art14Error) as exc:
+        load_confirmations(_config(tmp_path, body))
+    assert "carries a `basis`" in str(exc.value)
+
+
+@pytest.mark.parametrize("value", ['"2026-09-12"', "2026-09-12T08:00:00"])
+def test_an_awareness_date_must_be_a_bare_date(tmp_path, value):
+    """A date-time is refused rather than truncated. Accepting one would
+    promise arithmetic this tool deliberately does not do."""
+    body = (
+        '[[report]]\ncomponent = "a@1.0"\ncve = "CVE-2021-44228"\n'
+        f'aware = {value}\nrationale = "Reachable."\n'
+    )
+    with pytest.raises(Art14Error) as exc:
+        load_confirmations(_config(tmp_path, body))
+    assert "bare TOML date" in str(exc.value)

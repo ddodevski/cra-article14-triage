@@ -23,6 +23,25 @@
 # VEX statement is written from. An entry without one would be a verdict with
 # nothing behind it, so the file is rejected rather than read.
 #
+# Two optional fields:
+#
+#   basis    what a [[report]] rests on when the catalogue is silent. One of
+#            "operator evidence", "vendor advisory" or "incident", and nothing
+#            else -- a closed set, so the brief, the JSON and the HTML report
+#            can all show it without any of them having to read prose. It is
+#            required in exactly one case: a [[report]] for a CVE no catalogue
+#            in this run lists. A catalogue lags the world it describes, and a
+#            manufacturer with their own telemetry can know first; without
+#            this field that claim and "CISA lists it" would read identically
+#            in the output, which is a worse record than either. Not accepted
+#            on a [[no]], which rests on the rationale beside it.
+#   aware    the day you became aware, as a bare date: aware = 2026-09-11.
+#            Recorded and printed, nothing more. art14 does no arithmetic on
+#            it -- no deadline, no countdown, no elapsed time -- because that
+#            would make this a case-management tool, and it is not one. The
+#            point is that the date lives in a field something other than a
+#            human reader can find, instead of only inside the rationale.
+#
 # There is no auto-discovery. This file takes effect only when --config names
 # it, so the command line always records what a verdict rested on.
 #

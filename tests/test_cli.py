@@ -1287,3 +1287,57 @@ def test_a_state_other_than_not_affected_is_never_adopted(capsys, tmp_path, docu
     product, so the flag leaves the item open and the run still exits 1."""
     path = _write(tmp_path, _vexed(document, state="false_positive"))
     assert main(["--adopt-upstream-vex", path]) == EXIT_ERROR
+
+
+# --- own evidence, end to end ---------------------------------------------
+#
+# The half the unit tests cannot see: that a [[report]] on a CVE no catalogue
+# lists reaches the exit code. It did not. The item stayed in NO, the run
+# exited 0, and the only trace was a line under the table saying the entry did
+# not apply -- a tool whose product is the exit code certifying a product its
+# manufacturer had direct evidence was being exploited.
+
+
+def _own_evidence(tmp_path, *, basis=True):
+    body = f'[[report]]\ncomponent = "{LOG4J_PURL}"\ncve = "{LOG4SHELL_CVE}"\n'
+    if basis:
+        body += 'basis = "operator evidence"\naware = 2026-09-12\n'
+    body += 'rationale = "Exploitation attempts against customer deployments."\n'
+    return _config(tmp_path, body)
+
+
+def test_own_evidence_on_an_unlisted_cve_exits_two(
+    capsys, tmp_path, osv_responses, kev_state
+):
+    osv_responses(_log4j_osv())
+    # A catalogue that lists something else entirely: the situation the field
+    # exists for, where the manufacturer knows and CISA does not yet.
+    kev_state["dump"] = list(IRRELEVANT_KEV_DUMP)
+    config = _own_evidence(tmp_path)
+    assert main(["--json", "--config", config, str(LOG4J_FIXTURE)]) == EXIT_REPORT
+    payload = json.loads(capsys.readouterr().out)
+    item = payload["triage"]["items"][0]
+    assert item["bucket"] == "REPORT"
+    assert item["basis"] == "operator evidence"
+    assert item["aware"] == "2026-09-12"
+    # Nothing behind it in any catalogue, and the payload says so plainly
+    # rather than leaving the REPORT to be read as a listing.
+    assert item["sources"] == []
+    assert item["dateAdded"] is None
+    assert "reported on the manufacturer's own evidence" in item["signal"]
+    assert payload["triage"]["unusedConfirmations"] == []
+
+
+def test_own_evidence_without_a_basis_stops_the_run(
+    capsys, tmp_path, osv_responses, kev_state
+):
+    """Refused rather than promoted quietly, on the same stance as a config
+    that cannot be read: a verdict this tool cannot render faithfully is worse
+    than no verdict. And refused cleanly -- a message, not a traceback."""
+    osv_responses(_log4j_osv())
+    kev_state["dump"] = list(IRRELEVANT_KEV_DUMP)
+    config = _own_evidence(tmp_path, basis=False)
+    assert main(["--config", config, str(LOG4J_FIXTURE)]) == EXIT_ERROR
+    captured = capsys.readouterr()
+    assert "Traceback" not in captured.err
+    assert "needs a `basis`" in _flat(captured.err)
