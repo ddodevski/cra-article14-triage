@@ -142,6 +142,7 @@ Decided 2026-09-11 by the platform security team.
 [[no]]
 component = "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.54"
 cve = "CVE-2025-24813"
+justification = "requires_configuration"
 rationale = """
 Not reachable. The partial-PUT path requires the default servlet to be running
 with readonly=false and either file-based session persistence or a library
@@ -383,6 +384,88 @@ makes it a worked example of that schema for anyone building their own view.
 There is no severity chart, no top-N table, no health score and no remediation
 advice; severity appears once per brief, as context.
 
+## The dispositions as VEX
+
+The decision brief ends by telling you to write the rationale down, because
+that is what a VEX statement is written from. `--vex` writes it:
+
+```
+art14 examples/log4j-app.cdx.json \
+      --config examples/dispositions.toml --vex gateway.vex.json
+```
+
+A CycloneDX VEX document with one statement per decision this run produced.
+Three states, and they are the spec's own words rather than art14's:
+
+```
+REPORT                   exploitable, and the component version marked
+                         affected in affects[].versions[]
+ASSESS, still open       in_triage
+[[no]] in --config       not_affected
+```
+
+One statement out of that file, with the long strings cut:
+
+```json
+{
+  "id": "CVE-2022-22965",
+  "analysis": {
+    "state": "not_affected",
+    "justification": "requires_environment",
+    "detail": "Precondition not met. Spring4Shell requires the ..."
+  },
+  "affects": [{ "ref": "pkg:maven/org.springframework.boot/..." }],
+  "properties": [
+    { "name": "art14:confirmedBy", "value": "examples/dispositions.toml" }
+  ]
+}
+```
+
+`justification` is an optional field on a `[[no]]` entry, taking one value
+from CycloneDX's own list: `code_not_present`, `code_not_reachable`,
+`requires_configuration`, `requires_dependency`, `requires_environment`,
+`protected_by_compiler`, `protected_at_runtime`, `protected_at_perimeter`,
+`protected_by_mitigating_control`. It is never inferred. A rationale reads to
+a person as one of those, and having art14 decide which and then publish that
+decision under your name is the one thing this tool does nowhere else. An
+entry without the field still exports as `not_affected`, with the rationale in
+`analysis.detail` and no justification -- which is what a determination
+resting on its words alone honestly looks like.
+
+The rationale goes in verbatim. The justification is a value a machine can
+sort on; the sentence is what a CSIRT or a market surveillance authority
+actually asks for, and the export does not replace one with the other.
+
+**What the document deliberately does not say.** A VEX consumer reads silence
+as "fine", so this one states its own scope in `metadata.properties` rather
+than leaving that to be inferred. Pairs the catalogue did not list are not in
+it: "not currently known to be exploited" is not a determination about whether
+your product is affected, and art14 has no grounds to make one. Neither are
+items suppressed by `--adopt-upstream-vex` -- those are somebody else's claim,
+already in the source SBOM under its author's name, and restating them here
+would republish them under yours.
+
+Open ASSESS items *are* in it, as `in_triage`. Leaving them out would let a
+consumer read "not mentioned" as "clean", which is the one thing this tool
+never does.
+
+Nothing in the document is a remediation. `analysis.response` is never
+written, and that is also why this is CycloneDX and not CSAF: the CSAF VEX
+profile requires an action statement -- `mitigation`, `no_fix_planned`,
+`none_available`, `vendor_fix` or `workaround` -- for every product listed as
+affected, which art14 has no basis for. It also requires publisher identity
+and tracking metadata that art14 would have to invent. CycloneDX requires
+`bomFormat` and `specVersion`, and every other field written here is one this
+tool actually knows.
+
+Give the source SBOM a `serialNumber` if you can. With one, each statement
+points at its component by BOM-Link (`urn:cdx:<uuid>/<version>#<bom-ref>`),
+which a consumer can resolve without being handed the SBOM; without one the
+statement carries the bare bom-ref and the document names the file path
+instead. Two runs over unchanged evidence write the same bytes -- no uuid is
+minted and no clock is read at write time -- so the file diffs cleanly when
+you commit it.
+
 ## How it decides
 
 Three stages, and only the third is interesting:
@@ -594,6 +677,7 @@ Neither axis can suppress a REPORT item.
 --brief                 the full decision brief for every REPORT and ASSESS item
 --json                  machine readable, for CI and downstream processing
 --report PATH           an HTML report to print and file -- see The report
+--vex PATH              this run's dispositions as a CycloneDX VEX document
 --config PATH           the TOML file of recorded decisions
 --adopt-upstream-vex    honour the SBOM's own not_affected claims
 --offline               cache only, never open a connection
@@ -682,7 +766,15 @@ worse than no tool.
 - **CycloneDX only.** 1.5, 1.6 and 1.7 are read and tested. A later 1.x is
   parsed with a stated caveat rather than refused, because a scanner piping
   into this tool upgrades on its own schedule. 2.x is refused. SPDX is not
-  supported.
+  supported, and not because nobody got to it: it carries PURLs optionally
+  through `externalRefs` and expresses structure as
+  `RELATIONSHIP_DEPENDS_ON` rather than as a dependency graph, so the direct
+  versus transitive distinction that every decision brief turns on would be
+  separate logic with its own failure modes rather than a second parser.
+  SPDX also dominates firmware and OS-image SBOMs, which is exactly where the
+  Alpine run above shows OSV answering nothing, so support would most often
+  produce a degraded grade rather than an answer. Worth doing when the
+  matching side can serve those SBOMs; not worth doing first.
 - **A `[[report]]` or `[[no]]` entry is somebody's word.** art14 records it,
   names the file it came from, prints it in full, and does not check it. The
   same goes for an upstream `not_affected` claim adopted with

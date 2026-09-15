@@ -34,6 +34,7 @@ from . import (
     report as report_module,
     table as table_module,
     triage as triage_module,
+    vex as vex_module,
 )
 from .cyclonedx import SUPPORTED_SPEC_VERSIONS, parse_source, version_caveat
 from .errors import Art14Error
@@ -113,6 +114,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--vex",
+        metavar="PATH",
+        help=(
+            "write a CycloneDX VEX document to PATH: this run's dispositions"
+            " as machine-readable statements. REPORT items as exploitable,"
+            " open ASSESS items as in_triage, and [[no]] rulings from --config"
+            " as not_affected, with what the document deliberately omits"
+            " stated inside it"
+        ),
+    )
+    parser.add_argument(
         "--config",
         metavar="PATH",
         help=(
@@ -168,6 +180,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     # same statement. Failing on the typo first means that choice never comes
     # up: --report never touches the exit code.
     if args.report and not _writable(args.report):
+        return EXIT_ERROR
+    if args.vex and not _writable(args.vex):
         return EXIT_ERROR
 
     try:
@@ -243,9 +257,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         kev=_kev_stamp(catalogue),
     )
 
-    # Built once and rendered twice at most. The HTML report reads this dict
-    # and nothing else, so it is a consumer of the documented schema rather
-    # than a second path into the objects behind it.
+    # Built once and rendered up to three times. The HTML report and the VEX
+    # export both read this dict and nothing else, so each is a consumer of
+    # the documented schema rather than a second path into the objects behind
+    # it.
     payload = (
         _inventory(
             document,
@@ -258,7 +273,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             report_items=report_items,
             assess_items=assess_items,
         )
-        if args.as_json or args.report
+        if args.as_json or args.report or args.vex
         else None
     )
 
@@ -287,6 +302,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         # to stdout and nothing else.
         print(f"art14: wrote {args.report}", file=sys.stderr)
 
+    if args.vex:
+        assert payload is not None  # built above whenever --vex was given
+        Path(args.vex).write_text(
+            vex_module.render(payload), encoding="utf-8", newline="\n"
+        )
+        print(f"art14: wrote {args.vex}", file=sys.stderr)
+
     return _exit_code(
         quality,
         report_items=report_items,
@@ -296,7 +318,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def _writable(path: str) -> bool:
-    """Whether `--report PATH` can be written, asked before the run starts.
+    """Whether an output path can be written, asked before the run starts.
 
     Touching the file rather than inspecting the directory: the question is
     whether this process can write here, and permissions, a read-only mount
@@ -458,6 +480,13 @@ def _inventory(
         # one; the product name is the manufacturer's word for it, not an
         # identifier anybody can go back to.
         "source": source,
+        # The one identifier that is: `urn:cdx:<uuid>/<version>`, from the
+        # SBOM's own serialNumber, which a consumer can resolve without being
+        # handed the file. Null when the document declared none, which is
+        # common and is not an error -- CycloneDX only recommends the field.
+        # Nothing in the run depends on it; it is here so a statement written
+        # about this SBOM can name it.
+        "bomLink": sbom.bom_link_prefix,
         "product": sbom.root.label if sbom.root else None,
         # Always present, and the same shape on every run: a consumer reads
         # `provenance.mode` without first branching on what kind of run it got.

@@ -20,6 +20,7 @@ This module knows nothing about KEV, buckets, EPSS or rendering.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import deque
 from pathlib import Path
@@ -41,6 +42,12 @@ from .models import (
 
 # Versions this build has actually been read against, oldest first.
 SUPPORTED_SPEC_VERSIONS = ("1.5", "1.6", "1.7")
+
+# `serialNumber`, as CycloneDX pins it: an RFC 4122 urn and nothing else.
+_SERIAL = re.compile(
+    r"urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+    re.IGNORECASE,
+)
 
 
 def is_newer_than_tested(spec_version: str) -> bool:
@@ -207,6 +214,8 @@ def parse_document(document: dict[str, Any]) -> Sbom:
         unresolved_affects=unresolved,
         excluded_affects=excluded,
         non_packages=non_packages,
+        serial_number=_serial_number(document),
+        document_version=_document_version(document),
     )
 
 
@@ -236,6 +245,32 @@ def _check_format(document: dict[str, Any]) -> str:
         f"CycloneDX {spec_version} is not supported - art14 reads {supported}"
         " and later 1.x"
     )
+
+
+def _serial_number(document: dict[str, Any]) -> str | None:
+    """The document's serial number, if it declared a well-formed one.
+
+    Read but never required, and never repaired. CycloneDX says a BOM SHOULD
+    have one and pins the format to RFC 4122; a document that carries
+    something else in that field has not identified itself, and treating the
+    string as an identifier anyway would put a malformed urn into a BOM-Link
+    that no consumer can resolve. Nothing in a run depends on this value --
+    it exists so a statement written about this SBOM can name it.
+    """
+    value = document.get("serialNumber")
+    if not isinstance(value, str):
+        return None
+    if not _SERIAL.fullmatch(value.strip()):
+        return None
+    return value.strip()
+
+
+def _document_version(document: dict[str, Any]) -> int:
+    """The document's revision number. One unless it says otherwise."""
+    value = document.get("version")
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        return 1
+    return value
 
 
 def _parse_root(document: dict[str, Any]) -> Component | None:

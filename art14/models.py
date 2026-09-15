@@ -300,6 +300,33 @@ class Sbom:
     # rule. They still resolve through `component_by_ref`, so a vulnerability
     # affecting one is reported rather than counted as unresolved.
     non_packages: tuple[Component, ...] = ()
+    # The document's own identity, carried because a VEX statement has to say
+    # which SBOM it is about. `serial_number` is the raw `urn:uuid:...` the
+    # document declared; `document_version` is its `version`, which counts
+    # revisions of that serial number. Both are optional in CycloneDX -- a
+    # SHOULD, not a MUST -- and plenty of real SBOMs omit the serial number,
+    # so nothing here may depend on having one.
+    serial_number: str | None = None
+    document_version: int = 1
+
+    @property
+    def bom_link_prefix(self) -> str | None:
+        """The BOM-Link stem for this document, when it can be formed.
+
+        `urn:cdx:<uuid>/<version>`, to which a component's bom-ref is appended
+        after a `#`. None when the document declared no serial number, which
+        is not an error: a BOM-Link identifies a document by serial number and
+        a document without one cannot be pointed at this way. The caller falls
+        back to the bare bom-ref rather than inventing a serial number, which
+        would mint an identifier for somebody else's document.
+        """
+        if not self.serial_number:
+            return None
+        # Lowercased: CycloneDX accepts either case in `serialNumber` and
+        # accepts only lowercase inside a BOM-Link, so a document that shouted
+        # its uuid would otherwise produce a link no consumer will match.
+        uuid = self.serial_number.lower().removeprefix("urn:uuid:")
+        return f"urn:cdx:{uuid}/{self.document_version}"
 
     @property
     def document_components(self) -> int:

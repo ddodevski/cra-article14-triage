@@ -83,6 +83,39 @@ BASES: dict[str, str] = {
     "incident": "an incident",
 }
 
+# Why a [[no]] does not apply, in the one vocabulary a machine can read.
+#
+# This is CycloneDX's `impactAnalysisJustification`, taken from the 1.6 schema
+# with its own wording, and it exists for exactly one consumer: the VEX
+# export. A rationale is the product here and it always will be, but free text
+# is not a claim another tool can act on, and a `not_affected` statement
+# carrying no justification is one a reader has to take on trust.
+#
+# Optional, and never inferred. A rationale that says "the lookup class is
+# unreachable from our code" reads to a person as `code_not_reachable`, and
+# reading it that way in software would mean art14 deciding what the operator
+# meant and then publishing that decision under their name. An entry without
+# this field exports as `not_affected` with the rationale in `analysis.detail`
+# and no justification -- which is what a justification-less claim honestly
+# looks like -- rather than being dropped or guessed at.
+JUSTIFICATIONS: dict[str, str] = {
+    "code_not_present": "the code has been removed or tree-shaken",
+    "code_not_reachable": "the vulnerable code is not invoked at runtime",
+    "requires_configuration": "exploitability requires a configurable option"
+    " to be set or unset",
+    "requires_dependency": "exploitability requires a dependency that is not"
+    " present",
+    "requires_environment": "exploitability requires an environment that is"
+    " not present",
+    "protected_by_compiler": "exploitability requires a compiler flag to be"
+    " set or unset",
+    "protected_at_runtime": "exploits are prevented at runtime",
+    "protected_at_perimeter": "attacks are blocked at the physical, logical or"
+    " network perimeter",
+    "protected_by_mitigating_control": "preventative measures are in place"
+    " that reduce the likelihood or the impact",
+}
+
 
 # --- configuration --------------------------------------------------------
 #
@@ -119,6 +152,12 @@ class Confirmation:
     printed, and nothing else -- no deadline, no elapsed time, no arithmetic
     on it anywhere. The alternative is where that date used to live, which
     is inside the rationale where nothing can read it.
+
+    `justification` is the same move for a `[[no]]`: one value from
+    CycloneDX's own vocabulary, saying which of the standard reasons the
+    rationale beside it describes. Optional, because the rationale is the
+    record and this is only a machine's view of it, and never derived from
+    the prose -- see `JUSTIFICATIONS`.
     """
 
     component: str
@@ -128,6 +167,7 @@ class Confirmation:
     verdict: str = REPORT
     basis: str | None = None
     aware: date | None = None
+    justification: str | None = None
 
     @property
     def rules_out(self) -> bool:
@@ -251,6 +291,7 @@ def _entries(
                 verdict=verdict,
                 basis=_basis(item, location, index, table),
                 aware=_aware(item, location, index, table),
+                justification=_justification(item, location, index, table),
             )
         )
     return out
@@ -292,6 +333,49 @@ def _basis(item: dict, location: Path, index: int, table: str) -> str | None:
             " that a reader can see which claims rest on the catalogue and"
             " which on the manufacturer's own knowledge; free text here would"
             " be one more thing nothing can read."
+        )
+    return key
+
+
+def _justification(
+    item: dict, location: Path, index: int, table: str
+) -> str | None:
+    """Which of the standard reasons a `[[no]]` rests on. Optional.
+
+    Only on a `[[no]]`. The vocabulary exists to qualify "this does not
+    affect us", and it has nothing to say about a REPORT: an entry that puts
+    an item in REPORT is claiming the vulnerability does apply, and `basis` is
+    the field that qualifies that one.
+    """
+    value = item.get("justification")
+    if value is None:
+        return None
+    if table != "no":
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} carries a"
+            " `justification`. The field says why a vulnerability does not"
+            " affect this product, so it belongs on a [[no]]; what a REPORT"
+            " rests on is `basis`."
+        )
+    if not isinstance(value, str):
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} needs `justification`"
+            " written as a string."
+        )
+    # Same spelling rule as `basis`, arriving at the wire form rather than at
+    # prose: `code not reachable`, `code-not-reachable` and
+    # `Code_Not_Reachable` are the one value CycloneDX spells
+    # `code_not_reachable`.
+    key = "_".join(value.replace("-", " ").replace("_", " ").lower().split())
+    if key not in JUSTIFICATIONS:
+        permitted = ", ".join(f"`{name}`" for name in JUSTIFICATIONS)
+        raise Art14Error(
+            f"{location}: [[{table}]] entry {index} names `{value}` as its"
+            f" justification, which is not one of {permitted}. The list is"
+            " CycloneDX's own and art14 does not extend it: a value outside it"
+            " would be written into a VEX document no consumer can read, which"
+            " is worse than the field being absent. Leave it out and the"
+            " rationale still carries the reason."
         )
     return key
 
@@ -359,6 +443,9 @@ class Item:
     # confirmation: carried and printed, never computed from.
     basis: str | None = None
     aware: date | None = None
+    # Which of CycloneDX's standard reasons a [[no]] rests on, when the
+    # operator named one. Never present on any other bucket.
+    justification: str | None = None
     # Set only when `--adopt-upstream-vex` moved this item to NO on the
     # strength of the SBOM's own claim. It is the same object as `vex`; the
     # separate field is what distinguishes "a claim was made" from "a claim
@@ -600,6 +687,9 @@ def triage(
                 confirmed_by=confirmation.source if confirmation else None,
                 basis=confirmation.basis if confirmation else None,
                 aware=confirmation.aware if confirmation else None,
+                justification=(
+                    confirmation.justification if confirmation else None
+                ),
                 suppressed_by=adopted,
             )
             if confirmation and not confirmation.rules_out:
@@ -1361,6 +1451,11 @@ def _item_json(item: Item, sbom: Sbom | None) -> dict[str, object]:
         # wrote it. A recorded date: nothing here counts from it, and a
         # consumer that wants to is doing so on its own authority.
         "aware": item.aware.isoformat() if item.aware else None,
+        # One value from CycloneDX's `impactAnalysisJustification`, on a NO
+        # the operator ruled out and named a reason for. Null everywhere
+        # else, including on a NO whose rationale says why in prose and
+        # nothing more -- art14 never reads a justification out of the words.
+        "justification": item.justification,
         # Present whenever the SBOM made a claim, whether or not it was
         # adopted; `adopted` says which. A consumer must be able to see the
         # claim on an item art14 is still asking about, not only on one that
