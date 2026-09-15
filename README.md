@@ -26,7 +26,7 @@ syft ghcr.io/acme/gateway:1.4 -o cyclonedx-json | uvx art14 -
 ```
 
 The source is at [github.com/ddodevski/cra-article14-triage][repo], and the
-example SBOM every block on this page was produced from lives there under
+example SBOM every result on this page was produced from lives there under
 `examples/` rather than in the installed package. Version 0.1.0, published
 because the tool works and not as the start of a programme: there is no
 roadmap, no issue triage and no support commitment behind it.
@@ -89,8 +89,8 @@ one question to answer about this product.
 Exit code 1: seven items are open.
 
 `see README`, here and in the blocks further down, points at [Matching
-quality][matching-quality]. Every block on this page is a verbatim copy of a
-real run, so they all say what the terminal says.
+quality][matching-quality]. Every output block on this page is a verbatim
+copy of a real run, so they all say what the terminal says.
 
 The 131 in NO are not listed row by row, and never will be. A tool that prints
 the other 131 has handed the problem back unsolved.

@@ -25,6 +25,11 @@ permissions: {}
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Enough for `actions/checkout` to read this repository and nothing else.
+    # The workflow-level `permissions: {}` would otherwise hand it a token
+    # with no scopes at all, and the checkout would fail on a tag.
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
