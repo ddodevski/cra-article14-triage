@@ -12,20 +12,31 @@ that. This is the reading art14 is built on, and it is one to check against
 runs in both directions -- a queue ordered by severity score reports what it
 need not, and misses what it must.
 
-The example in this repository is a Java application with 36 components.
-OSV.dev matches 138 vulnerabilities against it. Seven of those are in the
+The worked example below is a Java application with 36 components. OSV.dev
+matches 138 vulnerabilities against it. Seven of those are in the
 exploited-vulnerability catalogue, and those seven are the ones a person has to
 look at. Collapsing 138 to 7, and saying why for each, is the whole tool.
 
 art14 is not a scanner. It never reads images, containers or filesystems.
-SBOM in, verdict out.
+SBOM in, verdict out:
+
+```
+uvx art14 sbom.cdx.json
+syft ghcr.io/acme/gateway:1.4 -o cyclonedx-json | uvx art14 -
+```
+
+The source is at [github.com/ddodevski/cra-article14-triage][repo], and the
+example SBOM every block on this page was produced from lives there under
+`examples/` rather than in the installed package. Version 0.1.0, published
+because the tool works and not as the start of a programme: there is no
+roadmap, no issue triage and no support commitment behind it.
 
 ## What it says
 
 ![A run of art14 against the Log4j example SBOM: 36 components, 138
 vulnerabilities matched, 136 CVE ids put to the KEV catalogue, 5 of them
 listed there, nothing confirmed reportable and 7 items left for a human to
-decide](docs/img/01-funnel.svg)
+decide][funnel]
 
 `art14 examples/log4j-app.cdx.json`, with no configuration and no argument
 beyond the file:
@@ -78,7 +89,7 @@ one question to answer about this product.
 Exit code 1: seven items are open.
 
 `see README`, here and in the blocks further down, points at [Matching
-quality](#matching-quality). Every block on this page is a verbatim copy of a
+quality][matching-quality]. Every block on this page is a verbatim copy of a
 real run, so they all say what the terminal says.
 
 The 131 in NO are not listed row by row, and never will be. A tool that prints
@@ -107,14 +118,14 @@ art14.cmd examples/log4j-app.cdx.json       # Windows
 ```
 
 Nothing lands in your Python: the launcher finds or builds what it needs beside
-itself, and [Installing it](#installing-it) has the rest.
+itself, and [Installing it][installing-it] has the rest.
 
 ## What it says once somebody has decided
 
 ![The same SBOM run against a file of recorded decisions: 1 item to report, 1
 left open on purpose, 136 not to report, five of them ruled out in
 configuration with the written rationale for each printed under the
-table](docs/img/02-decisions.svg)
+table][decisions]
 
 Run the same SBOM against a file of recorded decisions:
 
@@ -358,7 +369,7 @@ the reader who decides and will never open a terminal.
 provenance block naming the SBOM file, the CycloneDX version, the run
 timestamp, the tool version and the age of each cache, and then the funnel --
 36 components, 28 with records, 136 CVE ids, 5 known exploited and 1 to
-report](docs/img/03-report.svg)
+report][report-shot]
 
 That is page one of five, from the same run as the decision record above:
 
@@ -716,8 +727,8 @@ installed yourself, `uv` if it is on PATH, and failing all of those a fresh
 If you would rather install it:
 
 ```
-pip install -e .
-art14 examples/log4j-app.cdx.json
+pip install art14              # from PyPI
+pip install -e .               # from a clone of this repository
 ```
 
 `python -m art14 examples/log4j-app.cdx.json` works too, and is the fallback
@@ -745,7 +756,7 @@ worse than no tool.
 - **A source can be silent on an ecosystem, and that is not a clean result.**
   art14 names the silence and will not certify a run nothing answered, but it
   cannot tell you what a source covers -- only what came back. Measured, with
-  the output, in [A source that said nothing](#a-source-that-said-nothing).
+  the output, in [A source that said nothing][a-source-that-said-nothing].
 - **The EUVD exploited list is close to CISA KEV plus a small EU margin.** On
   2026-09-12 the dump this tool reads held 1721 records, of which 1710 carry
   CISA's tag and 11 the EU's alone. CISA's own catalogue that day held 1709
@@ -824,8 +835,17 @@ built around.
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE][licence].
 
+[repo]: https://github.com/ddodevski/cra-article14-triage
+[matching-quality]: https://github.com/ddodevski/cra-article14-triage#matching-quality
+[installing-it]: https://github.com/ddodevski/cra-article14-triage#installing-it
+[a-source-that-said-nothing]:
+    https://github.com/ddodevski/cra-article14-triage#a-source-that-said-nothing
+[licence]: https://github.com/ddodevski/cra-article14-triage/blob/main/LICENSE
+[funnel]: https://raw.githubusercontent.com/ddodevski/cra-article14-triage/main/docs/img/01-funnel.svg
+[decisions]: https://raw.githubusercontent.com/ddodevski/cra-article14-triage/main/docs/img/02-decisions.svg
+[report-shot]: https://raw.githubusercontent.com/ddodevski/cra-article14-triage/main/docs/img/03-report.svg
 [cra-reporting]: https://digital-strategy.ec.europa.eu/en/policies/cra-reporting
 [cra]: https://eur-lex.europa.eu/eli/reg/2024/2847/oj
 [cra-guidance]: https://digital-strategy.ec.europa.eu/en/library/commission-publishes-new-guidance-support-timely-cyber-resilience-act-implementation
