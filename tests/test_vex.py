@@ -19,6 +19,7 @@ import pytest
 
 from art14 import vex
 from art14.cli import EXIT_ERROR, EXIT_OK, EXIT_REPORT, main
+from art14.kev import CatalogueUnavailable
 from tests.conftest import IRRELEVANT_KEV_DUMP
 
 FIXTURE = Path(__file__).parent / "fixtures" / "graph.cdx.json"
@@ -61,6 +62,10 @@ def _config(tmp_path, body, name="dispositions.toml"):
 
 def _by_cve(document):
     return {entry["id"]: entry for entry in document["vulnerabilities"]}
+
+
+def _properties(document):
+    return {item["name"]: item["value"] for item in document["metadata"]["properties"]}
 
 
 # CVE-2021-44228 affects `bravo`, CVE-2026-0002 affects `alpha` and `charlie`;
@@ -251,6 +256,86 @@ def test_the_awareness_date_is_not_written_as_a_statement_date(
     assert properties["art14:aware"] == "2026-09-12"
 
 
+# --- what the run itself could not do -------------------------------------
+
+
+def test_a_run_that_could_not_consult_the_catalogue_says_so(capsys, kev_state):
+    """The worst document this export can write: no catalogue, so no pair was
+    ever judged, and the file that comes out is indistinguishable from a
+    product with nothing to declare. The run already knows -- `canRuleOut` is
+    false -- and the document has to carry that where a machine will see it."""
+    kev_state["error"] = CatalogueUnavailable("no catalogue")
+    payload = _payload([str(FIXTURE)], capsys)
+    assert payload["input"]["canRuleOut"] is False
+    document = vex.build(payload)
+    assert document["vulnerabilities"] == []
+    properties = _properties(document)
+    assert "not a complete disposition record" in properties["art14:vex:incomplete"]
+    # And the run's own words for why, rather than a second account of it.
+    assert payload["input"]["verdict"] in properties["art14:vex:incomplete"]
+
+
+def test_a_run_without_a_catalogue_does_not_claim_the_catalogue_answered(
+    capsys, kev_state
+):
+    """"Pairs the catalogue did not list are omitted" is true of a run that
+    asked. Said by a run that never asked, it is a false account of why the
+    document is empty -- and the only explanation in the file."""
+    kev_state["error"] = CatalogueUnavailable("no catalogue")
+    properties = _properties(vex.build(_payload([str(FIXTURE)], capsys)))
+    assert "art14:vex:omitted:not-in-catalogue" not in properties
+
+
+def test_a_thin_inventory_says_so_even_with_statements_in_the_document(
+    tmp_path, capsys, kev_state
+):
+    """Not only the empty case. A run whose inventory could not be matched
+    still writes the statements it did make, and they are still not the whole
+    position. One property covers both, because both are the same failure."""
+    document = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    for entry in document["components"]:
+        entry.pop("purl", None)
+        entry.pop("version", None)
+    path = tmp_path / "thin.cdx.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    payload = _payload([str(path)], capsys)
+    assert payload["input"]["canRuleOut"] is False
+    built = vex.build(payload)
+    assert built["vulnerabilities"], "this run still made statements"
+    assert "art14:vex:incomplete" in _properties(built)
+
+
+def test_a_run_that_could_rule_out_carries_no_such_property(capsys, kev_state):
+    """Otherwise the property is decoration. It has to be absent from the runs
+    that earned its absence, or a consumer learns to ignore it."""
+    kev_state["dump"] = list(IRRELEVANT_KEV_DUMP)
+    payload = _payload([str(FIXTURE)], capsys)
+    assert payload["input"]["canRuleOut"] is True
+    assert "art14:vex:incomplete" not in _properties(vex.build(payload))
+
+
+def test_a_component_with_no_version_is_not_given_one(capsys, kev_state):
+    """`@scope/pkg` has an `@` in it and nothing after it that is a version.
+    Splitting the label would put "scope/pkg" in an affects[].versions[] entry,
+    which is a claim about which build is affected."""
+    payload = {
+        "triage": {
+            "items": [
+                {
+                    "bucket": "REPORT",
+                    "cve": "CVE-2026-0001",
+                    "bomRef": "scoped",
+                    "component": "@scope/pkg",
+                    "version": None,
+                    "rationale": "Confirmed live.",
+                }
+            ]
+        }
+    }
+    affects = vex.build(payload)["vulnerabilities"][0]["affects"][0]
+    assert "versions" not in affects
+
+
 # --- binding the statements to their subject ------------------------------
 
 
@@ -312,6 +397,20 @@ def test_the_same_payload_writes_the_same_bytes(capsys, kev_state):
     payload = _payload([str(FIXTURE)], capsys)
     assert vex.render(payload) == vex.render(payload)
     assert "serialNumber" not in vex.build(payload)
+
+
+def test_the_only_field_that_moves_between_two_runs_is_the_timestamp(
+    capsys, kev_state
+):
+    """The stronger claim, and the one the README makes. Rendering one payload
+    twice cannot catch a second field reading a clock, because there is only
+    one clock read in the payload and it happened before either render."""
+    payload = _payload([str(FIXTURE)], capsys)
+    later = json.loads(json.dumps(payload))
+    later["provenance"]["generatedAt"] = "2099-01-01T00:00:00Z"
+    first, second = vex.build(payload), vex.build(later)
+    assert first["metadata"].pop("timestamp") != second["metadata"].pop("timestamp")
+    assert first == second
 
 
 def test_the_export_does_not_touch_the_exit_code(tmp_path, capsys, kev_state):

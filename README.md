@@ -462,9 +462,16 @@ Give the source SBOM a `serialNumber` if you can. With one, each statement
 points at its component by BOM-Link (`urn:cdx:<uuid>/<version>#<bom-ref>`),
 which a consumer can resolve without being handed the SBOM; without one the
 statement carries the bare bom-ref and the document names the file path
-instead. Two runs over unchanged evidence write the same bytes -- no uuid is
-minted and no clock is read at write time -- so the file diffs cleanly when
-you commit it.
+instead. The document is a pure function of the run's JSON: no uuid is minted
+and no clock is read while writing it, so the only field that moves between
+two runs over unchanged evidence is the run's own timestamp, and the file
+diffs cleanly when you commit it.
+
+If the run could not establish that there was nothing further to report --
+no catalogue, or an inventory too thin to match against -- the document says
+so in a property of its own and quotes the run's verdict. A short document
+from such a run is a coverage failure, and the file has to say that where a
+machine reading it will see it.
 
 ## How it decides
 

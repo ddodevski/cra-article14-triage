@@ -1417,6 +1417,14 @@ def _item_json(item: Item, sbom: Sbom | None) -> dict[str, object]:
         "osvIds": list(item.osv_ids),
         "bomRef": item.component.bom_ref,
         "component": item.component.label,
+        # The version on its own, beside the `name@version` label. Splitting
+        # the label back apart is not safe: an npm component named
+        # `@scope/pkg` with no version has an `@` in it and no version behind
+        # it, and a consumer doing that arrives at "scope/pkg" as a version
+        # string. The VEX export writes this value into a CycloneDX
+        # `affects[].versions[]` entry, where a wrong one is a claim about
+        # which build is affected.
+        "version": item.component.version or None,
         "purl": item.component.purl,
         "dependency": item.location.short,
         "where": _where(item, sbom) if sbom else item.location.describe(),

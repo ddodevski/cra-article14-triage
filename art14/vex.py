@@ -78,6 +78,14 @@ _OMITTED_CATALOGUE = (
     " product is affected."
 )
 
+_INCOMPLETE = (
+    "This run could not establish that there was nothing further to report,"
+    " so the statements below are not a complete disposition record: a pair"
+    " this run never assessed is absent from this document exactly as a pair"
+    " it ruled out is. An empty or short document from such a run is a"
+    " coverage failure, not a clean result. The run's own account of why:"
+)
+
 _OMITTED_UPSTREAM = (
     "Items suppressed by --adopt-upstream-vex are omitted. Those rest on a"
     " not_affected claim made by whoever produced the source SBOM; that claim"
@@ -159,10 +167,30 @@ def _properties(payload: Mapping[str, Any]) -> list[dict[str, str]]:
     triage = _block(payload, "triage")
     counts = _block(triage, "counts")
     provenance = _block(payload, "provenance")
-    properties = [
-        {"name": "art14:vex:scope", "value": _SCOPE},
-        {"name": "art14:vex:omitted:not-in-catalogue", "value": _OMITTED_CATALOGUE},
-    ]
+    quality = _block(payload, "input")
+    properties = [{"name": "art14:vex:scope", "value": _SCOPE}]
+    # Only when there was a catalogue to be absent from. A run that could not
+    # fetch one listed nothing, and saying "art14 asked and the answer was no"
+    # about every pair in the product would be this document's single worst
+    # sentence: a false account of why it is empty.
+    if quality.get("catalogueAvailable"):
+        properties.append(
+            {
+                "name": "art14:vex:omitted:not-in-catalogue",
+                "value": _OMITTED_CATALOGUE,
+            }
+        )
+    # The run's own honesty flag, carried through rather than re-derived. A
+    # VEX consumer reads absence as "fine", and the runs where that reading is
+    # most wrong are the ones that produce the fewest statements: no
+    # catalogue, or an inventory too thin to match. Whatever the cause, the
+    # document says it was not in a position to rule anything out.
+    if quality.get("canRuleOut") is False:
+        verdict = quality.get("verdict")
+        value = _INCOMPLETE
+        if isinstance(verdict, str) and verdict.strip():
+            value = f"{_INCOMPLETE} {verdict.strip()}."
+        properties.append({"name": "art14:vex:incomplete", "value": value})
     if _int(counts, "suppressed"):
         properties.append(
             {"name": "art14:vex:omitted:upstream-vex", "value": _OMITTED_UPSTREAM}
@@ -363,12 +391,18 @@ def _affects(
 
 
 def _version(item: Mapping[str, Any]) -> str | None:
-    """The component's version, off the `name@version` label the payload has."""
-    label = item.get("component")
-    if not isinstance(label, str) or "@" not in label:
+    """The component's version, as the payload carries it.
+
+    Read from its own field and never split out of the `name@version` label:
+    an npm component called `@scope/pkg` with no version has an `@` in it and
+    nothing after it that is a version. A component the SBOM gave no version
+    for has none here either, and the statement then says which component it
+    is about without saying which build.
+    """
+    version = item.get("version")
+    if not isinstance(version, str):
         return None
-    version = label.rsplit("@", 1)[1].strip()
-    return version or None
+    return version.strip() or None
 
 
 def _references(item: Mapping[str, Any]) -> list[dict[str, Any]]:
